@@ -267,7 +267,11 @@ Conventions already locked:
 ### 5.3 Theorem culture
 
 - Use `definition`, `theorem`, `proposition`, `lemma`, `corollary`, `example` from `style/environments.tex`. Five total tcolorbox environments; do not invent new ones.
-- All these share one counter (`mathemagicsCounter`) per chapter, easy to find by number.
+- **Three independent counters per chapter**, following standard textbook convention:
+  - **Definitions** count independently: Definition 4.1, 4.2, 4.3, ...
+  - **Examples** count independently: Example 4.1, 4.2, 4.3, ...
+  - **Theorems / Propositions / Lemmas / Corollaries** share one counter (they are all "formal claims" of the same kind): Theorem 4.1, Proposition 4.2, Lemma 4.3, Corollary 4.4, ...
+  - All counters reset per chapter.
 - `intuition` is unnumbered (it accompanies a definition or theorem; it's a viewpoint, not a claim).
 - Every theorem's proof is either:
   - Inline immediately after.

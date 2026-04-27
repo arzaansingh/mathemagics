@@ -4,20 +4,30 @@
 %% Discipline: do NOT add new colored environments without explicit consent.
 %% Five is the design budget.
 %%
-%% Counter discipline: definitions, theorems, propositions, lemmas, corollaries,
-%% and examples all SHARE one counter (`mathemagicsCounter`) which resets per
-%% chapter. So you'll see "Definition 4.1, Theorem 4.2, Example 4.3" sequentially
-%%, easy to find by number, no risk of collisions.
+%% Counter discipline (standard textbook convention):
+%%   - Definitions count independently:           Definition 1.1, 1.2, 1.3, ...
+%%   - Examples count independently:               Example 1.1, 1.2, 1.3, ...
+%%   - Theorems / Propositions / Lemmas / Corollaries share ONE counter
+%%     (they are all "formal claims" of the same kind):
+%%                                                 Theorem 1.1, Proposition 1.2,
+%%                                                 Lemma 1.3, Corollary 1.4, ...
+%% All counters reset per chapter.
 
-% Master shared counter
-\newcounter{mathemagicsCounter}[chapter]
-\renewcommand{\themathemagicsCounter}{\thechapter.\arabic{mathemagicsCounter}}
+% Three independent counters
+\newcounter{mathemagicsDefCnt}[chapter]
+\renewcommand{\themathemagicsDefCnt}{\thechapter.\arabic{mathemagicsDefCnt}}
+
+\newcounter{mathemagicsThmCnt}[chapter]
+\renewcommand{\themathemagicsThmCnt}{\thechapter.\arabic{mathemagicsThmCnt}}
+
+\newcounter{mathemagicsExCnt}[chapter]
+\renewcommand{\themathemagicsExCnt}{\thechapter.\arabic{mathemagicsExCnt}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % (1) Definition, light blue tinted box, blue rule
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\newtcbtheorem[use counter=mathemagicsCounter]
+\newtcbtheorem[use counter=mathemagicsDefCnt]
   {definition}{Definition}{%
     enhanced,breakable,
     colback=mathemagicsDefBg,
@@ -38,7 +48,7 @@
 % (2) Theorem / Proposition / Lemma, minimal, white box, slanted body, shared counter
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\newtcbtheorem[use counter=mathemagicsCounter]
+\newtcbtheorem[use counter=mathemagicsThmCnt]
   {theorem}{Theorem}{%
     enhanced,breakable,
     colback=mathemagicsThmBg,
@@ -56,7 +66,7 @@
     before skip=1em, after skip=1em
   }{thm}
 
-\newtcbtheorem[use counter=mathemagicsCounter]
+\newtcbtheorem[use counter=mathemagicsThmCnt]
   {proposition}{Proposition}{%
     enhanced,breakable,
     colback=mathemagicsThmBg,
@@ -74,7 +84,7 @@
     before skip=1em, after skip=1em
   }{prop}
 
-\newtcbtheorem[use counter=mathemagicsCounter]
+\newtcbtheorem[use counter=mathemagicsThmCnt]
   {lemma}{Lemma}{%
     enhanced,breakable,
     colback=mathemagicsThmBg,
@@ -92,7 +102,7 @@
     before skip=1em, after skip=1em
   }{lem}
 
-\newtcbtheorem[use counter=mathemagicsCounter]
+\newtcbtheorem[use counter=mathemagicsThmCnt]
   {corollary}{Corollary}{%
     enhanced,breakable,
     colback=mathemagicsThmBg,
@@ -139,7 +149,7 @@
 % (4) Example, pale gray, shared counter
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\newtcbtheorem[use counter=mathemagicsCounter]
+\newtcbtheorem[use counter=mathemagicsExCnt]
   {example}{Example}{%
     enhanced,breakable,
     colback=mathemagicsExBg,
