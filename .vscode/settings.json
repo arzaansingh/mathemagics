@@ -49,6 +49,19 @@
   "latex-workshop.view.pdf.viewer": "tab",
   "latex-workshop.view.pdf.tab.editorGroup": "right",
 
+  // ============================================================
+  //  Resolve the vscode-pdf conflict
+  //  Force *all* PDFs in this workspace to open with LaTeX Workshop's
+  //  internal viewer, not the third-party "vscode-pdf" extension.
+  // ============================================================
+  "workbench.editorAssociations": {
+    "*.pdf": "latex-workshop-pdf-hook"
+  },
+
+  // Auto-refresh the PDF panel every time a build finishes
+  "latex-workshop.view.autoFocus.enabled": false,
+  "latex-workshop.view.outline.follow.editor": true,
+
   // SyncTeX: Cmd+Alt+J jumps from .tex line to PDF location;
   // Cmd+Click in the PDF jumps back to the source line.
   "latex-workshop.synctex.afterBuild.enabled": true,

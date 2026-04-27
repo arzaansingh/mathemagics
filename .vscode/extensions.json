@@ -7,5 +7,13 @@
     "streetsidesoftware.code-spell-checker",
     "ms-python.python",
     "ms-toolsai.jupyter"
+  ],
+
+  // These extensions conflict with LaTeX Workshop's built-in PDF viewer.
+  // VS Code will prompt to disable them in this workspace if installed.
+  "unwantedRecommendations": [
+    "tomoki1207.pdf",
+    "mathematic.vscode-pdf",
+    "analytic-signal.preview-pdf"
   ]
 }
