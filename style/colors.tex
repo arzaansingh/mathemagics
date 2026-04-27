@@ -1,42 +1,73 @@
 %% style/colors.tex
-%% The locked-in palette for Mathemagics. Five tcolorbox colors + supporting hues.
-%% Tweak in ONE place; everything else inherits.
+%% The locked-in pastel-academic palette for Mathemagics.
+%% Eight colors total: five for the locked tcolorbox environments,
+%% three for structural/code roles. Refresh as of v0.2: softer / lighter
+%% than v0.1, but kept saturated enough that white text remains legible
+%% on the title bars.
+%%
+%% Tweak in ONE place; everything else inherits. Adding a NEW color here
+%% is a signal the design has drifted — pause and reconsider.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Five tcolorbox colors — do not add new ones lightly. The discipline is
-% deliberate: too many colored boxes makes a textbook visually noisy.
+% Five tcolorbox environment colors
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Definitions: cool blue tint
-\definecolor{mathemagicsDef}{HTML}{1B6EC2}        % blue rule
-\definecolor{mathemagicsDefBg}{HTML}{EAF2FB}      % light blue tint
+% Definition: powder blue (sky-feel, friendly)
+\definecolor{mathemagicsDef}{HTML}{5A9CCB}        % rule + title bar
+\definecolor{mathemagicsDefBg}{HTML}{E8F2FB}      % light tint background
 
-% Theorems / propositions / lemmas: minimal, white box, dark rule
-\definecolor{mathemagicsThm}{HTML}{1A1A1A}        % near-black rule
+% Theorem / Proposition / Lemma / Corollary: charcoal, restrained
+\definecolor{mathemagicsThm}{HTML}{2D2D2D}        % rule
 \definecolor{mathemagicsThmBg}{HTML}{FFFFFF}      % white
 
-% Intuition: warm cream
-\definecolor{mathemagicsIntu}{HTML}{C09010}       % amber rule
-\definecolor{mathemagicsIntuBg}{HTML}{FBF5E2}     % cream tint
+% Intuition: warm mustard / cream (friendly, "lightbulb" feel)
+\definecolor{mathemagicsIntu}{HTML}{B8901C}       % rule (deepened for white text legibility)
+\definecolor{mathemagicsIntuBg}{HTML}{FBF3D9}     % cream tint
 
-% Example: pale gray
-\definecolor{mathemagicsEx}{HTML}{555555}         % gray rule
-\definecolor{mathemagicsExBg}{HTML}{F4F4F4}       % pale gray
+% Example: warm gray (neutral, restrained)
+\definecolor{mathemagicsEx}{HTML}{8B8378}         % rule
+\definecolor{mathemagicsExBg}{HTML}{F5F2EE}       % warm pale tint
 
-% Aside (margin sidebar): no fill, just a thin orange accent
-\definecolor{mathemagicsAside}{HTML}{C2521B}      % rust accent
+% Aside: coral / peach (margin only, no fill)
+\definecolor{mathemagicsAside}{HTML}{C57A5C}      % rule (deepened)
 \definecolor{mathemagicsAsideBg}{HTML}{FFFFFF}    % no tint (margin)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Supporting colors for code, links, recap boxes, exercises
+% Three structural-role colors
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\definecolor{mathemagicsLink}{HTML}{1B6EC2}       % matches definition blue
-\definecolor{mathemagicsCodeBg}{HTML}{F7F7F7}     % code background
-\definecolor{mathemagicsRecap}{HTML}{2E7D32}      % green for chapter recap
-\definecolor{mathemagicsRecapBg}{HTML}{ECF5ED}    % green tint
-\definecolor{mathemagicsWhereWeAre}{HTML}{6D4AA1} % purple for "where we are"
-\definecolor{mathemagicsWhereWeAreBg}{HTML}{F1ECF7}
-\definecolor{mathemagicsExercise}{HTML}{1A1A1A}   % black for exercise rule
-\definecolor{mathemagicsColab}{HTML}{F9AB00}      % Colab badge yellow
-\definecolor{mathemagicsCartoon}{HTML}{C2521B}    % matches aside (cartoon asides)
+% Recap (chapter end): mint
+\definecolor{mathemagicsRecap}{HTML}{50A076}       % rule
+\definecolor{mathemagicsRecapBg}{HTML}{ECF5EE}     % mint tint
+
+% Where-we-are (chapter top): lilac
+\definecolor{mathemagicsWhereWeAre}{HTML}{8273A8}  % rule
+\definecolor{mathemagicsWhereWeAreBg}{HTML}{F1ECF7} % lilac tint
+
+% Colab simulation badge: soft gold
+\definecolor{mathemagicsColab}{HTML}{D4A028}       % rule + badge background
+\definecolor{mathemagicsColabBg}{HTML}{FBF1D8}     % gold tint (light)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Hyperlink color (matches definition blue for unity)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\definecolor{mathemagicsLink}{HTML}{3D7BAA}        % slightly deeper than Def for link contrast
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Code background (very subtle warm tint, distinct from any environment)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\definecolor{mathemagicsCodeBg}{HTML}{F8F6F2}      % off-white warm
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Cartoon-aside accent (matches Aside coral)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\definecolor{mathemagicsCartoon}{HTML}{C57A5C}     % matches Aside
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Exercise rule (used by exercise/warmup environments)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\definecolor{mathemagicsExercise}{HTML}{2D2D2D}    % matches Theorem charcoal

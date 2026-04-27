@@ -24,20 +24,20 @@ These are the rules that, if broken, the section gets sent back regardless of ho
 
 ### 2.1 Color palette
 
-The palette is **pastel-academic**: muted enough to feel restrained, saturated enough to read at a glance. Five colors do all the work. The palette is locked in `style/colors.tex`; do not introduce new colors anywhere else.
+The palette is **soft pastel-academic**: light enough to feel airy, saturated enough that white title text remains legible on the rule color, and disciplined enough that nothing competes with the math. Eight colors do all the work. The palette is locked in `style/colors.tex`; do not introduce new colors anywhere else.
 
 | Role                  | Primary (rule, accent) | Background tint   | Use                                    |
 |-----------------------|------------------------|-------------------|----------------------------------------|
-| Definition            | dusty blue `#1B6EC2`   | `#EAF2FB`         | `definition` boxes, link color         |
-| Theorem / Prop / Lem  | charcoal `#1A1A1A`     | white             | formal claims; minimal, restrained     |
-| Intuition             | warm amber `#C09010`   | `#FBF5E2` (cream) | "plain English" boxes, lightbulb cue   |
-| Example               | slate gray `#555555`   | `#F4F4F4`         | worked examples                        |
-| Aside (margin)        | terracotta `#C2521B`   | none              | margin asides, cartoon flag            |
-| Recap (chapter end)   | sage `#2E7D32`         | `#ECF5ED`         | end-of-chapter recap box only          |
-| Where-we-are (chap top) | dusty purple `#6D4AA1` | `#F1ECF7`       | top-of-chapter mini-map only           |
-| Colab badge           | golden yellow `#F9AB00` | n/a              | Colab links and simulation boxes only  |
+| Definition            | powder blue `#5A9CCB`  | `#E8F2FB`         | `definition` boxes                     |
+| Theorem / Prop / Lem  | charcoal `#2D2D2D`     | white             | formal claims; minimal, restrained     |
+| Intuition             | mustard `#B8901C`      | `#FBF3D9` (cream) | "plain English" boxes, lightbulb cue   |
+| Example               | warm gray `#8B8378`    | `#F5F2EE`         | worked examples                        |
+| Aside (margin)        | coral `#C57A5C`        | none (margin)     | margin asides, cartoon flag            |
+| Recap (chapter end)   | mint `#50A076`         | `#ECF5EE`         | end-of-chapter recap box only          |
+| Where-we-are (chap top) | lilac `#8273A8`      | `#F1ECF7`         | top-of-chapter mini-map only           |
+| Colab badge           | soft gold `#D4A028`    | `#FBF1D8`         | Colab links and simulation boxes only  |
 
-These eight colors are the entire visible spectrum of Mathemagics. Plots and TikZ figures **must** use only these (with optional alpha variants). If a chapter needs a "new" color for a plot, the answer is: choose two of the existing ones with appropriate alpha.
+These eight colors are the entire visible spectrum of Mathemagics. Plots and TikZ figures **must** use only these (with optional alpha variants — `mathemagicsDef!50` etc.). If a chapter needs a "new" color for a plot, the answer is: choose two of the existing ones with different alpha levels.
 
 > **Audit gate**: a figure that uses any color outside this list fails the visual audit.
 
