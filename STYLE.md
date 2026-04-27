@@ -21,6 +21,7 @@ These are the rules that, if broken, the section gets sent back regardless of ho
 9. **Voice is third person, present tense, collective "we."** Established by existing notes; matches the tone of Strang and Vershynin.
 10. **Every theorem gets a picture or numerical experiment before its formal statement.** Picture before proof. Always.
 11. **Every standard result is either proved in-line, sketched with pointer to chapter appendix, or cited.** No bare claims.
+12. **Margin items must be visually linked to their body-text anchor.** Every margin entry (`\marginnote`, `\asideHistorical`, `\asideMatters`, `\marginfigure`) is paired with a colored dot (`\anchorDot{N}`) placed both in the body text at the relevant phrase *and* at the top of the margin item. Same `N`, same color, dot to dot. Five anchor colors cycle: 1 = coral, 2 = mint, 3 = lilac, 4 = gold, 5 = powder blue. Pick distinct numbers for adjacent anchors so neighbours don't collide. Margin items must also have **explicit visual breathing room** between them (`\marginGap` macro inserts ~1.4em of empty margin) so two adjacent items don't blend together.
 
 ---
 

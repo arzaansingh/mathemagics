@@ -2,8 +2,8 @@
 %% Chapter 1: Random Variables, A Working Vocabulary
 %%
 %% Section status:
-%%   §1.0  Chapter opener + whereWeAre   DONE  (audit pass v0.3)
-%%   §1.1  Sample spaces, outcomes, X    DONE  (audit pass v0.3 — visual redesign)
+%%   §1.0  Chapter opener + whereWeAre   DONE  (audit pass v0.4)
+%%   §1.1  Sample spaces, outcomes, X    DONE  (audit pass v0.4 — anchors, cartoons, hints)
 %%   §1.2  Distributions: PMF / PDF / CDF  placeholder
 %%   §1.3  Expectation and variance        placeholder
 %%   §1.4  Independence and joint distributions  placeholder
@@ -17,12 +17,22 @@ This is the first chapter of the book. Everything that follows, moment generatin
 By the end of this chapter the reader will be able to: define random variables and their distributions cleanly, compute expectations and variances of all the running examples (Bernoulli, Binomial, Normal, Exponential), and recognize when two random variables are independent. The chapter assumes only basic high-school algebra and a willingness to draw a few pictures.%
 }
 
-Probability is the language we use when we want to say something precise about a quantity that is uncertain. The outcome of a coin flip, the height of a randomly chosen person, the largest eigenvalue of a sample covariance matrix; all of these vary across repetitions of the experiment, and probability supplies the vocabulary for describing how. The unit of vocabulary is the \vocab{random variable}: a single number whose value is unknown until the experiment is run. This chapter builds that vocabulary from scratch and trains the running examples that the rest of the book will lean on.
+% --- Page 11 chapter-opener cartoon -----------------------------------------
+\marginnote{%
+\centering
+\anchorDot{1}\,\sffamily\footnotesize\scshape Mathemagics\par
+\smallskip
+\wizardHatCartoon\par
+\smallskip
+\itshape\footnotesize Probability is rigorous magic: we name the unknown, weigh it, and pull conclusions out of it.
+}
+
+Probability is the language\anchorDot{1} we use when we want to say something precise about a quantity that is uncertain. The outcome of a coin flip, the height of a randomly chosen person, the largest eigenvalue of a sample covariance matrix; all of these vary across repetitions of the experiment, and probability supplies the vocabulary for describing how. The unit of vocabulary is the \vocab{random variable}: a single number whose value is unknown until the experiment is run. This chapter builds that vocabulary from scratch and trains the running examples that the rest of the book will lean on.
 
 \section{Sample spaces, outcomes, and the function we call \texorpdfstring{$X$}{X}}
 \label{sec:rvs-samplespace}
 
-Before we can define a random variable, we need to be precise about what it ``randomizes over.'' That requires three pieces:
+Before we can define a random variable, we need to be precise about what it ``randomizes over.''\anchorDot{2} That requires three pieces:
 
 \begin{enumerate}
 \item an \vocab{experiment}, the act whose result is uncertain;
@@ -30,9 +40,14 @@ Before we can define a random variable, we need to be precise about what it ``ra
 \item a \vocab{probability function} $\Prob$ that assigns a number in $[0,1]$ to events (i.e., subsets of $\Omega$), with $\Prob(\Omega) = 1$.
 \end{enumerate}
 
+% --- Page 12 margin: historical aside FIRST, then experiments ---------------
+\asideHistorical{\anchorDot{2}\, The modern definition of a random variable as a function on a sample space is due to Andrey Kolmogorov, in his 1933 monograph \emph{Foundations of the Theory of Probability}. Before Kolmogorov, ``random'' was a word in search of a definition.}
+
+\marginGap
+
 \marginnote{%
 \centering
-\sffamily\footnotesize\scshape Three running experiments\par
+\anchorDot{3}\,\sffamily\footnotesize\scshape Three running experiments\par
 \smallskip
 \begin{tabular}{@{}c@{\quad}l@{}}
 \coinbig{H}    & \footnotesize coin: $2$ outcomes\\[2pt]
@@ -51,11 +66,9 @@ Before we can define a random variable, we need to be precise about what it ``ra
 \end{tabular}
 }
 
-\asideHistorical{The modern definition of a random variable as a function on a sample space is due to Andrey Kolmogorov, in his 1933 monograph \emph{Foundations of the Theory of Probability}. Before Kolmogorov, ``random'' was a word in search of a definition.}
+The simplest example is a single coin flip.\anchorDot{3} The experiment is the flip; the sample space is $\Omega = \{H, T\}$; and the probability function (for a fair coin) is $\Prob(H) = \Prob(T) = \tfrac{1}{2}$. The outcomes here are just the labels $H$ and $T$. They are not numbers, they are labels for possibilities.
 
-The simplest example is a single coin flip. The experiment is the flip; the sample space is $\Omega = \{H, T\}$; and the probability function (for a fair coin) is $\Prob(H) = \Prob(T) = \tfrac{1}{2}$. The outcomes here are just the labels $H$ and $T$. They are not numbers, they are labels for possibilities.
-
-Often we care less about the labels themselves than about a number we can compute from them. For two coin flips, we may care about the \emph{number of heads}; for the roll of two dice, we may care about the \emph{sum}; for a clinical trial, we may care about whether a patient recovered or not. In each case there is a function that takes an outcome and returns a number. That function is the random variable.
+Often we care less about the labels themselves than about a number we can compute from them. For two coin flips, we may care about the \emph{number of heads}; for the roll of two dice, we may care about the \emph{sum}; for a clinical trial, we may care about whether a patient recovered or not. In each case there is a function that takes an outcome and returns a number. That function is the random variable.\anchorDot{4}
 
 \begin{definition}{Random variable}{rv}
 Let $\Omega$ be a sample space. A \emph{random variable} on $\Omega$ is a function $X : \Omega \to \R$ that assigns to each outcome $\omega \in \Omega$ a real number $X(\omega)$.\footnotemark
@@ -63,32 +76,26 @@ Let $\Omega$ be a sample space. A \emph{random variable} on $\Omega$ is a functi
 \footnotetext{In a fully rigorous treatment we would also require $X$ to be \emph{measurable}; this technical condition becomes relevant only when $\Omega$ is uncountable. Appendix~D sketches the measure-theoretic framework for the curious reader.}
 
 \marginnote{%
-\centering\sffamily\footnotesize\scshape A random variable as a machine\par
+\centering
+\anchorDot{4}\,\sffamily\footnotesize\scshape A random variable as a machine\par
 \smallskip
 \begin{tikzpicture}[scale=0.55, every node/.style={font=\sffamily\footnotesize}]
-  % Input
   \node[anchor=east] at (-2.6, 0) {$\omega$};
   \draw[->, line width=0.55pt, mathemagicsThm] (-2.5, 0) -- (-1.05, 0);
-
-  % Machine box
   \draw[rounded corners=4pt, draw=mathemagicsThm, fill=mathemagicsIntuBg!70,
         line width=0.7pt]
     (-1, -0.85) rectangle (1, 0.85);
   \node[font=\itshape\bfseries\Large, color=mathemagicsDef] at (0, 0) {$X$};
-
-  % Knob/gear decoration on top
   \draw[draw=mathemagicsThm, line width=0.4pt] (0, 0.95) circle (0.18);
   \foreach \angle in {0,45,90,135,180,225,270,315} {
     \draw[mathemagicsThm, line width=0.3pt]
       (0, 0.95) ++(\angle:0.18) -- ++(\angle:0.08);
   }
-
-  % Output
   \draw[->, line width=0.55pt, mathemagicsThm] (1.05, 0) -- (2.5, 0);
   \node[anchor=west] at (2.6, 0) {$X(\omega)$};
 \end{tikzpicture}\par
 \smallskip
-\itshape\footnotesize Outcomes go in; numbers come out. The randomness is in the input, not in the machine.
+\itshape\footnotesize Outcomes go in; numbers come out. The randomness lives in the input, not in the machine.
 }
 
 \begin{intuition}
@@ -97,7 +104,17 @@ Think of $X$ as a \emph{measurement device}. The randomness lives in $\Omega$; i
 
 \subsection*{A worked example: number of heads in two coin flips}
 
-Let the experiment be flipping a fair coin twice in a row. The sample space contains four outcomes:
+% --- Page 13 margin: cartoon coin at the start of this subsection -----------
+\marginnote{%
+\centering
+\anchorDot{5}\,\sffamily\footnotesize\scshape Heads or tails?\par
+\smallskip
+\coinCartoon\par
+\smallskip
+\itshape\footnotesize One coin flip is the simplest non-trivial experiment in all of probability.
+}
+
+Let the experiment be flipping a fair coin twice in a row.\anchorDot{5} The sample space contains four outcomes:
 \[
 \Omega \;=\; \{HH,\; HT,\; TH,\; TT\}.
 \]
@@ -122,28 +139,21 @@ Then $X(HH) = 2$, $X(HT) = 1$, $X(TH) = 1$, and $X(TT) = 0$. The random variable
   },
   realline/.style={->, line width=0.6pt, draw=mathemagicsThm}
 ]
-% Title centered above
 \node[font=\itshape\sffamily, color=mathemagicsThm, anchor=south]
      at (0, 2.25)
      {\large $X = $ ``number of heads in two coin flips''};
 
-% Omega as a soft rounded background
 \fill[mathemagicsDefBg, rounded corners=8pt]
   (-3.5, -2.0) rectangle (-1.3, 2.0);
 \node[font=\sffamily\itshape\bfseries, color=mathemagicsThm,
       anchor=north west]
      at (-3.4, 1.95) {$\Omega$};
 
-% Outcomes, sorted vertically by their image under X
-% HH at top (value 2)
 \node[outcome] at (-2.4, 1.5)   (hh) {HH};
-% HT and TH share value 1 (cluster in middle)
 \node[outcome] at (-2.4, 0.35)  (ht) {HT};
 \node[outcome] at (-2.4,-0.35)  (th) {TH};
-% TT at bottom (value 0)
 \node[outcome] at (-2.4,-1.5)   (tt) {TT};
 
-% Vertical real number line
 \draw[realline] (3, -1.95) -- (3, 1.95)
   node[above, font=\sffamily, color=mathemagicsThm] {$\R$};
 \foreach \y/\lbl in {-1.5/0, 0/1, 1.5/2} {
@@ -152,13 +162,11 @@ Then $X(HH) = 2$, $X(HT) = 1$, $X(TH) = 1$, and $X(TT) = 0$. The random variable
        at (3.15, \y) {$\lbl$};
 }
 
-% Mapping arrows (mostly horizontal because outcomes are sorted by image)
 \draw[arr] (hh.east) -- (2.84, 1.5);
 \draw[arr] (ht.east) -- (2.84, 0);
 \draw[arr] (th.east) -- (2.84, 0);
 \draw[arr] (tt.east) -- (2.84,-1.5);
 
-% Single label "X" on the topmost arrow
 \node[font=\itshape\sffamily, color=mathemagicsIntu, above=1pt]
      at (0.2, 1.5) {$X$};
 
@@ -167,7 +175,7 @@ Then $X(HH) = 2$, $X(HT) = 1$, $X(TH) = 1$, and $X(TT) = 0$. The random variable
 \label{fig:rv-mapping}
 \end{figure}
 
-\asideMatters{Defining $X$ as a function on $\Omega$, rather than just as ``a random number,'' lets us recover \emph{any} numerical question about the experiment by the same mechanism. The number of heads, the number of tails, whether the first flip matched the second; each is a different function on the same $\Omega$.}
+\asideMatters{\anchorDot{1}\, Defining $X$ as a function on $\Omega$, rather than just as ``a random number,'' lets us recover \emph{any} numerical question about the experiment by the same mechanism. The number of heads, the number of tails, whether the first flip matched the second; each is a different function on the same $\Omega$.}
 
 \subsection*{Notation}
 
@@ -190,7 +198,7 @@ The probability $\Prob(X = 1) = \tfrac{1}{2}$ comes from the fact that two of th
 
 \marginnote{%
 \centering
-\sffamily\footnotesize\scshape One outcome, sum $= 7$\par
+\anchorDot{2}\,\sffamily\footnotesize\scshape One outcome, sum $= 7$\par
 \smallskip
 \diebig{3}\quad\diebig{4}\par
 \smallskip
@@ -198,7 +206,7 @@ The probability $\Prob(X = 1) = \tfrac{1}{2}$ comes from the fact that two of th
 }
 
 \begin{example}{Sum of two dice}{two-dice}
-Roll two fair six-sided dice. The sample space contains $36$ ordered pairs:
+Roll two fair six-sided dice.\anchorDot{2} The sample space contains $36$ ordered pairs:
 \[
 \Omega = \bigl\{(i, j) : i, j \in \{1, 2, 3, 4, 5, 6\}\bigr\},
 \]
@@ -206,11 +214,12 @@ each with probability $\tfrac{1}{36}$. Let $X(i, j) = i + j$ be the sum. Then $X
 \[
 \Prob(X = 2) = \tfrac{1}{36}, \quad \Prob(X = 7) = \tfrac{6}{36}, \quad \Prob(X = 12) = \tfrac{1}{36}.
 \]
-The full distribution of $X$ has the familiar triangular shape: rare on the extremes (only one pair sums to $2$), most likely in the middle (six different pairs sum to $7$). \cref{fig:dice-distribution} plots it.
+The full distribution of $X$\anchorDot{3} has the familiar triangular shape: rare on the extremes (only one pair sums to $2$), most likely in the middle (six different pairs sum to $7$). \cref{fig:dice-distribution} plots it.
 \end{example}
 
 \begin{marginfigure}
 \centering
+\anchorDot{3}\par\smallskip
 \includegraphics[width=\linewidth]{figures/ch01/dice-distribution.pdf}
 \caption{The distribution of $X$ in \cref{ex:two-dice}. The triangular peak at $k = 7$ is no coincidence: of the $36$ equally-likely pairs $(i, j)$, exactly $6$ sum to $7$.}
 \label{fig:dice-distribution}
@@ -220,8 +229,9 @@ This is the working pattern. We start from a sample space whose outcomes carry n
 
 \subsection*{Brief warm-ups}
 
+\hint{\anchorDot{4}\,How many outcomes do you get from flipping three coins? Try listing them in order, then count those with exactly $k$ heads.}
 \begin{warmup}[\coffee{1}]
-Three coins are flipped, all fair, all independent. Write down the sample space $\Omega$. Define the random variable $X$ to be the number of heads. List $X(\omega)$ for each $\omega \in \Omega$, and compute $\Prob(X = k)$ for $k = 0, 1, 2, 3$.
+Three coins are flipped, all fair, all independent.\anchorDot{4} Write down the sample space $\Omega$. Define the random variable $X$ to be the number of heads. List $X(\omega)$ for each $\omega \in \Omega$, and compute $\Prob(X = k)$ for $k = 0, 1, 2, 3$.
 \end{warmup}
 \begin{warmupSolution}
 $\Omega = \{HHH, HHT, HTH, HTT, THH, THT, TTH, TTT\}$, eight outcomes each with probability $\tfrac{1}{8}$. The values of $X$ are $3, 2, 2, 1, 2, 1, 1, 0$ respectively. Counting,
@@ -231,15 +241,17 @@ $\Prob(X{=}2) = \tfrac{3}{8}$,
 $\Prob(X{=}3) = \tfrac{1}{8}$.
 \end{warmupSolution}
 
+\hint{\anchorDot{5}\,A standard deck has $52$ cards, half of them red.}
 \begin{warmup}[\coffee{1}]
-A single card is drawn from a standard 52-card deck. Define a random variable $Y$ that equals $1$ if the card is red and $0$ if the card is black. What is the sample space, and what is $\Prob(Y = 1)$?
+A single card is drawn from a standard 52-card deck.\anchorDot{5} Define a random variable $Y$ that equals $1$ if the card is red and $0$ if the card is black. What is the sample space, and what is $\Prob(Y = 1)$?
 \end{warmup}
 \begin{warmupSolution}
 $\Omega$ is the set of $52$ cards, each with probability $\tfrac{1}{52}$. The random variable $Y$ takes the value $1$ on the $26$ red cards and $0$ on the $26$ black cards, so $\Prob(Y = 1) = \tfrac{26}{52} = \tfrac{1}{2}$. (This $Y$ is the prototype of the \emph{Bernoulli random variable}, which we will meet again repeatedly starting in \cref{ch:genfunc}.)
 \end{warmupSolution}
 
+\hint{\anchorDot{1}\,Out of the $36$ ordered pairs in $\Omega$, how many have $i = j$?}
 \begin{warmup}[\coffee{2}]
-Re-do \cref{ex:two-dice} but with a different random variable: let $Z(i, j)$ be $1$ if $i = j$ and $0$ otherwise, so $Z$ records whether the two dice show the same face. Compute $\Prob(Z = 1)$.
+Re-do \cref{ex:two-dice} but with a different random variable:\anchorDot{1} let $Z(i, j)$ be $1$ if $i = j$ and $0$ otherwise, so $Z$ records whether the two dice show the same face. Compute $\Prob(Z = 1)$.
 \end{warmup}
 \begin{warmupSolution}
 The pairs with $i = j$ are $(1,1), (2,2), (3,3), (4,4), (5,5), (6,6)$, six in total. Each has probability $\tfrac{1}{36}$, so $\Prob(Z = 1) = \tfrac{6}{36} = \tfrac{1}{6}$.
