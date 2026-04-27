@@ -90,8 +90,14 @@
 % Cross-reference cleverness
 \RequirePackage[noabbrev,capitalise]{cleveref}
 
-% Bibliography (biblatex with biber backend)
-\RequirePackage[style=alphabetic,backend=biber,maxbibnames=10,maxcitenames=2,giveninits=true]{biblatex}
+% Bibliography (biblatex with biber backend; natbib=true gives us
+% \citep / \citet commands compatible with the legacy notes).
+\RequirePackage[style=alphabetic,backend=biber,natbib=true,maxbibnames=10,maxcitenames=2,giveninits=true]{biblatex}
+
+% OCG (Optional Content Groups) for click-to-reveal flashcard answers.
+% printocg=always means the answer is always rendered when printed, but
+% hidden by default on screen in OCG-aware viewers.
+\RequirePackage[printocg=always]{ocgx2}
 
 % Index
 \RequirePackage{imakeidx}
@@ -196,5 +202,17 @@
   \setlength{\parindent}{0pt}%
   \setlength{\parskip}{0.6\baselineskip plus 0.1\baselineskip minus 0.1\baselineskip}%
 }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Lists ARE indented (counter-rule to the no-paragraph-indent rule above).
+% Numbered and bulleted lists carry a left-margin indent so they read as
+% visually distinct blocks from prose.  See STYLE.md non-negotiable #2.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\setlist[enumerate,1]{leftmargin=2.2em, labelsep=0.6em, itemsep=0.25em, topsep=0.4em}
+\setlist[enumerate,2]{leftmargin=3.2em, labelsep=0.6em, itemsep=0.2em}
+\setlist[itemize,1]{leftmargin=2.2em, labelsep=0.6em, itemsep=0.25em, topsep=0.4em}
+\setlist[itemize,2]{leftmargin=3.2em, labelsep=0.6em, itemsep=0.2em}
+\setlist[description]{leftmargin=2.2em, labelsep=0.6em, itemsep=0.3em, topsep=0.4em}
 
 \endinput

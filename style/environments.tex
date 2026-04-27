@@ -236,11 +236,37 @@
   \par\medskip%
 }
 
+% Click-to-reveal answer (flashcard-style).
+%
+% Each \begin{warmupSolution}...\end{warmupSolution} produces a clickable
+% "Reveal answer" button. The answer text is hidden by default in OCG-aware
+% PDF viewers (Adobe Acrobat, pdf.js / VS Code LaTeX Workshop viewer, ...)
+% and shown when the button is clicked. In viewers without OCG support, the
+% layer is rendered "always" per the package option, so readers still see
+% the answer.
+%
+% A separate counter (warmupocg) gives each warm-up a unique OCG layer ID.
+
+\newcounter{warmupocg}
+
 \newenvironment{warmupSolution}{%
+  \stepcounter{warmupocg}%
+  \edef\@currentwsoltag{wsol\thewarmupocg}%
   \par\smallskip\noindent%
-  {\sffamily\bfseries\small\itshape Answer:}\quad%
-  \small\ignorespaces%
+  % The clickable toggle button
+  \begingroup
+    \sffamily\footnotesize
+    \switchocg{\@currentwsoltag}{%
+      \textcolor{mathemagicsLink}{\textbf{$\blacktriangleright$\ Reveal answer}}%
+    }%
+  \endgroup\par\smallskip
+  % The hidden answer (initially OFF; printocg=always from class option)
+  \begin{ocg}{Answer~\thewarmupocg}{\@currentwsoltag}{0}%
+    \noindent{\sffamily\bfseries\small\itshape Answer:}\quad
+    \small\ignorespaces%
 }{%
+    \par
+  \end{ocg}%
   \par\smallskip%
 }
 

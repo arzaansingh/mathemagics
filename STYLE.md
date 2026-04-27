@@ -11,13 +11,16 @@ This document is **prescriptive**, when there's tension between "this is fast" a
 These are the rules that, if broken, the section gets sent back regardless of how good the content is:
 
 1. **No paragraph indentation.** Block paragraphs only. Enforced at the class level.
-2. **No em dashes.** Neither `---` (LaTeX) nor `—` (Unicode). Use commas, semicolons, periods, or parentheses instead. En dashes (`--`) are still fine for numerical ranges (e.g., "pages 5–10"). Enforced by sweep before commit.
-3. **Every page has at least one item in the right margin.** Even if it's a tiny callout. Empty margins are a bug.
-4. **All visualizations are in-house.** No stock images, no copy-pasted diagrams, no external screenshots. TikZ for diagrams; matplotlib for data plots. Citations are the only "outside" thing on the page.
-5. **Every figure passes a visual audit before commit.** The dependency-graph mishap (arrows passing through node interiors, text being clipped) does not happen again.
-6. **Voice is third person, present tense, collective "we."** Established by existing notes; matches the tone of Strang and Vershynin.
-7. **Every theorem gets a picture or numerical experiment before its formal statement.** Picture before proof. Always.
-8. **Every standard result is either proved in-line, sketched with pointer to chapter appendix, or cited.** No bare claims.
+2. **Lists, however, *are* indented.** Numbered and bulleted lists carry a left-margin indent so they read as visually distinct blocks from prose. Implemented via `enumitem` `\setlist` in `mathemagics.cls`. The block-paragraph rule applies to paragraphs only, not lists.
+3. **No em dashes.** Neither `---` (LaTeX) nor `—` (Unicode). Use commas, semicolons, periods, or parentheses instead. En dashes (`--`) are still fine for numerical ranges (e.g., "pages 5–10"). Enforced by sweep before commit.
+4. **Every page has at least one item in the right margin.** Even if it's a tiny callout. Empty margins are a bug.
+5. **No inline icon graphics in body text.** TikZ icons (`\coin{H}`, `\die{3}`) belong in figures and in margin entries with room to be legible. In running prose, use plain text ("H", "T", "the outcome HH"). Inline icons at body-text size become unreadable.
+6. **Default to in-house visualizations; reach for the right tool for each job.** TikZ for diagrams, matplotlib for data plots. When the *best* visualization of a concept already exists in published literature or open educational resources, reproducing it (faithfully or as a redrawing in our palette) with full attribution in the caption is allowed and sometimes preferred. AI-image-generator output is allowed for *purely illustrative cartoons* (a stylized character, a scene), saved as PNG with caption "Illustration generated for this book." The image generator is for cartoons and scenes, never for math diagrams.
+7. **Research-first principle for new figures.** Before drawing a figure for any concept that appears in textbook literature, look at how 2–3 well-regarded sources have drawn it. Pick a pattern that is *known to work*. Only then start in TikZ. The "iterate until it looks OK" workflow burns time.
+8. **Every figure passes a visual audit before commit.** The dependency-graph mishap (arrows passing through node interiors, text being clipped) and the Figure 2.1 v0.1/v0.2 mishaps (fanning arrows bunching, labels colliding with arrows) do not happen again.
+9. **Voice is third person, present tense, collective "we."** Established by existing notes; matches the tone of Strang and Vershynin.
+10. **Every theorem gets a picture or numerical experiment before its formal statement.** Picture before proof. Always.
+11. **Every standard result is either proved in-line, sketched with pointer to chapter appendix, or cited.** No bare claims.
 
 ---
 
