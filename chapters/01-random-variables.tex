@@ -93,9 +93,13 @@ The simplest example is a single coin flip.\anchorDot{3} The experiment is the f
 Often we care less about the labels themselves than about a number we can compute from them. For two coin flips, we may care about the \emph{number of heads}; for the roll of two dice, we may care about the \emph{sum}; for a clinical trial, we may care about whether a patient recovered or not. In each case there is a function that takes an outcome and returns a number. That function is the random variable.\anchorDot{4}
 
 \begin{definition}{Random variable}{rv}
-Let $\Omega$ be a sample space. A \emph{random variable} on $\Omega$ is a function $X : \Omega \to \R$ that assigns to each outcome $\omega \in \Omega$ a real number $X(\omega)$.\footnotemark
+\anchorDot{1}\,Let $\Omega$ be a sample space. A \emph{random variable} on $\Omega$ is a function $X : \Omega \to \R$ that assigns to each outcome $\omega \in \Omega$ a real number $X(\omega)$.\footnotemark
 \end{definition}
 \footnotetext{In a fully rigorous treatment we would also require $X$ to be \emph{measurable}; this technical condition becomes relevant only when $\Omega$ is uncountable. Appendix~D sketches the measure-theoretic framework for the curious reader.}
+
+\asideMatters{\anchorDot{1}\, Defining $X$ as a function on $\Omega$, rather than just as ``a random number,'' lets us recover \emph{any} numerical question about the experiment by the same mechanism. The number of heads, the number of tails, whether the first flip matched the second; each is a different function on the same $\Omega$.}
+
+\marginGap
 
 \marginnote{%
 \centering
@@ -227,10 +231,8 @@ Then $X(HH) = 2$, $X(HT) = 1$, $X(TH) = 1$, and $X(TT) = 0$. So $X$ takes its va
 
 Before moving to a richer example, two notational conventions are worth pinning down. They will be used everywhere in this book.
 
-\asideMatters{\anchorDot{1}\, Defining $X$ as a function on $\Omega$, rather than just as ``a random number,'' lets us recover \emph{any} numerical question about the experiment by the same mechanism. The number of heads, the number of tails, whether the first flip matched the second; each is a different function on the same $\Omega$.}
-
 \begin{definition}{Notation: $X$ versus $x$}{notation}
-\anchorDot{1}\, Capital letters ($X$, $Y$, $Z$, \ldots) denote random variables, the \emph{functions} on $\Omega$. Lowercase letters ($x$, $y$, $z$, \ldots) denote particular real numbers, specific values that those random variables \emph{could} take.
+Capital letters ($X$, $Y$, $Z$, \ldots) denote random variables, the \emph{functions} on $\Omega$. Lowercase letters ($x$, $y$, $z$, \ldots) denote particular real numbers, specific values that those random variables \emph{could} take.
 \end{definition}
 
 So when we write $\Prob(X = x)$, we are asking: what is the probability that the random variable $X$ takes the value $x$? In the two-coin example above,
@@ -273,7 +275,7 @@ The full distribution of $X$\anchorDot{3} has the familiar triangular shape: rar
 \end{marginfigure}
 
 This is the working pattern. We start from a sample space whose outcomes carry no numerical structure; we define a function $X$ that turns each outcome into a number; and we pull the probabilities forward through $X$ to talk about $\Prob(X = x)$ or, more generally, $\Prob(X \in A)$ for any subset $A$ of $\R$.
-
+\newpage
 \subsection*{Brief warm-ups}
 
 \hint{\anchorDot{4}\,How many outcomes do you get from flipping three coins? Try listing them in order, then count those with exactly $k$ heads.}
@@ -306,10 +308,265 @@ The pairs with $i = j$ are $(1,1), (2,2), (3,3), (4,4), (5,5), (6,6)$, six in to
 
 \bigskip
 
-% --- §1.1 ENDS HERE; §1.2 onward still placeholder ---
+% --- §1.1 ENDS HERE ---
+
+% =====================================================================
+% §1.2 Distributions: PMFs, PDFs, and CDFs
+% =====================================================================
 
 \section{Distributions: PMFs, PDFs, and CDFs}
-\PLACEHOLDER{§1.2: discrete vs continuous; PMF, PDF, CDF; the CDF as the unifying object; standard distributions table; first Colab simulation (distribution sandbox).}
+\label{sec:distributions}
+
+% --- §1.2.1 Bridge + motivation ----------------------------------------------
+
+We have a random variable\anchorDot{1}; how do we summarize its behavior compactly? The full set of probabilities $\Prob(X \in A)$ for every $A \subseteq \R$ is too big to write down directly. We need a single object, a function on $\R$, that contains the same information. There are two natural answers depending on what kind of values $X$ takes.
+
+\marginnote{%
+\centering
+\anchorDot{1}\,\sffamily\footnotesize\scshape Discrete vs continuous\par
+\medskip
+\diceVsThermometer\par
+\medskip
+\itshape\footnotesize Two flavours of randomness, two parallel ways to summarize.
+}
+
+A random variable $X$ is \vocab{discrete} if it takes values in a finite or countable set: integers, indicator labels $\{0, 1\}$, the natural numbers. The number of heads in two coin flips and the sum of two dice are both discrete. A random variable $X$ is \vocab{continuous} if its values lie in an interval (or all of $\R$): a length, a temperature, a time. Discrete and continuous random variables share the same definition but require different summaries because of how their probability is allocated. We work through the discrete case first, then the continuous case, then a single unifying object that handles both.
+
+% --- §1.2.2 Discrete: the PMF -------------------------------------------------
+
+\subsection*{Discrete: the probability mass function}
+
+The simplest summary of a discrete random variable lists the probability of every value it can take. That list is the PMF.
+
+\begin{definition}{Probability mass function (PMF)}{pmf}
+Let $X$ be a discrete random variable. The \emph{probability mass function} of $X$ is the function $p_X : \R \to [0, 1]$ defined by
+\[
+p_X(x) \;=\; \Prob(X = x).
+\]
+A PMF satisfies $p_X(x) \ge 0$ for every $x$, and $\sum_x p_X(x) = 1$, where the sum is over all values $x$ that $X$ can take.
+\end{definition}
+
+\begin{intuition}
+The PMF places a \emph{weight} at each value the random variable can take, and the weights sum to $1$. Visualised as a bar chart, the height of the bar at $x$ is the probability of seeing exactly that value.
+\end{intuition}
+
+\begin{example}{Bernoulli$(p)$}{bernoulli}
+A \vocab{Bernoulli random variable} $X \sim \mathrm{Bernoulli}(p)$ takes the value $1$ with probability $p$ and the value $0$ with probability $1 - p$. Its PMF is
+\[
+p_X(1) = p, \qquad p_X(0) = 1 - p.
+\]
+The card-colour random variable $Y$ from \cref{ch:rvs} is a Bernoulli with $p = \tfrac{1}{2}$.
+\end{example}
+
+\begin{example}{Binomial$(n, p)$}{binomial}
+A \vocab{Binomial random variable} $X \sim \mathrm{Bin}(n, p)$ counts the number of successes in $n$ independent Bernoulli$(p)$ trials. Its PMF is
+\[
+p_X(k) \;=\; \binom{n}{k} p^k (1 - p)^{n - k}, \qquad k = 0, 1, \ldots, n.
+\]
+The number of heads in $n$ coin flips is exactly $\mathrm{Bin}(n, \tfrac{1}{2})$.
+\end{example}
+
+% --- §1.2.3 Continuous: the PDF ----------------------------------------------
+
+\subsection*{Continuous: the probability density function}
+
+The PMF idea breaks down for continuous random variables. Suppose $X$ is the height of a randomly chosen adult, measured in metres. What is $\Prob(X = 1.732)$? The answer is exactly $0$: there are uncountably many possible heights, and no individual real number can carry positive probability without the total exceeding $1$.\anchorDot{2}
+
+\marginnote{%
+\centering
+\anchorDot{2}\,\sffamily\footnotesize\scshape The density paradox\par
+\medskip
+\itshape\footnotesize ``What is $\Prob(X = 1.732\,\text{m})$ if $X$ is a height?''\par
+\smallskip
+$0$.\par
+\smallskip
+This is not a flaw of the model. There are uncountably many possible heights; no single one can carry positive weight.
+}
+
+The fix is to replace point probabilities with a \emph{density}.
+
+\begin{definition}{Probability density function (PDF)}{pdf}
+A continuous random variable $X$ has \emph{probability density function} $f_X : \R \to [0, \infty)$ if
+\[
+\Prob(X \in A) \;=\; \int_A f_X(x)\, dx \qquad \text{for every interval } A \subseteq \R.
+\]
+A PDF satisfies $f_X(x) \ge 0$ for every $x$ and $\int_{-\infty}^{\infty} f_X(x)\, dx = 1$.
+\end{definition}
+
+\begin{intuition}
+A PDF is \emph{not} a probability. It is a density, probability per unit of $x$.\anchorDot{3} To turn it into a probability, multiply by $dx$ and integrate over an interval. The total area under the curve is always $1$.
+\end{intuition}
+
+\marginnote{%
+\centering
+\anchorDot{3}\,\sffamily\footnotesize\scshape Density, not probability\par
+\smallskip
+\itshape\footnotesize $f_X(x)$ can exceed $1$. What must be at most $1$ is the area under the curve over any interval.
+}
+
+\begin{example}{Uniform on $[0, 1]$}{uniform}
+The \vocab{uniform} random variable $X \sim \mathrm{Uniform}(0, 1)$ has PDF
+\[
+f_X(x) \;=\; \begin{cases} 1, & 0 \le x \le 1, \\ 0, & \text{otherwise.} \end{cases}
+\]
+For any subinterval $[a, b] \subseteq [0, 1]$, $\Prob(a \le X \le b) = b - a$.
+\end{example}
+
+\begin{example}{Normal $\mathcal{N}(\mu, \sigma^2)$}{normal}
+The \vocab{Normal} (or \vocab{Gaussian}) random variable $X \sim \mathcal{N}(\mu, \sigma^2)$ has PDF
+\[
+f_X(x) \;=\; \frac{1}{\sigma \sqrt{2\pi}} \exp\!\left( -\frac{(x - \mu)^2}{2\sigma^2} \right), \qquad x \in \R.
+\]
+The bell curve. Its centre is at $\mu$ and its spread is controlled by $\sigma$. Part~I builds toward proving \emph{why} this distribution is so special: it is the universal limit shape of sample averages.
+\end{example}
+
+\begin{example}{Exponential$(\lambda)$}{exponential}
+An \vocab{Exponential} random variable $X \sim \mathrm{Exp}(\lambda)$ with rate $\lambda > 0$ has PDF
+\[
+f_X(x) \;=\; \begin{cases} \lambda e^{-\lambda x}, & x \ge 0, \\ 0, & x < 0. \end{cases}
+\]
+It models waiting times for memoryless events.
+\end{example}
+
+\Cref{fig:pdf-curves} plots the three densities side by side at standard parameter values.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{figures/ch01/pdf-curves.pdf}
+\caption[Three PDFs side by side: Uniform, Normal, Exponential.]{Three densities at standard parameter values. The Uniform on $[0,1]$ is constant on its support; the Normal $\mathcal{N}(0,1)$ is the bell curve centred at zero; the Exponential$(1)$ decays from a finite peak at zero. Areas under all three curves are $1$.}
+\label{fig:pdf-curves}
+\end{figure}
+
+% --- §1.2.4 The CDF: unifying object ----------------------------------------
+
+\subsection*{The cumulative distribution function: a unifying object}
+
+The PMF and PDF are different kinds of objects, applicable to different kinds of random variables. Is there a single function that handles both? Yes. It is the cumulative distribution function.
+
+\begin{definition}{Cumulative distribution function (CDF)}{cdf}
+The \emph{cumulative distribution function} of a random variable $X$ is the function $F_X : \R \to [0, 1]$ defined by
+\[
+F_X(x) \;=\; \Prob(X \le x).
+\]
+The CDF is non-decreasing, satisfies $\lim_{x \to -\infty} F_X(x) = 0$ and $\lim_{x \to \infty} F_X(x) = 1$, and is right-continuous.
+\end{definition}
+
+The CDF is defined for \emph{every} random variable, discrete or continuous. The PMF and PDF are recoverable from it.
+
+\begin{proposition}{Recovering the PMF / PDF from the CDF}{pmf-pdf-from-cdf}
+\textit{Let $X$ have CDF $F_X$.}
+\begin{itemize}
+\item \textit{If $X$ is discrete, the PMF is the jump heights of the CDF: $p_X(x) = F_X(x) - F_X(x^-)$, where $F_X(x^-) = \lim_{y \uparrow x} F_X(y)$.}
+\item \textit{If $X$ is continuous and $F_X$ is differentiable at $x$, the PDF is the derivative: $f_X(x) = F_X'(x)$.}
+\end{itemize}
+\end{proposition}
+
+\begin{proof}[Sketch]
+For discrete $X$, the event $\{X \le x\}$ minus the event $\{X < x\}$ is exactly $\{X = x\}$, so the right-side jump of $F_X$ at $x$ has height $\Prob(X = x) = p_X(x)$. For continuous $X$, the fundamental theorem of calculus gives $\frac{d}{dx} \int_{-\infty}^{x} f_X(t)\, dt = f_X(x)$.
+\end{proof}
+
+The CDFs of our running examples have three quite different shapes. \Cref{fig:cdf-trio} shows them side by side.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{figures/ch01/cdf-trio.pdf}
+\caption[Three CDFs: Bernoulli, Uniform, Normal.]{The CDF of a discrete random variable is a staircase (Bernoulli$(0.6)$, left); the CDF of a uniformly distributed random variable is a linear ramp (Uniform on $[0,1]$, middle); the CDF of a Normal is a smooth S-curve (centre, right). All three are non-decreasing and approach $1$ as $x \to \infty$.}
+\label{fig:cdf-trio}
+\end{figure}
+
+% --- §1.2.5 Reference table -----------------------------------------------
+
+\subsection*{A reference table of standard distributions}
+
+The book leans on the same handful of standard distributions repeatedly. \Cref{tab:standard-distributions} gathers them in one place; later chapters point back to this table rather than re-defining each distribution.
+
+\begin{table}[h]
+\centering
+\renewcommand{\arraystretch}{1.4}
+\begin{fullwidth}
+\footnotesize
+\begin{tabular}{@{}llllll@{}}
+\toprule
+\textbf{Name} & \textbf{Type} & \textbf{Support} & \textbf{PMF / PDF} & \textbf{Mean} & \textbf{Variance} \\
+\midrule
+Bernoulli$(p)$ & discrete & $\{0, 1\}$ & $p_X(1) = p,\ p_X(0) = 1-p$ & $p$ & $p(1-p)$ \\
+Binomial$(n, p)$ & discrete & $\{0, 1, \ldots, n\}$ & $\binom{n}{k} p^k (1-p)^{n-k}$ & $np$ & $np(1-p)$ \\
+Geometric$(p)$ & discrete & $\{1, 2, 3, \ldots\}$ & $(1-p)^{k-1} p$ & $1/p$ & $(1-p)/p^2$ \\
+Poisson$(\lambda)$ & discrete & $\{0, 1, 2, \ldots\}$ & $e^{-\lambda} \lambda^k / k!$ & $\lambda$ & $\lambda$ \\
+\midrule
+Uniform$(a, b)$ & continuous & $[a, b]$ & $1/(b-a)$ on $[a, b]$ & $(a+b)/2$ & $(b-a)^2 / 12$ \\
+Exponential$(\lambda)$ & continuous & $[0, \infty)$ & $\lambda e^{-\lambda x}$ & $1/\lambda$ & $1/\lambda^2$ \\
+Normal$(\mu, \sigma^2)$ & continuous & $\R$ & $\frac{1}{\sigma \sqrt{2\pi}} e^{-(x-\mu)^2 / (2\sigma^2)}$ & $\mu$ & $\sigma^2$ \\
+\bottomrule
+\end{tabular}
+\end{fullwidth}
+\caption{The standard distributions used throughout this book. Mean and variance are derived in \cref{ch:genfunc} via moment generating functions.}
+\label{tab:standard-distributions}
+\end{table}
+
+% --- §1.2.6 Distribution sandbox ------------------------------------------
+
+\subsection*{The distribution sandbox}
+
+Reading a PDF or PMF formula on a page is one thing; watching a simulator throw thousands of samples and seeing the histogram resolve into the theoretical shape is another. \Cref{fig:sandbox-sample} shows a snapshot from the companion Colab notebook: $5{,}000$ samples from $\mathrm{Bin}(20, 0.3)$ on the left and from $\mathcal{N}(0, 1)$ on the right, each plotted against the theoretical PMF or PDF.\anchorDot{4}
+
+\marginnote{%
+\centering
+\anchorDot{4}\,\sffamily\footnotesize\scshape Distribution sandbox\par
+\smallskip
+\colablink{Open notebook}{https://github.com/arzaansingh/mathemagics/tree/main/colab-notebooks/ch01-distribution-sandbox.ipynb}\par
+\medskip
+\itshape\footnotesize Generate samples, compare to theory, vary $N$.
+}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{figures/ch01/sandbox-sample.pdf}
+\caption[Sandbox sample: empirical histogram vs theoretical PMF / PDF.]{Empirical histogram (left bars / shaded) overlaid with the theoretical PMF / PDF (right bars / smooth curve) for two distributions, $N = 5{,}000$ samples each. With this many samples the two are visually indistinguishable; with $N = 50$ they would not be.}
+\label{fig:sandbox-sample}
+\end{figure}
+
+The companion notebook \texttt{ch01-distribution-sandbox.ipynb} runs the same simulation interactively and lets the reader vary $N$, the sample size, to watch the empirical bars converge to the theoretical curves. The convergence is one form of the \emph{law of large numbers}, which we prove in \cref{ch:convergence}.
+
+% --- §1.2.7 Brief warm-ups -----------------------------------------------
+
+\subsection*{Brief warm-ups}
+
+\hint{\anchorDot{5}\,Count the eight equally-likely strings $HHH, HHT, \ldots, TTT$, then group by number of heads.}
+\begin{warmup}[\coffee{1}]
+Let $X \sim \mathrm{Bin}(3, \tfrac{1}{2})$.\anchorDot{5} List $p_X(k)$ for $k = 0, 1, 2, 3$ and verify they sum to $1$.
+\end{warmup}
+\begin{warmupSolution}
+$p_X(0) = \tfrac{1}{8}$, $p_X(1) = \tfrac{3}{8}$, $p_X(2) = \tfrac{3}{8}$, $p_X(3) = \tfrac{1}{8}$. The four values sum to $1$. (This is also the answer to Warm-up 1 of \cref{sec:rvs-samplespace}, viewed through the PMF.)
+\end{warmupSolution}
+
+\hint{\anchorDot{1}\,Integrate the constant density over the interval; equivalently, take the length of the subinterval.}
+\begin{warmup}[\coffee{1}]
+For $X \sim \mathrm{Uniform}(0, 1)$,\anchorDot{1} compute $\Prob(0.2 \le X \le 0.7)$ and sketch the CDF $F_X$ on the interval $[0, 1]$.
+\end{warmup}
+\begin{warmupSolution}
+$\Prob(0.2 \le X \le 0.7) = 0.5$. The CDF is a linear ramp on $[0, 1]$: $F_X(x) = x$ for $x \in [0, 1]$, with $F_X(x) = 0$ for $x < 0$ and $F_X(x) = 1$ for $x > 1$.
+\end{warmupSolution}
+
+\hint{\anchorDot{2}\,A PDF must integrate to $1$ over its full support.}
+\begin{warmup}[\coffee{2}]
+Suppose $X$ is continuous with PDF $f_X(x) = c x$ for $x \in [0, 2]$, and $f_X(x) = 0$ otherwise.\anchorDot{2} Find the constant $c$.
+\end{warmup}
+\begin{warmupSolution}
+$\int_0^2 c x \, dx = 2c = 1$, so $c = \tfrac{1}{2}$.
+\end{warmupSolution}
+
+\hint{\anchorDot{3}\,Integrate $\lambda e^{-\lambda t}$ from $0$ to $x$ to get $F_X(x)$.}
+\begin{warmup}[\coffee{2}]
+For $X \sim \mathrm{Exp}(\lambda)$,\anchorDot{3} derive the CDF $F_X(x)$ from the PDF $f_X(x) = \lambda e^{-\lambda x}$ on $[0, \infty)$.
+\end{warmup}
+\begin{warmupSolution}
+For $x \ge 0$, $F_X(x) = \int_0^x \lambda e^{-\lambda t} \, dt = 1 - e^{-\lambda x}$. For $x < 0$, $F_X(x) = 0$.
+\end{warmupSolution}
+
+\bigskip
+
+% --- §1.2 ENDS HERE; §1.3 onward still placeholder ---
 
 \section{Expectation and variance}
 \PLACEHOLDER{§1.3: definition and intuition; linearity of expectation; variance and standard deviation; worked examples on the running distributions.}
