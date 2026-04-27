@@ -79,8 +79,8 @@ Every page in the book follows the Tufte rhythm:
 
 The margin is sacred. Discipline:
 
-- **Required**: at least one margin item per page. Empty margins fail audit.
-- **Capped**: at most 2 items per page (3 only on dense pages).
+- **Required**: 2–3 margin items per page minimum. A single margin item on a page is too sparse; the right margin should feel populated. The exception is the very first page of a chapter, where the chapter-opener cartoon may be the only margin item if the body content above it is short.
+- **Capped**: 4 margin items per page in dense passages. Beyond that, the items collide and the page reads as cluttered. If you need more, spread them across paragraphs so they anchor to different vertical positions, or move the less-critical ones to a later page.
 - **Never load-bearing**: if every margin entry on the page were deleted, every proof and definition still reads cleanly.
 - **Hierarchy of margin item types**, in priority order:
   1. **Small figure / schematic**, most-preferred. Visual reinforcement of the math next to it.

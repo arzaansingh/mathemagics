@@ -319,7 +319,7 @@ The pairs with $i = j$ are $(1,1), (2,2), (3,3), (4,4), (5,5), (6,6)$, six in to
 
 % --- §1.2.1 Bridge + motivation ----------------------------------------------
 
-We have a random variable\anchorDot{1}; how do we summarize its behavior compactly? The full set of probabilities $\Prob(X \in A)$ for every $A \subseteq \R$ is too big to write down directly. We need a single object, a function on $\R$, that contains the same information. There are two natural answers depending on what kind of values $X$ takes.
+We have a random variable\anchorDot{1}; how do we summarize its behavior compactly? The full set of probabilities $\Prob(X \in A)$ for every $A \subseteq \R$ is too big to write down directly. We need a single object, a function on $\R$, that contains the same information. There are two natural answers depending on what kind of values $X$ takes, plus a third object that handles both at once.
 
 \marginnote{%
 \centering
@@ -350,20 +350,108 @@ A PMF satisfies $p_X(x) \ge 0$ for every $x$, and $\sum_x p_X(x) = 1$, where the
 The PMF places a \emph{weight} at each value the random variable can take, and the weights sum to $1$. Visualised as a bar chart, the height of the bar at $x$ is the probability of seeing exactly that value.
 \end{intuition}
 
+Four named discrete distributions show up repeatedly in the rest of this book. Each one below comes with a short story (what it models), its PMF, and a numerical example. The mean and variance are stated as facts; the techniques for computing them are introduced in \cref{sec:expectation}.
+
+% --- Bernoulli ---
+
+\marginnote{%
+\anchorDot{5}\,\sffamily\footnotesize\scshape Bernoulli in the wild\par
+\smallskip
+\itshape\footnotesize Anywhere a single trial has just two outcomes:
+a coin lands heads or tails;
+a clinical patient recovers or does not;
+an ad impression results in a click or it does not;
+an exam answer is right or wrong;
+a packet of internet data arrives or is lost.
+}
+
+The simplest discrete distribution has just two outcomes.\anchorDot{5}
+
 \begin{example}{Bernoulli$(p)$}{bernoulli}
 A \vocab{Bernoulli random variable} $X \sim \mathrm{Bernoulli}(p)$ takes the value $1$ with probability $p$ and the value $0$ with probability $1 - p$. Its PMF is
 \[
 p_X(1) = p, \qquad p_X(0) = 1 - p.
 \]
-The card-colour random variable $Y$ from \cref{ch:rvs} is a Bernoulli with $p = \tfrac{1}{2}$.
+Mean: $p$. Variance: $p(1 - p)$, largest at $p = \tfrac{1}{2}$ (the maximally uncertain coin).
 \end{example}
 
+The card-colour random variable $Y$ from \cref{sec:rvs-samplespace} is a Bernoulli with $p = \tfrac{1}{2}$. So is the indicator of any single yes/no event.
+
+% --- Binomial ---
+
+\marginnote{%
+\anchorDot{1}\,\sffamily\footnotesize\scshape Binomial in the wild\par
+\smallskip
+\itshape\footnotesize The number of:
+heads in $n$ coin flips;
+voters in a sample of $n$ who support a candidate;
+defective items in a batch of $n$ products;
+successful free throws out of $n$ attempts;
+ad clicks out of $n$ impressions.
+}
+
+If we run $n$ independent Bernoulli$(p)$ trials and count the successes, we get the most useful discrete distribution in statistics.\anchorDot{1}
+
 \begin{example}{Binomial$(n, p)$}{binomial}
-A \vocab{Binomial random variable} $X \sim \mathrm{Bin}(n, p)$ counts the number of successes in $n$ independent Bernoulli$(p)$ trials. Its PMF is
+A \vocab{Binomial random variable} $X \sim \mathrm{Bin}(n, p)$ counts the number of successes in $n$ independent Bernoulli$(p)$ trials, so $X = X_1 + \cdots + X_n$ where each $X_i \sim \mathrm{Bernoulli}(p)$. Its PMF is
 \[
 p_X(k) \;=\; \binom{n}{k} p^k (1 - p)^{n - k}, \qquad k = 0, 1, \ldots, n.
 \]
-The number of heads in $n$ coin flips is exactly $\mathrm{Bin}(n, \tfrac{1}{2})$.
+The factor $\binom{n}{k}$ counts the distinct ways to arrange $k$ successes among $n$ trials; $p^k (1 - p)^{n - k}$ is the probability of any one such arrangement. Mean: $np$. Variance: $np(1 - p)$.
+
+\textit{A worked numeric.} The probability of getting exactly $3$ heads in $5$ flips of a fair coin is
+\[
+\Prob(X = 3) = \binom{5}{3} \cdot \left(\tfrac{1}{2}\right)^3 \cdot \left(\tfrac{1}{2}\right)^2 = 10 \cdot \tfrac{1}{32} = \tfrac{5}{16}.
+\]
+\end{example}
+
+% --- Geometric ---
+
+\marginnote{%
+\anchorDot{2}\,\sffamily\footnotesize\scshape Geometric in the wild\par
+\smallskip
+\itshape\footnotesize The number of trials until something happens for the first time:
+flips until the first head;
+job applications until the first offer;
+guesses until cracking a four-digit PIN;
+batters until the first hit.
+}
+
+Where Bernoulli answers \emph{yes/no} and Binomial answers \emph{how many out of $n$}, the Geometric answers \emph{how long do I have to wait}.\anchorDot{2}
+
+\begin{example}{Geometric$(p)$}{geometric}
+A \vocab{Geometric random variable} $X \sim \mathrm{Geometric}(p)$ counts the number of independent Bernoulli$(p)$ trials needed to get the first success. Its PMF is
+\[
+p_X(k) \;=\; (1 - p)^{k - 1} p, \qquad k = 1, 2, 3, \ldots
+\]
+The reasoning: the first $k - 1$ trials must all fail (probability $(1-p)^{k-1}$) and the $k$-th must succeed (probability $p$). Mean: $1/p$. Variance: $(1-p)/p^2$. For a fair die, the expected number of rolls until the first six is $6$.
+\end{example}
+
+% --- Poisson ---
+
+\marginnote{%
+\anchorDot{3}\,\sffamily\footnotesize\scshape Poisson in the wild\par
+\smallskip
+\itshape\footnotesize The count of rare events in a fixed window:
+phone calls per hour at a help desk;
+mutations per generation in a single gene;
+cosmic rays per second hitting a detector;
+typos per page in a manuscript;
+soccer goals per match.
+}
+
+If a rare event happens many times independently over a fixed window, the count is Poisson.\anchorDot{3}
+
+\begin{example}{Poisson$(\lambda)$}{poisson}
+A \vocab{Poisson random variable} $X \sim \mathrm{Poisson}(\lambda)$ takes nonnegative integer values with PMF
+\[
+p_X(k) \;=\; e^{-\lambda} \frac{\lambda^k}{k!}, \qquad k = 0, 1, 2, \ldots
+\]
+The parameter $\lambda > 0$ is the average rate. The Poisson is the only standard distribution where mean and variance \emph{both} equal $\lambda$.
+
+\textit{Connection to Binomial.} If we split a long window into $n$ tiny sub-windows, each with success probability $\lambda / n$, the count of successes is $\mathrm{Bin}(n, \lambda / n)$. As $n \to \infty$, this converges to $\mathrm{Poisson}(\lambda)$. The Poisson is the limiting count of many rare independent events, which is why it shows up wherever you count phone calls, mutations, or typos.
+
+\textit{A worked numeric.} A help desk receives an average of $\lambda = 12$ calls per hour, or $1$ call per $5$-minute window. The probability of \emph{no} calls in the next $5$ minutes is $e^{-1} \approx 0.368$, and the probability of exactly one call is also $e^{-1} \approx 0.368$.
 \end{example}
 
 % --- §1.2.3 Continuous: the PDF ----------------------------------------------
@@ -404,40 +492,7 @@ A PDF is \emph{not} a probability. It is a density, probability per unit of $x$.
 \itshape\footnotesize $f_X(x)$ can exceed $1$. What must be at most $1$ is the area under the curve over any interval.
 }
 
-\begin{example}{Uniform on $[0, 1]$}{uniform}
-The \vocab{uniform} random variable $X \sim \mathrm{Uniform}(0, 1)$ has PDF
-\[
-f_X(x) \;=\; \begin{cases} 1, & 0 \le x \le 1, \\ 0, & \text{otherwise.} \end{cases}
-\]
-For any subinterval $[a, b] \subseteq [0, 1]$, $\Prob(a \le X \le b) = b - a$.
-\end{example}
-
-\begin{example}{Normal $\mathcal{N}(\mu, \sigma^2)$}{normal}
-The \vocab{Normal} (or \vocab{Gaussian}) random variable $X \sim \mathcal{N}(\mu, \sigma^2)$ has PDF
-\[
-f_X(x) \;=\; \frac{1}{\sigma \sqrt{2\pi}} \exp\!\left( -\frac{(x - \mu)^2}{2\sigma^2} \right), \qquad x \in \R.
-\]
-The bell curve. Its centre is at $\mu$ and its spread is controlled by $\sigma$. Part~I builds toward proving \emph{why} this distribution is so special: it is the universal limit shape of sample averages.
-\end{example}
-
-\begin{example}{Exponential$(\lambda)$}{exponential}
-An \vocab{Exponential} random variable $X \sim \mathrm{Exp}(\lambda)$ with rate $\lambda > 0$ has PDF
-\[
-f_X(x) \;=\; \begin{cases} \lambda e^{-\lambda x}, & x \ge 0, \\ 0, & x < 0. \end{cases}
-\]
-It models waiting times for memoryless events.
-\end{example}
-
-\Cref{fig:pdf-curves} plots the three densities side by side at standard parameter values.
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=\linewidth]{figures/ch01/pdf-curves.pdf}
-\caption[Three PDFs side by side: Uniform, Normal, Exponential.]{Three densities at standard parameter values. The Uniform on $[0,1]$ is constant on its support; the Normal $\mathcal{N}(0,1)$ is the bell curve centred at zero; the Exponential$(1)$ decays from a finite peak at zero. Areas under all three curves are $1$.}
-\label{fig:pdf-curves}
-\end{figure}
-
-% --- §1.2.4 The CDF: unifying object ----------------------------------------
+% --- §1.2.4 The CDF: unifying object (moved up — defined BEFORE used in continuous examples) ---
 
 \subsection*{The cumulative distribution function: a unifying object}
 
@@ -465,26 +520,153 @@ The CDF is defined for \emph{every} random variable, discrete or continuous. The
 For discrete $X$, the event $\{X \le x\}$ minus the event $\{X < x\}$ is exactly $\{X = x\}$, so the right-side jump of $F_X$ at $x$ has height $\Prob(X = x) = p_X(x)$. For continuous $X$, the fundamental theorem of calculus gives $\frac{d}{dx} \int_{-\infty}^{x} f_X(t)\, dt = f_X(x)$.
 \end{proof}
 
-The CDFs of our running examples have three quite different shapes. \Cref{fig:cdf-trio} shows them side by side.
+To make the recovery concrete, take the Bernoulli$(p)$ from earlier: it takes the value $0$ with probability $1 - p$ and the value $1$ with probability $p$. Its CDF is
+\[
+F_X(x) \;=\; \begin{cases} 0, & x < 0, \\ 1 - p, & 0 \le x < 1, \\ 1, & x \ge 1. \end{cases}
+\]
+A staircase with two jumps. The first (at $x = 0$) has height $1 - p$, exactly $p_X(0)$; the second (at $x = 1$) has height $p$, exactly $p_X(1)$. The PMF really is the jump heights of the CDF, as \cref{prop:pmf-pdf-from-cdf} promises.
+
+% --- §1.2.5 Continuous distributions in detail ---
+
+\subsection*{The standard continuous distributions}
+
+Three continuous distributions show up repeatedly in the rest of the book: the Uniform, the Exponential, and the Normal. Each comes with a short story, its PDF, a derivation of its CDF (which we can now do thanks to the definition above), and a numerical example. As with the discrete cases, the mean and variance are stated as facts; the integral techniques behind them belong to \cref{sec:expectation}.
+
+% --- Uniform ---
+
+\marginnote{%
+\anchorDot{5}\,\sffamily\footnotesize\scshape Uniform in the wild\par
+\smallskip
+\itshape\footnotesize Where every value in an interval is equally likely:
+the angle of a spun roulette wheel;
+the output of a software random-number generator;
+the position of a dart thrown at random on a board;
+the time of arrival of a uniformly-distributed signal.
+}
+
+The simplest continuous distribution gives every point in an interval equal weight.\anchorDot{5}
+
+\begin{example}{Uniform$(a, b)$}{uniform}
+The \vocab{uniform} random variable $X \sim \mathrm{Uniform}(a, b)$ has PDF
+\[
+f_X(x) \;=\; \begin{cases} \dfrac{1}{b - a}, & a \le x \le b, \\ 0, & \text{otherwise.} \end{cases}
+\]
+For any subinterval $[c, d] \subseteq [a, b]$, $\Prob(c \le X \le d) = (d - c) / (b - a)$.
+
+\textit{CDF.} For $a \le x \le b$,
+\[
+F_X(x) = \int_a^x \frac{1}{b - a}\, dt = \frac{x - a}{b - a},
+\]
+linearly ramping from $0$ at $x = a$ to $1$ at $x = b$ (with $F_X(x) = 0$ for $x < a$ and $F_X(x) = 1$ for $x > b$).
+
+Mean: $(a + b)/2$, the midpoint, exactly as intuition demands. Variance: $(b - a)^2 / 12$.
+\end{example}
+
+% --- Exponential ---
+
+\marginnote{%
+\anchorDot{1}\,\sffamily\footnotesize\scshape Exponential in the wild\par
+\smallskip
+\itshape\footnotesize The waiting time until something rare happens:
+time until the next radioactive decay event;
+time between earthquakes on a fault line;
+lifespan of a lightbulb (or any component without ageing);
+time between visits to a low-traffic web page;
+inter-arrival times of customers at a quiet shop.
+}
+
+If events arrive ``out of nowhere'' at a constant rate, the waiting time between them is exponentially distributed.\anchorDot{1}
+
+\begin{example}{Exponential$(\lambda)$}{exponential}
+An \vocab{Exponential random variable} $X \sim \mathrm{Exp}(\lambda)$ with rate $\lambda > 0$ has PDF
+\[
+f_X(x) \;=\; \begin{cases} \lambda e^{-\lambda x}, & x \ge 0, \\ 0, & x < 0. \end{cases}
+\]
+
+\textit{CDF.} For $x \ge 0$,
+\[
+F_X(x) = \int_0^x \lambda e^{-\lambda t}\, dt = 1 - e^{-\lambda x},
+\]
+and $F_X(x) = 0$ for $x < 0$. Mean: $1/\lambda$. Variance: $1/\lambda^2$. Mean and standard deviation both equal $1/\lambda$.
+\end{example}
+
+The Exponential has one celebrated structural property worth deriving here: it is \emph{memoryless}.
+
+\begin{proposition}{Memoryless property of the Exponential}{memoryless}
+\textit{If $X \sim \mathrm{Exp}(\lambda)$, then for all $s, t \ge 0$,}
+\[
+\Prob(X > s + t \mid X > s) \;=\; \Prob(X > t).
+\]
+\end{proposition}
+
+\begin{proof}
+$\Prob(X > x) = 1 - F_X(x) = e^{-\lambda x}$ for $x \ge 0$. So
+\[
+\Prob(X > s + t \mid X > s) = \frac{\Prob(X > s + t)}{\Prob(X > s)} = \frac{e^{-\lambda(s + t)}}{e^{-\lambda s}} = e^{-\lambda t} = \Prob(X > t). \qedhere
+\]
+\end{proof}
+
+\begin{intuition}
+A lightbulb that has already burned for a year, if its lifetime is exponential, is statistically indistinguishable from a brand-new bulb. This is why exponentials model component lifetimes \emph{when there is no ageing}: a radioactive nucleus, an idealised electronic component, or a customer arrival in a queue with no priority.
+\end{intuition}
+
+% --- Normal ---
+
+\marginnote{%
+\anchorDot{2}\,\sffamily\footnotesize\scshape Normal in the wild\par
+\smallskip
+\itshape\footnotesize Almost any quantity that is the sum of many small independent contributions:
+heights and weights in a population;
+measurement errors from independent sources;
+test scores in a large class;
+sample averages from any distribution with finite variance (the central limit theorem, \cref{ch:clt}).
+}
+
+The most important distribution in the book.\anchorDot{2} Almost every limit theorem in Parts I, IV, and V converges to a Normal in some way.
+
+\begin{example}{Normal $\mathcal{N}(\mu, \sigma^2)$}{normal}
+The \vocab{Normal} (or \vocab{Gaussian}) random variable $X \sim \mathcal{N}(\mu, \sigma^2)$ has PDF
+\[
+f_X(x) \;=\; \frac{1}{\sigma \sqrt{2\pi}} \exp\!\left( -\frac{(x - \mu)^2}{2\sigma^2} \right), \qquad x \in \R.
+\]
+The bell curve, centred at $\mu$ with spread controlled by $\sigma > 0$. Mean: $\mu$. Variance: $\sigma^2$.
+
+\textit{CDF.} The Normal CDF has no elementary closed form. We write it as
+\[
+F_X(x) \;=\; \Phi\!\left(\frac{x - \mu}{\sigma}\right),
+\]
+where $\Phi$ is the CDF of the \emph{standard} Normal $\mathcal{N}(0, 1)$. Tables, software, and Python's \texttt{scipy.stats.norm.cdf} all evaluate $\Phi$ numerically.
+
+\textit{The empirical rule.} For $X \sim \mathcal{N}(\mu, \sigma^2)$, the probability that $X$ lies within one, two, or three standard deviations of $\mu$ is approximately $0.68$, $0.95$, and $0.997$ respectively. These are the canonical ``rules of thumb'' for thinking with Normals.
+\end{example}
+
+The Normal will reappear repeatedly: in \cref{ch:genfunc} we compute its moment generating function, in \cref{ch:clt} we prove that sample averages from \emph{any} distribution with finite variance converge to a Normal, and in Parts III and IV the Normal becomes the building block of multivariate Gaussian random vectors and Wishart-distributed sample covariance matrices.
+
+\Cref{fig:pdf-curves} plots the three continuous densities side by side at standard parameter values, and \cref{fig:cdf-trio} pairs that with the corresponding CDFs (with the discrete Bernoulli CDF added for contrast). The discrete staircase next to the continuous shapes makes the unifying role of the CDF visible at a glance.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{figures/ch01/pdf-curves.pdf}
+\caption[Three PDFs side by side: Uniform, Normal, Exponential.]{Three densities at standard parameter values. The Uniform on $[0,1]$ is constant on its support; the Normal $\mathcal{N}(0,1)$ is the bell curve centred at zero; the Exponential$(1)$ decays from a finite peak at zero. Areas under all three curves are $1$.}
+\label{fig:pdf-curves}
+\end{figure}
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=\linewidth]{figures/ch01/cdf-trio.pdf}
-\caption[Three CDFs: Bernoulli, Uniform, Normal.]{The CDF of a discrete random variable is a staircase (Bernoulli$(0.6)$, left); the CDF of a uniformly distributed random variable is a linear ramp (Uniform on $[0,1]$, middle); the CDF of a Normal is a smooth S-curve (centre, right). All three are non-decreasing and approach $1$ as $x \to \infty$.}
+\caption[Three CDFs: Bernoulli, Uniform, Normal.]{The CDF of a discrete random variable is a staircase (Bernoulli$(0.6)$, left); the CDF of a uniformly distributed random variable is a linear ramp (Uniform on $[0,1]$, middle); the CDF of a Normal is a smooth S-curve (right). All three are non-decreasing and approach $1$ as $x \to \infty$.}
 \label{fig:cdf-trio}
 \end{figure}
 
-% --- §1.2.5 Reference table -----------------------------------------------
+% --- §1.2.6 Reference table -----------------------------------------------
 
 \subsection*{A reference table of standard distributions}
 
 The book leans on the same handful of standard distributions repeatedly. \Cref{tab:standard-distributions} gathers them in one place; later chapters point back to this table rather than re-defining each distribution.
 
-\begin{table}[h]
-\centering
-\renewcommand{\arraystretch}{1.4}
 \begin{fullwidth}
-\footnotesize
+\centering
+{\renewcommand{\arraystretch}{1.4}\footnotesize
 \begin{tabular}{@{}llllll@{}}
 \toprule
 \textbf{Name} & \textbf{Type} & \textbf{Support} & \textbf{PMF / PDF} & \textbf{Mean} & \textbf{Variance} \\
@@ -498,11 +680,13 @@ Uniform$(a, b)$ & continuous & $[a, b]$ & $1/(b-a)$ on $[a, b]$ & $(a+b)/2$ & $(
 Exponential$(\lambda)$ & continuous & $[0, \infty)$ & $\lambda e^{-\lambda x}$ & $1/\lambda$ & $1/\lambda^2$ \\
 Normal$(\mu, \sigma^2)$ & continuous & $\R$ & $\frac{1}{\sigma \sqrt{2\pi}} e^{-(x-\mu)^2 / (2\sigma^2)}$ & $\mu$ & $\sigma^2$ \\
 \bottomrule
-\end{tabular}
+\end{tabular}}\par
+\medskip
+\refstepcounter{table}\label{tab:standard-distributions}%
+{\centering\itshape\footnotesize
+\textbf{Table~\thetable.}\quad The standard distributions used throughout this book. Mean and variance are derived above (and re-derived more cleanly via moment generating functions in~\cref{ch:genfunc}).\par}
 \end{fullwidth}
-\caption{The standard distributions used throughout this book. Mean and variance are derived in \cref{ch:genfunc} via moment generating functions.}
-\label{tab:standard-distributions}
-\end{table}
+\bigskip
 
 % --- §1.2.6 Distribution sandbox ------------------------------------------
 
@@ -532,36 +716,72 @@ The companion notebook \texttt{ch01-distribution-sandbox.ipynb} runs the same si
 
 \subsection*{Brief warm-ups}
 
-\hint{\anchorDot{5}\,Count the eight equally-likely strings $HHH, HHT, \ldots, TTT$, then group by number of heads.}
+\hint{\anchorDot{5}\,Use the Bernoulli mean and variance formulas with $p = 0.3$.}
 \begin{warmup}[\coffee{1}]
-Let $X \sim \mathrm{Bin}(3, \tfrac{1}{2})$.\anchorDot{5} List $p_X(k)$ for $k = 0, 1, 2, 3$ and verify they sum to $1$.
+Let $X \sim \mathrm{Bernoulli}(0.3)$.\anchorDot{5} Compute $\Prob(X = 1)$, $\E[X]$, and $\Var(X)$.
 \end{warmup}
 \begin{warmupSolution}
-$p_X(0) = \tfrac{1}{8}$, $p_X(1) = \tfrac{3}{8}$, $p_X(2) = \tfrac{3}{8}$, $p_X(3) = \tfrac{1}{8}$. The four values sum to $1$. (This is also the answer to Warm-up 1 of \cref{sec:rvs-samplespace}, viewed through the PMF.)
+$\Prob(X = 1) = 0.3$. $\E[X] = p = 0.3$. $\Var(X) = p(1 - p) = 0.21$.
 \end{warmupSolution}
 
-\hint{\anchorDot{1}\,Integrate the constant density over the interval; equivalently, take the length of the subinterval.}
+\hint{\anchorDot{1}\,A true-false quiz with random guessing has $p = 1/2$ per question. Use the Binomial mean.}
 \begin{warmup}[\coffee{1}]
-For $X \sim \mathrm{Uniform}(0, 1)$,\anchorDot{1} compute $\Prob(0.2 \le X \le 0.7)$ and sketch the CDF $F_X$ on the interval $[0, 1]$.
+A student guesses randomly on a $10$-question true-false quiz.\anchorDot{1} Let $X$ be the number of correct answers. What is the expected number correct, and what is $\Prob(X = 10)$?
 \end{warmup}
 \begin{warmupSolution}
-$\Prob(0.2 \le X \le 0.7) = 0.5$. The CDF is a linear ramp on $[0, 1]$: $F_X(x) = x$ for $x \in [0, 1]$, with $F_X(x) = 0$ for $x < 0$ and $F_X(x) = 1$ for $x > 1$.
+$X \sim \mathrm{Bin}(10, 1/2)$, so $\E[X] = 10 \cdot 1/2 = 5$. $\Prob(X = 10) = \binom{10}{10} (1/2)^{10} = 1/1024 \approx 0.001$.
 \end{warmupSolution}
 
-\hint{\anchorDot{2}\,A PDF must integrate to $1$ over its full support.}
-\begin{warmup}[\coffee{2}]
-Suppose $X$ is continuous with PDF $f_X(x) = c x$ for $x \in [0, 2]$, and $f_X(x) = 0$ otherwise.\anchorDot{2} Find the constant $c$.
+\hint{\anchorDot{2}\,Geometric mean is $1/p$; here $p = 1/6$.}
+\begin{warmup}[\coffee{1}]
+You roll a fair six-sided die until you get a six.\anchorDot{2} What is the expected number of rolls?
 \end{warmup}
 \begin{warmupSolution}
-$\int_0^2 c x \, dx = 2c = 1$, so $c = \tfrac{1}{2}$.
+The number of rolls is $X \sim \mathrm{Geometric}(1/6)$, so $\E[X] = 1/p = 6$.
 \end{warmupSolution}
 
-\hint{\anchorDot{3}\,Integrate $\lambda e^{-\lambda t}$ from $0$ to $x$ to get $F_X(x)$.}
+\hint{\anchorDot{3}\,Convert the rate to ``per 5 minutes,'' then evaluate the Poisson PMF at $k = 2$.}
 \begin{warmup}[\coffee{2}]
-For $X \sim \mathrm{Exp}(\lambda)$,\anchorDot{3} derive the CDF $F_X(x)$ from the PDF $f_X(x) = \lambda e^{-\lambda x}$ on $[0, \infty)$.
+A help desk receives an average of $\lambda = 12$ calls per hour.\anchorDot{3} Treating the hourly count as Poisson, what is the probability of \emph{exactly two} calls in the next $5$ minutes?
 \end{warmup}
 \begin{warmupSolution}
-For $x \ge 0$, $F_X(x) = \int_0^x \lambda e^{-\lambda t} \, dt = 1 - e^{-\lambda x}$. For $x < 0$, $F_X(x) = 0$.
+The expected number of calls in $5$ minutes is $\lambda' = 12 \cdot (5/60) = 1$. Treating the $5$-minute count as $\mathrm{Poisson}(1)$, $\Prob(X = 2) = e^{-1} \cdot 1^2 / 2! = e^{-1}/2 \approx 0.184$.
+\end{warmupSolution}
+
+\hint{\anchorDot{4}\,Probability over an interval is its length, scaled by $1/(b-a)$.}
+\begin{warmup}[\coffee{1}]
+For $X \sim \mathrm{Uniform}(0, 10)$,\anchorDot{4} compute $\Prob(3 \le X \le 7)$ and $\E[X]$.
+\end{warmup}
+\begin{warmupSolution}
+$\Prob(3 \le X \le 7) = (7 - 3)/(10 - 0) = 0.4$. $\E[X] = (0 + 10)/2 = 5$.
+\end{warmupSolution}
+
+\hint{\anchorDot{5}\,Memoryless: $\Prob(X > 2 + 1 \mid X > 2) = \Prob(X > 1)$.}
+\begin{warmup}[\coffee{2}]
+For $X \sim \mathrm{Exp}(\lambda)$,\anchorDot{5} verify that $\Prob(X > s + t \mid X > s) = \Prob(X > t)$ for any $s, t \ge 0$.
+\end{warmup}
+\begin{warmupSolution}
+Using $\Prob(X > x) = e^{-\lambda x}$,
+\[
+\Prob(X > s + t \mid X > s) = \frac{\Prob(X > s + t)}{\Prob(X > s)} = \frac{e^{-\lambda(s+t)}}{e^{-\lambda s}} = e^{-\lambda t} = \Prob(X > t).
+\]
+The conditional waiting time, given that you have already waited $s$, is the same as the unconditional waiting time.
+\end{warmupSolution}
+
+\hint{\anchorDot{1}\,The empirical rule says $\Prob(|X - \mu| \le \sigma) \approx 0.68$.}
+\begin{warmup}[\coffee{2}]
+Adult heights in a population are approximately $\mathcal{N}(170, 10^2)$ (centimetres).\anchorDot{1} Roughly what fraction of the population is between $160$ and $180$\,cm tall?
+\end{warmup}
+\begin{warmupSolution}
+That interval is exactly $\mu \pm \sigma = 170 \pm 10$, so by the empirical rule about $68\%$ of the population.
+\end{warmupSolution}
+
+\hint{\anchorDot{2}\,A PDF must integrate to $1$ over its full support; for the second part, the CDF is $\int_0^x f_X(t) \, dt$.}
+\begin{warmup}[\coffee{2}]
+Suppose $X$ is continuous with PDF $f_X(x) = c x$ for $x \in [0, 2]$, and $f_X(x) = 0$ otherwise.\anchorDot{2} Find the constant $c$ and compute $\Prob(X \le 1)$ (equivalently, the value of $F_X(1)$).
+\end{warmup}
+\begin{warmupSolution}
+$\int_0^2 c x \, dx = 2c = 1$ gives $c = \tfrac{1}{2}$. Then $\Prob(X \le 1) = \int_0^1 \tfrac{1}{2} t \, dt = \tfrac{1}{4}$, which is also $F_X(1)$.
 \end{warmupSolution}
 
 \bigskip
@@ -569,6 +789,7 @@ For $x \ge 0$, $F_X(x) = \int_0^x \lambda e^{-\lambda t} \, dt = 1 - e^{-\lambda
 % --- §1.2 ENDS HERE; §1.3 onward still placeholder ---
 
 \section{Expectation and variance}
+\label{sec:expectation}
 \PLACEHOLDER{§1.3: definition and intuition; linearity of expectation; variance and standard deviation; worked examples on the running distributions.}
 
 \section{Independence and joint distributions}

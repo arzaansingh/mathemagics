@@ -48,8 +48,8 @@
 _minted-*/
 *.pyg
 
-# Final PDF — committed manually for releases, ignored in working dir
-main.pdf
+# Final PDF — tracked so the rendered current state is browsable on GitHub
+# (built by latexmk -pdf main.tex from the repo root)
 
 # ==========================================================
 # OS / editor cruft
