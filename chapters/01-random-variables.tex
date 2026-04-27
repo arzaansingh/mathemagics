@@ -79,22 +79,13 @@ Before we can define a random variable, we need to be precise about what it ``ra
 \marginnote{%
 \centering
 \anchorDot{3}\,\sffamily\footnotesize\scshape Three running experiments\par
-\smallskip
+\medskip
+{\renewcommand{\arraystretch}{2.2}%
 \begin{tabular}{@{}c@{\quad}l@{}}
-\coinbig{H}    & \footnotesize coin: $2$ outcomes\\[2pt]
-\diebig{3}     & \footnotesize die: $6$ outcomes\\[2pt]
-\begin{tikzpicture}[baseline=-0.5ex, scale=0.7]
-  \draw[draw=mathemagicsThm, line width=0.4pt, fill=mathemagicsExBg]
-    (-0.4, -0.45) rectangle (0.4, 0.45);
-  \draw[draw=mathemagicsThm, line width=0.3pt]
-    (-0.28,-0.36) -- (0.28,-0.36)
-    (-0.28,-0.18) -- (0.28,-0.18)
-    (-0.28, 0)    -- (0.28, 0)
-    (-0.28, 0.18) -- (0.28, 0.18)
-    (-0.28, 0.36) -- (0.28, 0.36);
-\end{tikzpicture}
-& \footnotesize tape measure: a continuum
-\end{tabular}
+\coinbig{H}      & \footnotesize coin: $2$ outcomes\\
+\diebig{3}       & \footnotesize die: $6$ outcomes\\
+\tapeMeasureIcon & \footnotesize tape measure: a continuum
+\end{tabular}}%
 }
 
 The simplest example is a single coin flip.\anchorDot{3} The experiment is the flip; the sample space is $\Omega = \{H, T\}$; and the probability function (for a fair coin) is $\Prob(H) = \Prob(T) = \tfrac{1}{2}$. The outcomes here are just the labels $H$ and $T$. They are not numbers, they are labels for possibilities.
@@ -232,16 +223,17 @@ Then $X(HH) = 2$, $X(HT) = 1$, $X(TH) = 1$, and $X(TT) = 0$. The random variable
 \label{fig:rv-mapping}
 \end{figure}
 
-\asideMatters{\anchorDot{1}\, Defining $X$ as a function on $\Omega$, rather than just as ``a random number,'' lets us recover \emph{any} numerical question about the experiment by the same mechanism. The number of heads, the number of tails, whether the first flip matched the second; each is a different function on the same $\Omega$.}
-
 \subsection*{Notation}
 
-Two conventions matter and will be used everywhere:
+\asideMatters{\anchorDot{1}\, Defining $X$ as a function on $\Omega$, rather than just as ``a random number,'' lets us recover \emph{any} numerical question about the experiment by the same mechanism. The number of heads, the number of tails, whether the first flip matched the second; each is a different function on the same $\Omega$.}
 
+\begin{definition}{Notation: $X$ versus $x$}{notation}
+\anchorDot{1}\, Two conventions matter and will be used everywhere:
 \begin{itemize}
 \item Capital letters ($X$, $Y$, $Z$, \ldots) denote random variables, the \emph{functions} on $\Omega$.
 \item Lowercase letters ($x$, $y$, $z$, \ldots) denote particular real numbers, specific values that those random variables \emph{could} take.
 \end{itemize}
+\end{definition}
 
 So when we write $\Prob(X = x)$, we are asking: what is the probability that the random variable $X$ takes the value $x$? In our two-coin example,
 \[

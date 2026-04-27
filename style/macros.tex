@@ -219,6 +219,20 @@
   \end{tikzpicture}%
 }
 
+% Tape measure icon (sized to match \coinbig and \diebig, ~5ex tall).
+% A small rectangular block with horizontal tick marks; conveys
+% "continuous measurement" alongside the coin and die.
+\DeclareRobustCommand{\tapeMeasureIcon}{%
+  \begin{tikzpicture}[baseline=-0.5ex, x=5ex, y=5ex]
+    \filldraw[rounded corners=0.04, draw=mathemagicsThm, line width=0.7pt,
+              fill=mathemagicsExBg]
+      (-0.4, -0.5) rectangle (0.4, 0.5);
+    \foreach \y in {-0.40, -0.20, 0.0, 0.20, 0.40} {
+      \draw[draw=mathemagicsThm, line width=0.4pt] (-0.28, \y) -- (0.28, \y);
+    }
+  \end{tikzpicture}%
+}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Anchor dots: visual links between body text and margin entries.
 % Place \anchorDot{N} in body text at the relevant phrase, and the matching

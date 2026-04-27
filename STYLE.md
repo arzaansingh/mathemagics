@@ -23,6 +23,8 @@ These are the rules that, if broken, the section gets sent back regardless of ho
 11. **Every standard result is either proved in-line, sketched with pointer to chapter appendix, or cited.** No bare claims.
 12. **Margin items must be visually linked to their body-text anchor.** Every margin entry (`\marginnote`, `\asideHistorical`, `\asideMatters`, `\marginfigure`) is paired with a colored dot (`\anchorDot{N}`) placed both in the body text at the relevant phrase *and* at the top of the margin item. Same `N`, same color, dot to dot. Five anchor colors cycle: 1 = coral, 2 = mint, 3 = lilac, 4 = gold, 5 = powder blue. Pick distinct numbers for adjacent anchors so neighbours don't collide. Margin items must also have **explicit visual breathing room** between them (`\marginGap` macro inserts ~1.4em of empty margin) so two adjacent items don't blend together.
 
+13. **Audit spacing whenever a visual is resized.** If you change the size of an icon, cartoon, or figure, immediately check that *every container it sits in* still has enough breathing room around it: tabular row spacing, vertical gaps between margin items, distance from caption text, distance from body. Visuals that grow MUST be paired with a corresponding spacing increase, or shrunk back down. A picture that touches the next row, the page bottom, or another margin item is a regression. Audit gate: every commit that changes a `\foo`-bigsize macro or a `scale=` value must visually verify the surrounding layout.
+
 ---
 
 ## 2. Visual identity
