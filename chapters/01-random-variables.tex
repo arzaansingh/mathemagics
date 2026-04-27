@@ -1,27 +1,189 @@
 %% chapters/01-random-variables.tex
+%% Chapter 1: Random Variables — A Working Vocabulary
+%%
+%% Section status:
+%%   §1.0  Chapter opener + whereWeAre  — DONE  (audit pass v0.1)
+%%   §1.1  Sample spaces, outcomes, X    — DONE  (audit pass v0.1)
+%%   §1.2  Distributions: PMF / PDF / CDF — placeholder
+%%   §1.3  Expectation and variance       — placeholder
+%%   §1.4  Independence and joint distributions — placeholder
+%%   §1.5  Brief warm-ups + chapter recap — placeholder
+
 \chapter{Random Variables: A Working Vocabulary}
 \label{ch:rvs}
 
 \whereWeAre{%
-The book begins here. We're building the vocabulary for everything that follows: what a random variable is, what its distribution looks like, and how we summarize it with mean and variance. By the end of the chapter you'll have the equipment to talk about \emph{what} is random and \emph{how much}.%
+This is the first chapter of the book. Everything that follows --- moment generating functions, the central limit theorem, sample covariance matrices, eigenvalue fluctuations, and ultimately spectral clustering --- is built on top of the language we develop here.\\[0.3em]
+By the end of this chapter the reader will be able to: define random variables and their distributions cleanly, compute expectations and variances of all the running examples (Bernoulli, Binomial, Normal, Exponential), and recognize when two random variables are independent. The chapter assumes only basic high-school algebra and a willingness to draw a few pictures.%
 }
 
-\PLACEHOLDER{Sources to draw from: Casella \& Berger Ch.~1--2; Joseph Genzer's thesis Section~2.1--2.2 (Defs 2.1--2.5).}
+Probability is the language we use when we want to say something precise about a quantity that is uncertain. The outcome of a coin flip, the height of a randomly chosen person, the largest eigenvalue of a sample covariance matrix --- all of these vary across repetitions of the experiment, and probability supplies the vocabulary for describing how. The unit of vocabulary is the \vocab{random variable}: a single number whose value is unknown until the experiment is run. This chapter builds that vocabulary from scratch and trains the running examples that the rest of the book will lean on.
 
-\section{What is a random variable?}
-\PLACEHOLDER{Sample space, outcomes, the working definition, examples (coin flip, dice, height of a random person).}
+\section{Sample spaces, outcomes, and the function we call \texorpdfstring{$X$}{X}}
+\label{sec:rvs-samplespace}
 
-\section{Discrete and continuous: PMFs and PDFs}
-\PLACEHOLDER{PMF and PDF; CDF as the unifying object; standard distributions (Bernoulli, Binomial, Poisson, Uniform, Exponential, Normal).}
+Before we can define a random variable, we need to be precise about what it ``randomizes over.'' That requires three pieces:
+
+\begin{enumerate}
+\item an \vocab{experiment} --- the act whose result is uncertain;
+\item the \vocab{sample space} $\Omega$ --- the set of all possible outcomes of the experiment;
+\item a \vocab{probability function} $\Prob$ that assigns a number in $[0,1]$ to events (i.e., subsets of $\Omega$), with $\Prob(\Omega) = 1$.
+\end{enumerate}
+
+\asideHistorical{The modern definition of a random variable as a function on a sample space is due to Andrey Kolmogorov, in his 1933 monograph \emph{Foundations of the Theory of Probability}. Before Kolmogorov, ``random'' was a word in search of a definition.}
+
+The simplest example is a single coin flip. The experiment is the flip; the sample space is $\Omega = \{H, T\}$; and the probability function (for a fair coin) is $\Prob(H) = \Prob(T) = \tfrac{1}{2}$. The outcomes here are just the letters $H$ and $T$. They are not numbers --- they are labels for possibilities.
+
+Often we care less about the labels themselves than about a number we can compute from them. For two coin flips, we may care about the \emph{number of heads}; for the roll of two dice, we may care about the \emph{sum}; for a clinical trial, we may care about whether a patient recovered or not. In each case there is a function that takes an outcome and returns a number. That function is the random variable.
+
+\begin{definition}{Random variable}{rv}
+Let $\Omega$ be a sample space. A \emph{random variable} on $\Omega$ is a function $X : \Omega \to \R$ that assigns to each outcome $\omega \in \Omega$ a real number $X(\omega)$.\footnotemark
+\end{definition}
+\footnotetext{In a fully rigorous treatment we would also require $X$ to be \emph{measurable}; this technical condition becomes relevant only when $\Omega$ is uncountable. Appendix~D sketches the measure-theoretic framework for the curious reader.}
+
+\begin{intuition}
+Think of $X$ as a \emph{measurement device}. The randomness lives in $\Omega$ --- it is the underlying experiment whose outcome we cannot predict. The random variable $X$ does not introduce any new randomness; it just tells you what number you record once an outcome has been drawn.
+\end{intuition}
+
+\subsection*{A worked example: number of heads in two coin flips}
+
+Let the experiment be flipping a fair coin twice in a row. The sample space contains four outcomes:
+\[
+\Omega \;=\; \{HH,\, HT,\, TH,\, TT\}.
+\]
+Each outcome has probability $\tfrac{1}{4}$. Define the random variable
+\[
+X(\omega) \;=\; \text{the number of heads in } \omega.
+\]
+Then $X(HH) = 2$, $X(HT) = 1$, $X(TH) = 1$, and $X(TT) = 0$. The random variable $X$ takes its values in the set $\{0, 1, 2\} \subset \R$. The function from $\Omega$ to $\R$ is shown in \cref{fig:rv-mapping}.
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[
+  >={Stealth[length=4pt]},
+  every node/.style={font=\small},
+  omega/.style={
+    ellipse, draw=mathemagicsThm, line width=0.5pt,
+    minimum width=2.6cm, minimum height=2.4cm,
+    fill=mathemagicsDefBg
+  },
+  outcome/.style={font=\footnotesize\sffamily, color=mathemagicsThm},
+  realline/.style={->, semithick, draw=mathemagicsThm, line width=0.5pt},
+  arr/.style={
+    ->, semithick, draw=mathemagicsDef, line width=0.5pt,
+    shorten >=2pt, shorten <=2pt
+  },
+  rvlabel/.style={font=\itshape\sffamily, color=mathemagicsDef}
+]
+% Sample space cloud
+\node[omega, label={[font=\sffamily\bfseries]above:$\Omega$}] (omega) at (-2, 0) {};
+\node[outcome] at (-2, 0.7)  (hh) {HH};
+\node[outcome] at (-2, 0.25) (ht) {HT};
+\node[outcome] at (-2,-0.25) (th) {TH};
+\node[outcome] at (-2,-0.7)  (tt) {TT};
+
+% Real number line
+\draw[realline] (1.5, 0) -- (5, 0) node[right, font=\small\sffamily] {$\R$};
+\foreach \x/\lbl in {2.0/0, 3.0/1, 4.0/2} {
+  \draw[mathemagicsThm, line width=0.4pt] (\x, -0.08) -- (\x, 0.08);
+  \node[below=2pt, font=\footnotesize\sffamily] at (\x,-0.08) {\lbl};
+}
+
+% Mapping arrows X(\omega)
+\draw[arr] (hh) to[bend left=8]  (3.95, 0.05);
+\draw[arr] (ht) to[bend left=4]  (2.95, 0.05);
+\draw[arr] (th) to[bend right=4] (2.95, 0.05);
+\draw[arr] (tt) to[bend right=8] (1.95, 0.05);
+
+% X label centered above arrows
+\node[rvlabel] at (0, 0.95) {$X$};
+\node[font=\footnotesize\itshape\sffamily, color=mathemagicsDef] at (0, 0.55) {(\,number of heads\,)};
+\end{tikzpicture}
+\caption{The random variable $X$ = ``number of heads in two coin flips'' as a function from the sample space $\Omega = \{HH, HT, TH, TT\}$ to the real line. Each outcome on the left maps to its head count on the right.}
+\label{fig:rv-mapping}
+\end{figure}
+
+\asideMatters{The reason we go to the trouble of defining $X$ as a function on $\Omega$, rather than just as ``a random number,'' is that it lets us recover \emph{any} numerical question about the experiment by the same mechanism. The number of heads, the number of tails, whether the first flip matched the second --- each is a different function on the same $\Omega$.}
+
+\subsection*{Notation}
+
+Two conventions matter and will be used everywhere:
+
+\begin{itemize}
+\item Capital letters ($X$, $Y$, $Z$, \ldots) denote random variables --- the \emph{functions} on $\Omega$.
+\item Lowercase letters ($x$, $y$, $z$, \ldots) denote particular real numbers --- specific values that those random variables \emph{could} take.
+\end{itemize}
+
+So when we write
+\[
+\Prob(X = x),
+\]
+we are asking: what is the probability that the random variable $X$ takes the value $x$? In our two-coin example,
+\[
+\Prob(X = 0) = \tfrac{1}{4}, \qquad
+\Prob(X = 1) = \tfrac{1}{2}, \qquad
+\Prob(X = 2) = \tfrac{1}{4}.
+\]
+The probability $\Prob(X = 1) = \tfrac{1}{2}$ comes from the fact that two of the four equally-likely outcomes ($HT$ and $TH$) map to $1$.
+
+\subsection*{A second example: the sum of two dice}
+
+\begin{example}{Sum of two dice}{two-dice}
+Roll two fair six-sided dice. The sample space contains $36$ ordered pairs:
+\[
+\Omega = \bigl\{(i, j) : i, j \in \{1, 2, 3, 4, 5, 6\}\bigr\},
+\]
+each with probability $\tfrac{1}{36}$. Let $X(i, j) = i + j$ be the sum. Then $X$ takes values in $\{2, 3, \ldots, 12\}$, and the probability of each value is given by the number of $(i, j)$ pairs that sum to it, divided by $36$:
+\[
+\Prob(X = 2) = \tfrac{1}{36}, \quad \Prob(X = 7) = \tfrac{6}{36}, \quad \Prob(X = 12) = \tfrac{1}{36}.
+\]
+The full distribution of $X$ has the familiar triangular shape: rare on the extremes (only $(1,1)$ sums to $2$), most likely in the middle (six different pairs sum to $7$).
+\end{example}
+
+This is the working pattern. We start from a sample space whose outcomes carry no numerical structure; we define a function $X$ that turns each outcome into a number; and we pull the probabilities forward through $X$ to talk about $\Prob(X = x)$ or, more generally, $\Prob(X \in A)$ for any subset $A$ of $\R$.
+
+\subsection*{Brief warm-ups}
+
+\begin{warmup}[\coffee{1}]
+Three coins are flipped, all fair, all independent. Write down the sample space $\Omega$. Define the random variable $X$ to be the number of heads. List $X(\omega)$ for each $\omega \in \Omega$, and compute $\Prob(X = k)$ for $k = 0, 1, 2, 3$.
+\end{warmup}
+\begin{warmupSolution}
+$\Omega = \{HHH, HHT, HTH, HTT, THH, THT, TTH, TTT\}$, eight outcomes each with probability $\tfrac{1}{8}$. The values of $X$ are $3, 2, 2, 1, 2, 1, 1, 0$ respectively. Counting,
+$\Prob(X=0) = \tfrac{1}{8}$,
+$\Prob(X=1) = \tfrac{3}{8}$,
+$\Prob(X=2) = \tfrac{3}{8}$,
+$\Prob(X=3) = \tfrac{1}{8}$.
+\end{warmupSolution}
+
+\begin{warmup}[\coffee{1}]
+A single card is drawn from a standard 52-card deck. Define a random variable $Y$ that equals $1$ if the card is red and $0$ if the card is black. What is the sample space, and what is $\Prob(Y = 1)$?
+\end{warmup}
+\begin{warmupSolution}
+$\Omega$ is the set of $52$ cards, each with probability $\tfrac{1}{52}$. The random variable $Y$ takes the value $1$ on the $26$ red cards and $0$ on the $26$ black cards, so $\Prob(Y = 1) = \tfrac{26}{52} = \tfrac{1}{2}$. (This $Y$ is the prototype of the \emph{Bernoulli random variable}, which we will meet again repeatedly starting in \cref{ch:genfunc}.)
+\end{warmupSolution}
+
+\begin{warmup}[\coffee{2}]
+Re-do \cref{ex:two-dice} but with a different random variable: let $Z(i, j)$ be $1$ if $i = j$ and $0$ otherwise --- so $Z$ records whether the two dice show the same face. Compute $\Prob(Z = 1)$.
+\end{warmup}
+\begin{warmupSolution}
+The pairs with $i = j$ are $(1,1), (2,2), (3,3), (4,4), (5,5), (6,6)$, six in total. Each has probability $\tfrac{1}{36}$, so $\Prob(Z = 1) = \tfrac{6}{36} = \tfrac{1}{6}$.
+\end{warmupSolution}
+
+\bigskip
+
+% --- §1.1 ENDS HERE; §1.2 onward still placeholder ---
+
+\section{Distributions: PMFs, PDFs, and CDFs}
+\PLACEHOLDER{§1.2: discrete vs continuous; PMF, PDF, CDF; the CDF as the unifying object; standard distributions table; first Colab simulation (distribution sandbox).}
 
 \section{Expectation and variance}
-\PLACEHOLDER{Definition and intuition; linearity of expectation; variance; standard deviation.}
+\PLACEHOLDER{§1.3: definition and intuition; linearity of expectation; variance and standard deviation; worked examples on the running distributions.}
 
-\section{Independence}
-\PLACEHOLDER{Definition; consequences; uncorrelated vs independent.}
+\section{Independence and joint distributions}
+\PLACEHOLDER{§1.4: two random variables at once; joint and marginal distributions; independence and its consequences; second Colab simulation (joint plots for independent RVs).}
 
-\section{Brief warm-ups}
-\PLACEHOLDER{3--5 short questions with immediate answers.}
+\section{Brief warm-ups and chapter recap}
+\PLACEHOLDER{§1.5: 3--5 cross-section warm-ups; chapter recap box.}
 
 \chapterRecap{%
 \begin{itemize}
