@@ -22,7 +22,7 @@
 \LoadClass[justified,nobib]{tufte-book}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Page geometry — Tufte feel: narrow main column, wide right margin for asides
+% Page geometry, Tufte feel: narrow main column, wide right margin for asides
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \geometry{
@@ -107,7 +107,7 @@
 \input{style/environments}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Hyperref color scheme — uses our locked-in palette from style/colors
+% Hyperref color scheme, uses our locked-in palette from style/colors
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \hypersetup{
@@ -189,7 +189,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Block-paragraph style: no first-line indent, slight space between paragraphs.
-% Locked house rule for Mathemagics — see STYLE.md.
+% Locked house rule for Mathemagics, see STYLE.md.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \AtBeginDocument{%

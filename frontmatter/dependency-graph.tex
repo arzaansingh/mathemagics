@@ -1,5 +1,5 @@
 %% frontmatter/dependency-graph.tex
-%% Chapter dependency graph — rebuilt to pass the visual audit per STYLE.md §10.1.
+%% Chapter dependency graph, rebuilt to pass the visual audit per STYLE.md §10.1.
 %%
 %% Layout choice (deliberate): one row per Part, with arrows only WITHIN
 %% each row. Reading top-to-bottom implies progression between Parts; the
@@ -48,7 +48,7 @@ If you only have time for the spine, follow the cliff-notes track:
 ]
 
 % ----------------------------------------------------------------
-% Row 1: Part I — Foundations of Probability
+% Row 1: Part I, Foundations of Probability
 % ----------------------------------------------------------------
 \node[partlbl] at (-0.7, 0)             {Part~I};
 \node[spine]   at ( 0.5, 0)        (c1) {Ch.\,1\\RVs};
@@ -61,7 +61,7 @@ If you only have time for the spine, follow the cliff-notes track:
 \draw[needs] (c3) -- (c4);
 
 % ----------------------------------------------------------------
-% Row 2: Part II — From Numbers to Vectors and Matrices
+% Row 2: Part II, From Numbers to Vectors and Matrices
 % ----------------------------------------------------------------
 \node[partlbl] at (-0.7, -1.6)            {Part~II};
 \node[chap]    at ( 0.5, -1.6)      (c5) {Ch.\,5\\Vectors};
@@ -72,7 +72,7 @@ If you only have time for the spine, follow the cliff-notes track:
 \draw[needs] (c6) -- (c7);
 
 % ----------------------------------------------------------------
-% Row 3: Part III — Sample Covariance Matrices
+% Row 3: Part III, Sample Covariance Matrices
 % ----------------------------------------------------------------
 \node[partlbl] at (-0.7, -3.2)             {Part~III};
 \node[chap]    at ( 0.5, -3.2)       (c8) {Ch.\,8\\SCM};
@@ -83,7 +83,7 @@ If you only have time for the spine, follow the cliff-notes track:
 \draw[needs] (c9) -- (c10);
 
 % ----------------------------------------------------------------
-% Row 4: Part IV — Eigenvalue Fluctuations in Fixed Dimension
+% Row 4: Part IV, Eigenvalue Fluctuations in Fixed Dimension
 % ----------------------------------------------------------------
 \node[partlbl] at (-0.7, -4.8)             {Part~IV};
 \node[chap]    at ( 0.5, -4.8)      (c11) {Ch.\,11\\Joint CLT};
@@ -96,7 +96,7 @@ If you only have time for the spine, follow the cliff-notes track:
 \draw[needs] (c13) -- (c14);
 
 % ----------------------------------------------------------------
-% Row 5: Part V — High-Dimensional Phenomena
+% Row 5: Part V, High-Dimensional Phenomena
 % ----------------------------------------------------------------
 \node[partlbl] at (-0.7, -6.4)             {Part~V};
 \node[chap]    at ( 0.5, -6.4)      (c15) {Ch.\,15\\High-dim};
@@ -109,7 +109,7 @@ If you only have time for the spine, follow the cliff-notes track:
 \draw[needs] (c17) -- (c18);
 
 % ----------------------------------------------------------------
-% Row 6: Part VI — Spikes and Spectral Clustering
+% Row 6: Part VI, Spikes and Spectral Clustering
 % ----------------------------------------------------------------
 \node[partlbl] at (-0.7, -8.0)             {Part~VI};
 \node[chap]    at ( 0.5, -8.0)      (c19) {Ch.\,19\\Spikes};
@@ -131,4 +131,4 @@ If you only have time for the spine, follow the cliff-notes track:
 
 \bigskip
 
-\noindent\textit{The graph is intentionally lossy --- it shows the within-Part reading order, not every cross-reference. When in doubt, the table of contents always works.}
+\noindent\textit{The graph is intentionally lossy, it shows the within-Part reading order, not every cross-reference. When in doubt, the table of contents always works.}

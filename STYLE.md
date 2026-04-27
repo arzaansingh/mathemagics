@@ -2,7 +2,7 @@
 
 The single source of truth for how every chapter is written, designed, and audited. Read before starting a section, refer to during writing, and verify against before committing.
 
-This document is **prescriptive** — when there's tension between "this is fast" and "this matches the guide," the guide wins. The point is consistency across 200 pages.
+This document is **prescriptive**, when there's tension between "this is fast" and "this matches the guide," the guide wins. The point is consistency across 200 pages.
 
 ---
 
@@ -11,12 +11,13 @@ This document is **prescriptive** — when there's tension between "this is fast
 These are the rules that, if broken, the section gets sent back regardless of how good the content is:
 
 1. **No paragraph indentation.** Block paragraphs only. Enforced at the class level.
-2. **Every page has at least one item in the right margin.** Even if it's a tiny callout. Empty margins are a bug.
-3. **All visualizations are in-house.** No stock images, no copy-pasted diagrams, no external screenshots. TikZ for diagrams; matplotlib for data plots. Citations are the only "outside" thing on the page.
-4. **Every figure passes a visual audit before commit.** The dependency-graph mishap (arrows passing through node interiors, text being clipped) does not happen again.
-5. **Voice is third person, present tense, collective "we."** Established by existing notes; matches the tone of Strang and Vershynin.
-6. **Every theorem gets a picture or numerical experiment before its formal statement.** Picture before proof. Always.
-7. **Every standard result is either proved in-line, sketched with pointer to chapter appendix, or cited.** No bare claims.
+2. **No em dashes.** Neither `---` (LaTeX) nor `—` (Unicode). Use commas, semicolons, periods, or parentheses instead. En dashes (`--`) are still fine for numerical ranges (e.g., "pages 5–10"). Enforced by sweep before commit.
+3. **Every page has at least one item in the right margin.** Even if it's a tiny callout. Empty margins are a bug.
+4. **All visualizations are in-house.** No stock images, no copy-pasted diagrams, no external screenshots. TikZ for diagrams; matplotlib for data plots. Citations are the only "outside" thing on the page.
+5. **Every figure passes a visual audit before commit.** The dependency-graph mishap (arrows passing through node interiors, text being clipped) does not happen again.
+6. **Voice is third person, present tense, collective "we."** Established by existing notes; matches the tone of Strang and Vershynin.
+7. **Every theorem gets a picture or numerical experiment before its formal statement.** Picture before proof. Always.
+8. **Every standard result is either proved in-line, sketched with pointer to chapter appendix, or cited.** No bare claims.
 
 ---
 
@@ -37,17 +38,17 @@ The palette is **soft pastel-academic**: light enough to feel airy, saturated en
 | Where-we-are (chap top) | lilac `#8273A8`      | `#F1ECF7`         | top-of-chapter mini-map only           |
 | Colab badge           | soft gold `#D4A028`    | `#FBF1D8`         | Colab links and simulation boxes only  |
 
-These eight colors are the entire visible spectrum of Mathemagics. Plots and TikZ figures **must** use only these (with optional alpha variants — `mathemagicsDef!50` etc.). If a chapter needs a "new" color for a plot, the answer is: choose two of the existing ones with different alpha levels.
+These eight colors are the entire visible spectrum of Mathemagics. Plots and TikZ figures **must** use only these (with optional alpha variants, `mathemagicsDef!50` etc.). If a chapter needs a "new" color for a plot, the answer is: choose two of the existing ones with different alpha levels.
 
 > **Audit gate**: a figure that uses any color outside this list fails the visual audit.
 
 ### 2.2 Typography
 
-- Body text: tufte-book default (Palatino-ish serif at 10pt — handled by class)
+- Body text: tufte-book default (Palatino-ish serif at 10pt, handled by class)
 - Section headings: italic small-caps (tufte default)
 - Margin notes: sans-serif, 8pt, with small caps title
 - Code: monospace, 9pt, in `mathemagicsCodeBg`-tinted boxes
-- Math: Computer Modern via `amsmath` — never override
+- Math: Computer Modern via `amsmath`, never override
 
 ### 2.3 Page anatomy
 
@@ -55,12 +56,12 @@ Every page in the book follows the Tufte rhythm:
 
 ```
 +------------------------+----------+
-| Main text — narrow     | margin:  |
+| Main text (narrow)     | margin:  |
 |   block paragraphs     |  figure  |
 |   no indent            |  aside   |
 |   ~70 chars/line       |  code    |
 | Theorem 4.2            |  Colab   |
-|   — boxed, narrow      |  badge   |
+|  (boxed, narrow)       |  badge   |
 +------------------------+----------+
 ```
 
@@ -76,11 +77,11 @@ The margin is sacred. Discipline:
 - **Capped**: at most 2 items per page (3 only on dense pages).
 - **Never load-bearing**: if every margin entry on the page were deleted, every proof and definition still reads cleanly.
 - **Hierarchy of margin item types**, in priority order:
-  1. **Small figure / schematic** — most-preferred. Visual reinforcement of the math next to it.
-  2. **Definition restatement / cross-reference** — "(Def. 3.1, p.42)" or a 2-line restated definition for the reader who's forgotten.
-  3. **Citation pointer** — "see Casella & Berger §5.5".
-  4. **Code snippet** — `\margincode{}`, ≤10 lines, illustrates the equation immediately to its left.
-  5. **Aside** — historical, "why this matters," or cartoon. Three flavors only.
+  1. **Small figure / schematic**, most-preferred. Visual reinforcement of the math next to it.
+  2. **Definition restatement / cross-reference**, "(Def. 3.1, p.42)" or a 2-line restated definition for the reader who's forgotten.
+  3. **Citation pointer**, "see Casella & Berger §5.5".
+  4. **Code snippet**, `\margincode{}`, ≤10 lines, illustrates the equation immediately to its left.
+  5. **Aside**, historical, "why this matters," or cartoon. Three flavors only.
 - **Cartoon asides get a star pictogram** so the reader knows it's optional.
 
 ---
@@ -109,7 +110,7 @@ The register slides between two extremes deliberately:
 
 The transition is signaled by the environment, not by tone shifting mid-paragraph. Good:
 
-> **Intuition.** The MGF is just a clever way to package an entire distribution into a single function — like a smoothie of all the moments.
+> **Intuition.** The MGF is just a clever way to package an entire distribution into a single function, like a smoothie of all the moments.
 >
 > **Theorem 2.4.** *If $M_X(t) = M_Y(t)$ on an open neighborhood of zero, then $X \stackrel{d}{=} Y$.*
 
@@ -203,7 +204,7 @@ These patterns are non-negotiable:
 Every theorem has either a figure, a numerical experiment, or a low-dimensional worked-out case **before** its formal statement. The reader sees what is true before being convinced of it.
 
 #### Three perspectives (for central results only)
-Marchenko–Pastur, Tracy–Widom, BBP transition, the spectral-clustering equivalences — these "load-bearing theorems of the book" each get presented three ways:
+Marchenko–Pastur, Tracy–Widom, BBP transition, the spectral-clustering equivalences, these "load-bearing theorems of the book" each get presented three ways:
 1. Heuristic / picture / numerical experiment.
 2. Sketch derivation, or low-dimensional exact case.
 3. Pointer to full rigorous proof (chapter appendix or "Optional rigor" subsection).
@@ -254,13 +255,13 @@ Conventions already locked:
 - Display math: `\[ ... \]` for unnumbered; `\begin{equation} ... \end{equation}` for numbered
 - Multi-line aligned: `\begin{aligned} ... \end{aligned}` inside display
 - Don't ever use `$$ ... $$` (deprecated)
-- No bare `\mathbb{R}` in prose — always `\R`
+- No bare `\mathbb{R}` in prose, always `\R`
 - Punctuate display math: equations end with periods or commas as if they were sentences
 
 ### 5.3 Theorem culture
 
 - Use `definition`, `theorem`, `proposition`, `lemma`, `corollary`, `example` from `style/environments.tex`. Five total tcolorbox environments; do not invent new ones.
-- All these share one counter (`mathemagicsCounter`) per chapter — easy to find by number.
+- All these share one counter (`mathemagicsCounter`) per chapter, easy to find by number.
 - `intuition` is unnumbered (it accompanies a definition or theorem; it's a viewpoint, not a claim).
 - Every theorem's proof is either:
   - Inline immediately after.
@@ -273,19 +274,19 @@ Conventions already locked:
 
 ### 6.1 Two acceptable tools
 
-- **TikZ** — for: dependency graphs, geometric diagrams, schematics, illustrations, cartoon asides.
-- **matplotlib** — for: simulations, histograms, density plots, Q-Q plots, scatter clouds.
+- **TikZ**, for: dependency graphs, geometric diagrams, schematics, illustrations, cartoon asides.
+- **matplotlib**, for: simulations, histograms, density plots, Q-Q plots, scatter clouds.
 
 Other tools (mermaid, draw.io, hand drawing, photos) are rejected. The point is consistency and the ability to re-render at any zoom.
 
 ### 6.2 TikZ standards
 
-- Always specify `>={Stealth[length=...]}` for arrowheads — never the default `latex` arrows.
-- Always set `line width` explicitly — never default.
+- Always specify `>={Stealth[length=...]}` for arrowheads, never the default `latex` arrows.
+- Always set `line width` explicitly, never default.
 - Node sizes use explicit `minimum width` and `minimum height`.
 - Spacing controlled by `node distance` or absolute positioning. Avoid relying on default spacing.
 - **Forbidden**: any arrow that visibly passes through a node's interior. Use `to[bend left=N]`, `to[out=A,in=B]`, or reroute via an intermediate point.
-- Every TikZ figure compiles in isolation — copy it into a minimal document, it should still build.
+- Every TikZ figure compiles in isolation, copy it into a minimal document, it should still build.
 
 ### 6.3 matplotlib standards
 
@@ -344,7 +345,7 @@ Every `colabbox`:
   rng = np.random.default_rng(seed=2026)
   ```
 - Comments explain "why," not "what."
-- No `for i in range(len(...))` — `enumerate` or `zip`.
+- No `for i in range(len(...))`, `enumerate` or `zip`.
 - Vectorize when possible.
 
 ---
@@ -382,7 +383,7 @@ Read the section as a critical reviewer.
 ### 8.3 Content audit
 
 - [ ] Voice is third-person, present-tense
-- [ ] No bare claims — everything proved, sketched, or cited
+- [ ] No bare claims, everything proved, sketched, or cited
 - [ ] Notation matches `macros.tex`; no inline redefinitions
 - [ ] Spell check passes (Code Spell Checker; expand workspace dict for new technical terms)
 - [ ] All citations resolve (run `latexmk` and check `.log` for missing-key warnings)
@@ -452,7 +453,7 @@ These have already shown up; do not let them come back.
 - Figures without captions
 - Captions that just say "Plot of X"
 - Citations to broken keys (always run `biber` to check)
-- New colors introduced ad-hoc in TikZ — must be from the palette
+- New colors introduced ad-hoc in TikZ, must be from the palette
 - Plots that violate the matplotlib style helper
 - Any inline `\textcolor{...}` outside the locked palette
 - Inventing new tcolorbox environments instead of reusing the five
@@ -464,7 +465,7 @@ These have already shown up; do not let them come back.
 Cartoon asides are explicitly allowed and explicitly limited.
 
 - **Frequency**: ≤1 per chapter. They lose impact if they're frequent.
-- **Style**: stick-figure-simple, hand-sketched feel via TikZ. Drawn entirely from primitive shapes (circle, line, arc) — never imported.
+- **Style**: stick-figure-simple, hand-sketched feel via TikZ. Drawn entirely from primitive shapes (circle, line, arc), never imported.
 - **Topic**: a small joke that lands in 1 sentence in the margin. Not a meme, not a reference, not anything that requires outside context.
 - **Pictogram**: every cartoon aside has a small star (★) glyph in the margin to flag "non-load-bearing." (Defined in `\cartoonglyph`.)
 

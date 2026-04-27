@@ -1,23 +1,23 @@
 %% chapters/01-random-variables.tex
-%% Chapter 1: Random Variables — A Working Vocabulary
+%% Chapter 1: Random Variables, A Working Vocabulary
 %%
 %% Section status:
-%%   §1.0  Chapter opener + whereWeAre  — DONE  (audit pass v0.1)
-%%   §1.1  Sample spaces, outcomes, X    — DONE  (audit pass v0.1)
-%%   §1.2  Distributions: PMF / PDF / CDF — placeholder
-%%   §1.3  Expectation and variance       — placeholder
-%%   §1.4  Independence and joint distributions — placeholder
-%%   §1.5  Brief warm-ups + chapter recap — placeholder
+%%   §1.0  Chapter opener + whereWeAre , DONE  (audit pass v0.1)
+%%   §1.1  Sample spaces, outcomes, X   , DONE  (audit pass v0.1)
+%%   §1.2  Distributions: PMF / PDF / CDF, placeholder
+%%   §1.3  Expectation and variance      , placeholder
+%%   §1.4  Independence and joint distributions, placeholder
+%%   §1.5  Brief warm-ups + chapter recap, placeholder
 
 \chapter{Random Variables: A Working Vocabulary}
 \label{ch:rvs}
 
 \whereWeAre{%
-This is the first chapter of the book. Everything that follows --- moment generating functions, the central limit theorem, sample covariance matrices, eigenvalue fluctuations, and ultimately spectral clustering --- is built on top of the language we develop here.\\[0.3em]
+This is the first chapter of the book. Everything that follows, moment generating functions, the central limit theorem, sample covariance matrices, eigenvalue fluctuations, and ultimately spectral clustering, is built on top of the language we develop here.\\[0.3em]
 By the end of this chapter the reader will be able to: define random variables and their distributions cleanly, compute expectations and variances of all the running examples (Bernoulli, Binomial, Normal, Exponential), and recognize when two random variables are independent. The chapter assumes only basic high-school algebra and a willingness to draw a few pictures.%
 }
 
-Probability is the language we use when we want to say something precise about a quantity that is uncertain. The outcome of a coin flip, the height of a randomly chosen person, the largest eigenvalue of a sample covariance matrix --- all of these vary across repetitions of the experiment, and probability supplies the vocabulary for describing how. The unit of vocabulary is the \vocab{random variable}: a single number whose value is unknown until the experiment is run. This chapter builds that vocabulary from scratch and trains the running examples that the rest of the book will lean on.
+Probability is the language we use when we want to say something precise about a quantity that is uncertain. The outcome of a coin flip, the height of a randomly chosen person, the largest eigenvalue of a sample covariance matrix, all of these vary across repetitions of the experiment, and probability supplies the vocabulary for describing how. The unit of vocabulary is the \vocab{random variable}: a single number whose value is unknown until the experiment is run. This chapter builds that vocabulary from scratch and trains the running examples that the rest of the book will lean on.
 
 \section{Sample spaces, outcomes, and the function we call \texorpdfstring{$X$}{X}}
 \label{sec:rvs-samplespace}
@@ -25,14 +25,14 @@ Probability is the language we use when we want to say something precise about a
 Before we can define a random variable, we need to be precise about what it ``randomizes over.'' That requires three pieces:
 
 \begin{enumerate}
-\item an \vocab{experiment} --- the act whose result is uncertain;
-\item the \vocab{sample space} $\Omega$ --- the set of all possible outcomes of the experiment;
+\item an \vocab{experiment}, the act whose result is uncertain;
+\item the \vocab{sample space} $\Omega$, the set of all possible outcomes of the experiment;
 \item a \vocab{probability function} $\Prob$ that assigns a number in $[0,1]$ to events (i.e., subsets of $\Omega$), with $\Prob(\Omega) = 1$.
 \end{enumerate}
 
 \asideHistorical{The modern definition of a random variable as a function on a sample space is due to Andrey Kolmogorov, in his 1933 monograph \emph{Foundations of the Theory of Probability}. Before Kolmogorov, ``random'' was a word in search of a definition.}
 
-The simplest example is a single coin flip. The experiment is the flip; the sample space is $\Omega = \{H, T\}$; and the probability function (for a fair coin) is $\Prob(H) = \Prob(T) = \tfrac{1}{2}$. The outcomes here are just the letters $H$ and $T$. They are not numbers --- they are labels for possibilities.
+The simplest example is a single coin flip. The experiment is the flip; the sample space is $\Omega = \{H, T\}$; and the probability function (for a fair coin) is $\Prob(H) = \Prob(T) = \tfrac{1}{2}$. The outcomes here are just the letters $H$ and $T$. They are not numbers, they are labels for possibilities.
 
 Often we care less about the labels themselves than about a number we can compute from them. For two coin flips, we may care about the \emph{number of heads}; for the roll of two dice, we may care about the \emph{sum}; for a clinical trial, we may care about whether a patient recovered or not. In each case there is a function that takes an outcome and returns a number. That function is the random variable.
 
@@ -42,7 +42,7 @@ Let $\Omega$ be a sample space. A \emph{random variable} on $\Omega$ is a functi
 \footnotetext{In a fully rigorous treatment we would also require $X$ to be \emph{measurable}; this technical condition becomes relevant only when $\Omega$ is uncountable. Appendix~D sketches the measure-theoretic framework for the curious reader.}
 
 \begin{intuition}
-Think of $X$ as a \emph{measurement device}. The randomness lives in $\Omega$ --- it is the underlying experiment whose outcome we cannot predict. The random variable $X$ does not introduce any new randomness; it just tells you what number you record once an outcome has been drawn.
+Think of $X$ as a \emph{measurement device}. The randomness lives in $\Omega$, it is the underlying experiment whose outcome we cannot predict. The random variable $X$ does not introduce any new randomness; it just tells you what number you record once an outcome has been drawn.
 \end{intuition}
 
 \subsection*{A worked example: number of heads in two coin flips}
@@ -103,15 +103,15 @@ Then $X(HH) = 2$, $X(HT) = 1$, $X(TH) = 1$, and $X(TT) = 0$. The random variable
 \label{fig:rv-mapping}
 \end{figure}
 
-\asideMatters{The reason we go to the trouble of defining $X$ as a function on $\Omega$, rather than just as ``a random number,'' is that it lets us recover \emph{any} numerical question about the experiment by the same mechanism. The number of heads, the number of tails, whether the first flip matched the second --- each is a different function on the same $\Omega$.}
+\asideMatters{The reason we go to the trouble of defining $X$ as a function on $\Omega$, rather than just as ``a random number,'' is that it lets us recover \emph{any} numerical question about the experiment by the same mechanism. The number of heads, the number of tails, whether the first flip matched the second, each is a different function on the same $\Omega$.}
 
 \subsection*{Notation}
 
 Two conventions matter and will be used everywhere:
 
 \begin{itemize}
-\item Capital letters ($X$, $Y$, $Z$, \ldots) denote random variables --- the \emph{functions} on $\Omega$.
-\item Lowercase letters ($x$, $y$, $z$, \ldots) denote particular real numbers --- specific values that those random variables \emph{could} take.
+\item Capital letters ($X$, $Y$, $Z$, \ldots) denote random variables, the \emph{functions} on $\Omega$.
+\item Lowercase letters ($x$, $y$, $z$, \ldots) denote particular real numbers, specific values that those random variables \emph{could} take.
 \end{itemize}
 
 So when we write
@@ -163,7 +163,7 @@ $\Omega$ is the set of $52$ cards, each with probability $\tfrac{1}{52}$. The ra
 \end{warmupSolution}
 
 \begin{warmup}[\coffee{2}]
-Re-do \cref{ex:two-dice} but with a different random variable: let $Z(i, j)$ be $1$ if $i = j$ and $0$ otherwise --- so $Z$ records whether the two dice show the same face. Compute $\Prob(Z = 1)$.
+Re-do \cref{ex:two-dice} but with a different random variable: let $Z(i, j)$ be $1$ if $i = j$ and $0$ otherwise, so $Z$ records whether the two dice show the same face. Compute $\Prob(Z = 1)$.
 \end{warmup}
 \begin{warmupSolution}
 The pairs with $i = j$ are $(1,1), (2,2), (3,3), (4,4), (5,5), (6,6)$, six in total. Each has probability $\tfrac{1}{36}$, so $\Prob(Z = 1) = \tfrac{6}{36} = \tfrac{1}{6}$.
@@ -171,7 +171,7 @@ The pairs with $i = j$ are $(1,1), (2,2), (3,3), (4,4), (5,5), (6,6)$, six in to
 
 \bigskip
 
-% --- §1.1 ENDS HERE; §1.2 onward still placeholder ---
+% --- §1.1 ENDS HERE; §1.2 onward still placeholder,
 
 \section{Distributions: PMFs, PDFs, and CDFs}
 \PLACEHOLDER{§1.2: discrete vs continuous; PMF, PDF, CDF; the CDF as the unifying object; standard distributions table; first Colab simulation (distribution sandbox).}

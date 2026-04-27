@@ -7,14 +7,14 @@
 %% Counter discipline: definitions, theorems, propositions, lemmas, corollaries,
 %% and examples all SHARE one counter (`mathemagicsCounter`) which resets per
 %% chapter. So you'll see "Definition 4.1, Theorem 4.2, Example 4.3" sequentially
-%% — easy to find by number, no risk of collisions.
+%%, easy to find by number, no risk of collisions.
 
 % Master shared counter
 \newcounter{mathemagicsCounter}[chapter]
 \renewcommand{\themathemagicsCounter}{\thechapter.\arabic{mathemagicsCounter}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% (1) Definition — light blue tinted box, blue rule
+% (1) Definition, light blue tinted box, blue rule
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newtcbtheorem[use counter=mathemagicsCounter]
@@ -35,7 +35,7 @@
   }{def}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% (2) Theorem / Proposition / Lemma — minimal, white box, slanted body, shared counter
+% (2) Theorem / Proposition / Lemma, minimal, white box, slanted body, shared counter
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newtcbtheorem[use counter=mathemagicsCounter]
@@ -111,7 +111,7 @@
   }{cor}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% (3) Intuition — cream box, no number, used liberally to translate theorems
+% (3) Intuition, cream box, no number, used liberally to translate theorems
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newtcolorbox{intuition}{%
@@ -136,7 +136,7 @@
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% (4) Example — pale gray, shared counter
+% (4) Example, pale gray, shared counter
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newtcbtheorem[use counter=mathemagicsCounter]
@@ -157,7 +157,7 @@
   }{ex}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% (5) Aside — uses tufte-book's \marginnote.
+% (5) Aside, uses tufte-book's \marginnote.
 % Three flavors: \asideHistorical, \asideMatters, \asideCartoon.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -184,7 +184,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Code: three placements
-%   1. \mintinline{python}|...|     (inline) — provided by minted package
+%   1. \mintinline{python}|...|     (inline), provided by minted package
 %   2. \margincode{...}              (margin)
 %   3. \begin{colabbox}...\end{colabbox}  (full-width experiment)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

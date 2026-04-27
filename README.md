@@ -91,7 +91,7 @@ Five tcolorbox environments do all the heavy lifting:
 | `example` | Pale gray | Worked example |
 | `aside` (margin) | Margin sans-serif | Tangent / history / fun |
 
-All theorems, definitions, and examples share one counter (`mathemagicsCounter`) per chapter — easy to find by number.
+All theorems, definitions, and examples share one counter (`mathemagicsCounter`) per chapter, easy to find by number.
 
 ## Source materials
 
