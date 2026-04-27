@@ -187,4 +187,14 @@
 \setcounter{secnumdepth}{2}
 \setcounter{tocdepth}{1}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Block-paragraph style: no first-line indent, slight space between paragraphs.
+% Locked house rule for Mathemagics — see STYLE.md.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\AtBeginDocument{%
+  \setlength{\parindent}{0pt}%
+  \setlength{\parskip}{0.6\baselineskip plus 0.1\baselineskip minus 0.1\baselineskip}%
+}
+
 \endinput
