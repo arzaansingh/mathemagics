@@ -2,12 +2,12 @@
 %% Chapter 1: Random Variables, A Working Vocabulary
 %%
 %% Section status:
-%%   §1.0  Chapter opener + whereWeAre , DONE  (audit pass v0.1)
-%%   §1.1  Sample spaces, outcomes, X   , DONE  (audit pass v0.1)
-%%   §1.2  Distributions: PMF / PDF / CDF, placeholder
-%%   §1.3  Expectation and variance      , placeholder
-%%   §1.4  Independence and joint distributions, placeholder
-%%   §1.5  Brief warm-ups + chapter recap, placeholder
+%%   §1.0  Chapter opener + whereWeAre   DONE  (audit pass v0.2)
+%%   §1.1  Sample spaces, outcomes, X    DONE  (audit pass v0.2 — visual fix)
+%%   §1.2  Distributions: PMF / PDF / CDF  placeholder
+%%   §1.3  Expectation and variance        placeholder
+%%   §1.4  Independence and joint distributions  placeholder
+%%   §1.5  Brief warm-ups + chapter recap  placeholder
 
 \chapter{Random Variables: A Working Vocabulary}
 \label{ch:rvs}
@@ -17,7 +17,7 @@ This is the first chapter of the book. Everything that follows, moment generatin
 By the end of this chapter the reader will be able to: define random variables and their distributions cleanly, compute expectations and variances of all the running examples (Bernoulli, Binomial, Normal, Exponential), and recognize when two random variables are independent. The chapter assumes only basic high-school algebra and a willingness to draw a few pictures.%
 }
 
-Probability is the language we use when we want to say something precise about a quantity that is uncertain. The outcome of a coin flip, the height of a randomly chosen person, the largest eigenvalue of a sample covariance matrix, all of these vary across repetitions of the experiment, and probability supplies the vocabulary for describing how. The unit of vocabulary is the \vocab{random variable}: a single number whose value is unknown until the experiment is run. This chapter builds that vocabulary from scratch and trains the running examples that the rest of the book will lean on.
+Probability is the language we use when we want to say something precise about a quantity that is uncertain. The outcome of a coin flip (\coin{H} or \coin{T}), the height of a randomly chosen person, the largest eigenvalue of a sample covariance matrix, all of these vary across repetitions of the experiment, and probability supplies the vocabulary for describing how. The unit of vocabulary is the \vocab{random variable}: a single number whose value is unknown until the experiment is run. This chapter builds that vocabulary from scratch and trains the running examples that the rest of the book will lean on.
 
 \section{Sample spaces, outcomes, and the function we call \texorpdfstring{$X$}{X}}
 \label{sec:rvs-samplespace}
@@ -30,9 +30,32 @@ Before we can define a random variable, we need to be precise about what it ``ra
 \item a \vocab{probability function} $\Prob$ that assigns a number in $[0,1]$ to events (i.e., subsets of $\Omega$), with $\Prob(\Omega) = 1$.
 \end{enumerate}
 
+\marginnote{%
+\centering
+\sffamily\footnotesize\scshape Three running experiments\par
+\bigskip
+\begin{tikzpicture}[baseline=0]
+  \node at (0, 0)    {\coinbig{H}};
+  \node at (0, -1.4) {\diebig{3}};
+  \node at (0, -2.8) {%
+    \begin{tikzpicture}[baseline=0]
+      \draw[draw=mathemagicsThm, line width=0.5pt, fill=mathemagicsExBg]
+        (-0.45, -0.5) rectangle (0.45, 0.5);
+      \draw[draw=mathemagicsThm, line width=0.4pt]
+        (-0.3, -0.4) -- (0.3, -0.4)
+        (-0.3, -0.2) -- (0.3, -0.2)
+        (-0.3, 0)    -- (0.3, 0)
+        (-0.3, 0.2)  -- (0.3, 0.2)
+        (-0.3, 0.4)  -- (0.3, 0.4);
+    \end{tikzpicture}};
+\end{tikzpicture}
+\par\medskip
+\itshape\footnotesize Coin: 2 outcomes. Die: 6 outcomes. Tape measure: an outcome for every real number.
+}
+
 \asideHistorical{The modern definition of a random variable as a function on a sample space is due to Andrey Kolmogorov, in his 1933 monograph \emph{Foundations of the Theory of Probability}. Before Kolmogorov, ``random'' was a word in search of a definition.}
 
-The simplest example is a single coin flip. The experiment is the flip; the sample space is $\Omega = \{H, T\}$; and the probability function (for a fair coin) is $\Prob(H) = \Prob(T) = \tfrac{1}{2}$. The outcomes here are just the letters $H$ and $T$. They are not numbers, they are labels for possibilities.
+The simplest example is a single coin flip. The experiment is the flip; the sample space is $\Omega = \{\coin{H}, \coin{T}\}$; and the probability function (for a fair coin) is $\Prob(\coin{H}) = \Prob(\coin{T}) = \tfrac{1}{2}$. The outcomes here are just the labels \coin{H}\ and \coin{T}. They are not numbers, they are labels for possibilities.
 
 Often we care less about the labels themselves than about a number we can compute from them. For two coin flips, we may care about the \emph{number of heads}; for the roll of two dice, we may care about the \emph{sum}; for a clinical trial, we may care about whether a patient recovered or not. In each case there is a function that takes an outcome and returns a number. That function is the random variable.
 
@@ -42,68 +65,87 @@ Let $\Omega$ be a sample space. A \emph{random variable} on $\Omega$ is a functi
 \footnotetext{In a fully rigorous treatment we would also require $X$ to be \emph{measurable}; this technical condition becomes relevant only when $\Omega$ is uncountable. Appendix~D sketches the measure-theoretic framework for the curious reader.}
 
 \begin{intuition}
-Think of $X$ as a \emph{measurement device}. The randomness lives in $\Omega$, it is the underlying experiment whose outcome we cannot predict. The random variable $X$ does not introduce any new randomness; it just tells you what number you record once an outcome has been drawn.
+Think of $X$ as a \emph{measurement device}. The randomness lives in $\Omega$; it is the underlying experiment whose outcome we cannot predict. The random variable $X$ does not introduce any new randomness; it just tells you what number you record once an outcome has been drawn.
 \end{intuition}
 
 \subsection*{A worked example: number of heads in two coin flips}
 
 Let the experiment be flipping a fair coin twice in a row. The sample space contains four outcomes:
 \[
-\Omega \;=\; \{HH,\, HT,\, TH,\, TT\}.
+\Omega \;=\; \bigl\{\coin{H}\coin{H},\; \coin{H}\coin{T},\; \coin{T}\coin{H},\; \coin{T}\coin{T}\bigr\}.
 \]
 Each outcome has probability $\tfrac{1}{4}$. Define the random variable
 \[
 X(\omega) \;=\; \text{the number of heads in } \omega.
 \]
-Then $X(HH) = 2$, $X(HT) = 1$, $X(TH) = 1$, and $X(TT) = 0$. The random variable $X$ takes its values in the set $\{0, 1, 2\} \subset \R$. The function from $\Omega$ to $\R$ is shown in \cref{fig:rv-mapping}.
+Then $X(\coin{H}\coin{H}) = 2$, $X(\coin{H}\coin{T}) = 1$, $X(\coin{T}\coin{H}) = 1$, and $X(\coin{T}\coin{T}) = 0$. The random variable $X$ takes its values in the set $\{0, 1, 2\} \subset \R$. The function from $\Omega$ to $\R$ is shown in \cref{fig:rv-mapping}.
+
+\marginnote{%
+\centering
+\sffamily\footnotesize\scshape The mapping, by row\par
+\medskip
+\begin{tabular}{c@{\quad$\mapsto$\quad}c}
+\coin{H}\coin{H} & 2 \\[1pt]
+\coin{H}\coin{T} & 1 \\[1pt]
+\coin{T}\coin{H} & 1 \\[1pt]
+\coin{T}\coin{T} & 0 \\
+\end{tabular}\par
+\medskip
+\itshape\footnotesize Two outcomes share the value $1$; that is why $\Prob(X=1) = \tfrac{1}{2}$.
+}
 
 \begin{figure}[h]
 \centering
 \begin{tikzpicture}[
-  >={Stealth[length=4pt]},
+  >={Stealth[length=5pt]},
   every node/.style={font=\small},
   omega/.style={
     ellipse, draw=mathemagicsThm, line width=0.5pt,
-    minimum width=2.6cm, minimum height=2.4cm,
-    fill=mathemagicsDefBg
+    minimum width=2.4cm, minimum height=2.6cm,
+    fill=mathemagicsDefBg!60
   },
   outcome/.style={font=\footnotesize\sffamily, color=mathemagicsThm},
-  realline/.style={->, semithick, draw=mathemagicsThm, line width=0.5pt},
+  realline/.style={->, semithick, draw=mathemagicsThm, line width=0.6pt},
   arr/.style={
-    ->, semithick, draw=mathemagicsDef, line width=0.5pt,
+    ->, thick, draw=mathemagicsDef!90, line width=0.55pt,
     shorten >=2pt, shorten <=2pt
   },
   rvlabel/.style={font=\itshape\sffamily, color=mathemagicsDef}
 ]
-% Sample space cloud
-\node[omega, label={[font=\sffamily\bfseries]above:$\Omega$}] (omega) at (-2, 0) {};
-\node[outcome] at (-2, 0.7)  (hh) {HH};
-\node[outcome] at (-2, 0.25) (ht) {HT};
-\node[outcome] at (-2,-0.25) (th) {TH};
-\node[outcome] at (-2,-0.7)  (tt) {TT};
+% Sample space cloud, with omega label clearly above
+\node[omega] (omega) at (-3, 0) {};
+\node[font=\sffamily\bfseries\large, color=mathemagicsThm] at (-3, 1.6) {$\Omega$};
 
-% Real number line
-\draw[realline] (1.5, 0) -- (5, 0) node[right, font=\small\sffamily] {$\R$};
-\foreach \x/\lbl in {2.0/0, 3.0/1, 4.0/2} {
-  \draw[mathemagicsThm, line width=0.4pt] (\x, -0.08) -- (\x, 0.08);
-  \node[below=2pt, font=\footnotesize\sffamily] at (\x,-0.08) {\lbl};
+\node[outcome] at (-3, 0.85)  (hh) {\coin{H}\coin{H}};
+\node[outcome] at (-3, 0.30)  (ht) {\coin{H}\coin{T}};
+\node[outcome] at (-3,-0.30)  (th) {\coin{T}\coin{H}};
+\node[outcome] at (-3,-0.85)  (tt) {\coin{T}\coin{T}};
+
+% Real line, much wider, with proper spacing between tick marks
+\draw[realline] (1.8, 0) -- (6.5, 0)
+  node[right, font=\small\sffamily, color=mathemagicsThm] {$\R$};
+\foreach \x/\lbl in {2.5/0, 4/1, 5.5/2} {
+  \draw[mathemagicsThm, line width=0.5pt] (\x, -0.12) -- (\x, 0.12);
+  \node[below=4pt, font=\footnotesize\sffamily, color=mathemagicsThm]
+       at (\x,-0.12) {\lbl};
 }
 
-% Mapping arrows X(\omega)
-\draw[arr] (hh) to[bend left=8]  (3.95, 0.05);
-\draw[arr] (ht) to[bend left=4]  (2.95, 0.05);
-\draw[arr] (th) to[bend right=4] (2.95, 0.05);
-\draw[arr] (tt) to[bend right=8] (1.95, 0.05);
+% X label, well above the arrow paths so it cannot collide
+\node[rvlabel, font=\Large\itshape] at (-0.4, 1.6) {$X$};
+\node[font=\footnotesize\itshape\sffamily, color=mathemagicsDef!85]
+     at (-0.4, 1.15) {(number of heads)};
 
-% X label centered above arrows
-\node[rvlabel] at (0, 0.95) {$X$};
-\node[font=\footnotesize\itshape\sffamily, color=mathemagicsDef] at (0, 0.55) {(\,number of heads\,)};
+% Mapping arrows, fanning out cleanly to spread-out targets
+\draw[arr] (hh) to[bend left=12]   (5.42, 0.05);
+\draw[arr] (ht) to[bend left=4]    (3.92, 0.05);
+\draw[arr] (th) to[bend right=4]   (3.92, 0.05);
+\draw[arr] (tt) to[bend right=12]  (2.42, 0.05);
 \end{tikzpicture}
-\caption{The random variable $X$ = ``number of heads in two coin flips'' as a function from the sample space $\Omega = \{HH, HT, TH, TT\}$ to the real line. Each outcome on the left maps to its head count on the right.}
+\caption{The random variable $X$ = ``number of heads in two coin flips'' as a function from the sample space $\Omega$ to the real line. Each outcome on the left maps to a head count on the right; the values $0$ and $2$ are each hit by exactly one outcome, while $1$ is hit by two ($\coin{H}\coin{T}$ and $\coin{T}\coin{H}$).}
 \label{fig:rv-mapping}
 \end{figure}
 
-\asideMatters{The reason we go to the trouble of defining $X$ as a function on $\Omega$, rather than just as ``a random number,'' is that it lets us recover \emph{any} numerical question about the experiment by the same mechanism. The number of heads, the number of tails, whether the first flip matched the second, each is a different function on the same $\Omega$.}
+\asideMatters{The reason we go to the trouble of defining $X$ as a function on $\Omega$, rather than just as ``a random number,'' is that it lets us recover \emph{any} numerical question about the experiment by the same mechanism. The number of heads, the number of tails, whether the first flip matched the second; each is a different function on the same $\Omega$.}
 
 \subsection*{Notation}
 
@@ -124,9 +166,18 @@ we are asking: what is the probability that the random variable $X$ takes the va
 \Prob(X = 1) = \tfrac{1}{2}, \qquad
 \Prob(X = 2) = \tfrac{1}{4}.
 \]
-The probability $\Prob(X = 1) = \tfrac{1}{2}$ comes from the fact that two of the four equally-likely outcomes ($HT$ and $TH$) map to $1$.
+The probability $\Prob(X = 1) = \tfrac{1}{2}$ comes from the fact that two of the four equally-likely outcomes ($\coin{H}\coin{T}$ and $\coin{T}\coin{H}$) map to $1$.
 
 \subsection*{A second example: the sum of two dice}
+
+\marginnote{%
+\centering
+\sffamily\footnotesize\scshape One outcome, sum $= 7$\par
+\medskip
+\diebig{3}\quad\diebig{4}\par
+\medskip
+\itshape\footnotesize One of six outcomes that sum to $7$; the others are $(\die{1},\die{6})$, $(\die{2},\die{5})$, $(\die{4},\die{3})$, $(\die{5},\die{2})$, $(\die{6},\die{1})$.
+}
 
 \begin{example}{Sum of two dice}{two-dice}
 Roll two fair six-sided dice. The sample space contains $36$ ordered pairs:
@@ -137,8 +188,15 @@ each with probability $\tfrac{1}{36}$. Let $X(i, j) = i + j$ be the sum. Then $X
 \[
 \Prob(X = 2) = \tfrac{1}{36}, \quad \Prob(X = 7) = \tfrac{6}{36}, \quad \Prob(X = 12) = \tfrac{1}{36}.
 \]
-The full distribution of $X$ has the familiar triangular shape: rare on the extremes (only $(1,1)$ sums to $2$), most likely in the middle (six different pairs sum to $7$).
+The full distribution of $X$ has the familiar triangular shape: rare on the extremes (only $(\die{1}, \die{1})$ sums to $2$), most likely in the middle (six different pairs sum to $7$). \cref{fig:dice-distribution} shows the bar chart in the margin.
 \end{example}
+
+\begin{marginfigure}
+\centering
+\includegraphics[width=\linewidth]{figures/ch01/dice-distribution.pdf}
+\caption{The distribution of $X$ in \cref{ex:two-dice}. The triangular peak at $k=7$ is no coincidence: of the $36$ equally-likely pairs $(i,j)$, exactly $6$ sum to $7$.}
+\label{fig:dice-distribution}
+\end{marginfigure}
 
 This is the working pattern. We start from a sample space whose outcomes carry no numerical structure; we define a function $X$ that turns each outcome into a number; and we pull the probabilities forward through $X$ to talk about $\Prob(X = x)$ or, more generally, $\Prob(X \in A)$ for any subset $A$ of $\R$.
 
@@ -148,7 +206,7 @@ This is the working pattern. We start from a sample space whose outcomes carry n
 Three coins are flipped, all fair, all independent. Write down the sample space $\Omega$. Define the random variable $X$ to be the number of heads. List $X(\omega)$ for each $\omega \in \Omega$, and compute $\Prob(X = k)$ for $k = 0, 1, 2, 3$.
 \end{warmup}
 \begin{warmupSolution}
-$\Omega = \{HHH, HHT, HTH, HTT, THH, THT, TTH, TTT\}$, eight outcomes each with probability $\tfrac{1}{8}$. The values of $X$ are $3, 2, 2, 1, 2, 1, 1, 0$ respectively. Counting,
+$\Omega = \{\coin{H}\coin{H}\coin{H}, \coin{H}\coin{H}\coin{T}, \coin{H}\coin{T}\coin{H}, \coin{H}\coin{T}\coin{T}, \coin{T}\coin{H}\coin{H}, \coin{T}\coin{H}\coin{T}, \coin{T}\coin{T}\coin{H}, \coin{T}\coin{T}\coin{T}\}$, eight outcomes each with probability $\tfrac{1}{8}$. The values of $X$ are $3, 2, 2, 1, 2, 1, 1, 0$ respectively. Counting,
 $\Prob(X=0) = \tfrac{1}{8}$,
 $\Prob(X=1) = \tfrac{3}{8}$,
 $\Prob(X=2) = \tfrac{3}{8}$,
@@ -166,12 +224,12 @@ $\Omega$ is the set of $52$ cards, each with probability $\tfrac{1}{52}$. The ra
 Re-do \cref{ex:two-dice} but with a different random variable: let $Z(i, j)$ be $1$ if $i = j$ and $0$ otherwise, so $Z$ records whether the two dice show the same face. Compute $\Prob(Z = 1)$.
 \end{warmup}
 \begin{warmupSolution}
-The pairs with $i = j$ are $(1,1), (2,2), (3,3), (4,4), (5,5), (6,6)$, six in total. Each has probability $\tfrac{1}{36}$, so $\Prob(Z = 1) = \tfrac{6}{36} = \tfrac{1}{6}$.
+The pairs with $i = j$ are $(\die{1},\die{1}), (\die{2},\die{2}), (\die{3},\die{3}), (\die{4},\die{4}), (\die{5},\die{5}), (\die{6},\die{6})$, six in total. Each has probability $\tfrac{1}{36}$, so $\Prob(Z = 1) = \tfrac{6}{36} = \tfrac{1}{6}$.
 \end{warmupSolution}
 
 \bigskip
 
-% --- §1.1 ENDS HERE; §1.2 onward still placeholder,
+% --- §1.1 ENDS HERE; §1.2 onward still placeholder ---
 
 \section{Distributions: PMFs, PDFs, and CDFs}
 \PLACEHOLDER{§1.2: discrete vs continuous; PMF, PDF, CDF; the CDF as the unifying object; standard distributions table; first Colab simulation (distribution sandbox).}
