@@ -261,7 +261,9 @@
   \IfFileExists{#2}{%
     \includegraphics[width=#1]{#2}%
   }{%
-    #3%
+    % Auto-fit TikZ fallback to width #1 so it never overflows the margin
+    % column.  Aspect ratio preserved via the "!" height parameter.
+    \resizebox{#1}{!}{#3}%
   }%
 }
 
@@ -271,23 +273,76 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newcommand{\wizardHatCartoon}{%
-  \begin{tikzpicture}[scale=1.25]
-    % Hat brim
-    \filldraw[draw=mathemagicsThm, line width=0.5pt, fill=mathemagicsWhereWeAre]
-      (-1.4, -0.15) -- (1.4, -0.15) -- (1.22, 0.05) -- (-1.22, 0.05) -- cycle;
-    % Hat cone
-    \filldraw[draw=mathemagicsThm, line width=0.5pt, fill=mathemagicsWhereWeAre]
-      (-1.05, 0.05) -- (1.05, 0.05) -- (-0.04, 2.0) -- cycle;
-    % Star band on hat (a few decorative stars on the cone itself)
-    \node[font=\normalsize, color=mathemagicsColab]   at (-0.30, 0.95) {$\star$};
-    \node[font=\footnotesize, color=mathemagicsColab] at (0.25, 1.35)  {$\star$};
-    % Floating math/sparkle symbols around the hat
-    \node[font=\LARGE, color=mathemagicsAside]      at (1.7, 1.55)  {$\pi$};
-    \node[font=\LARGE, color=mathemagicsRecap]      at (-1.7, 1.10) {$\Sigma$};
-    \node[font=\LARGE, color=mathemagicsDef]        at (1.85, 0.45) {$\infty$};
-    \node[font=\large, color=mathemagicsIntu]       at (-1.85, 0.55) {$\int$};
-    \node[font=\normalsize, color=mathemagicsColab] at (-2.0, 1.85) {$\star$};
-    \node[font=\normalsize, color=mathemagicsColab] at (2.1, 1.05)  {$\star$};
+  \begin{tikzpicture}[scale=1.0, line cap=round, line join=round]
+    %%% --- Wizard hat ---
+    % Hat brim (slightly wavy / hand-drawn feel)
+    \filldraw[draw=mathemagicsThm, line width=0.55pt, fill=mathemagicsWhereWeAre]
+      (-1.0, 0.55) -- (1.0, 0.55) -- (0.82, 0.72) -- (-0.82, 0.72) -- cycle;
+    % Hat cone (lightly bent at the tip for personality)
+    \filldraw[draw=mathemagicsThm, line width=0.55pt, fill=mathemagicsWhereWeAre]
+      (-0.78, 0.72)
+      .. controls (-0.55, 1.55) and (0.05, 1.95) ..
+      (0.18, 2.25)
+      .. controls (0.30, 1.95) and (0.65, 1.20) ..
+      (0.78, 0.72) -- cycle;
+    % Star on the cone
+    \node[font=\Large, color=mathemagicsColab] at (-0.05, 1.30) {$\star$};
+    % Tiny moon detail on the hat
+    \fill[mathemagicsColab] (-0.40, 0.95) circle (0.04);
+
+    %%% --- Face ---
+    % Head (cream-tinted circle peeking from under the brim)
+    \filldraw[draw=mathemagicsThm, line width=0.55pt, fill=mathemagicsIntuBg]
+      (0, 0.20) circle (0.42);
+    % Bushy eyebrows (the wizard is paying attention)
+    \draw[draw=mathemagicsThm, line width=0.65pt]
+      (-0.27, 0.42) .. controls (-0.18, 0.50) .. (-0.08, 0.42);
+    \draw[draw=mathemagicsThm, line width=0.65pt]
+      (0.08, 0.42) .. controls (0.18, 0.50) .. (0.27, 0.42);
+    % Eyes (two dots)
+    \fill[mathemagicsThm] (-0.16, 0.30) circle (0.045);
+    \fill[mathemagicsThm] ( 0.16, 0.30) circle (0.045);
+    % Tiny nose (single curve)
+    \draw[draw=mathemagicsThm, line width=0.4pt]
+      (-0.02, 0.18) .. controls (-0.05, 0.10) .. (0.00, 0.07);
+    % Smile (gentle, almost smirk)
+    \draw[draw=mathemagicsThm, line width=0.5pt]
+      (-0.10, -0.03) .. controls (0, -0.10) .. (0.10, -0.03);
+
+    %%% --- Beard (cloud-shaped, white) ---
+    \filldraw[draw=mathemagicsThm, line width=0.55pt, fill=white]
+      (-0.36, 0.10)
+      .. controls (-0.55, -0.10) and (-0.55, -0.40) ..
+      (-0.42, -0.55)
+      .. controls (-0.30, -0.62) ..
+      (-0.20, -0.50)
+      .. controls (-0.10, -0.65) and (0.10, -0.65) ..
+      (0.20, -0.50)
+      .. controls (0.30, -0.62) ..
+      (0.42, -0.55)
+      .. controls (0.55, -0.40) and (0.55, -0.10) ..
+      (0.36, 0.10)
+      .. controls (0.20, 0.00) and (-0.20, 0.00) ..
+      cycle;
+    % Mustache (small) - sits on top of the beard
+    \draw[draw=mathemagicsThm, line width=0.5pt, fill=white]
+      (-0.18, -0.05) .. controls (-0.08, -0.10) .. (0, -0.05)
+      .. controls (0.08, -0.10) .. (0.18, -0.05)
+      -- (0.18, -0.05);
+
+    %%% --- Magic wand on the right ---
+    % Wand stick
+    \draw[draw=mathemagicsThm, line width=0.6pt]
+      (0.78, -0.40) -- (1.10, 0.05);
+    % Sparkle at the wand tip
+    \node[font=\large, color=mathemagicsColab] at (1.18, 0.12) {$\star$};
+
+    %%% --- Floating math symbols (small, balanced, not crowding) ---
+    \node[font=\normalsize, color=mathemagicsAside] at (1.20, 1.55) {$\pi$};
+    \node[font=\normalsize, color=mathemagicsRecap] at (-1.20, 1.55) {$\Sigma$};
+    \node[font=\small, color=mathemagicsDef]        at (1.30, 0.85) {$\infty$};
+    \node[font=\small, color=mathemagicsIntu]       at (-1.30, 0.85) {$\int$};
+
   \end{tikzpicture}%
 }
 
