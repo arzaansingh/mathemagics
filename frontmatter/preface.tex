@@ -1,0 +1,54 @@
+%% frontmatter/preface.tex
+%% Preface — explicit four-section structure: who / how / prereqs / outcomes
+
+\chapter*{Preface}
+\addcontentsline{toc}{chapter}{Preface}
+
+\PLACEHOLDER{The preface is a tour for the reader, not the author.
+A short version follows; the full text will be written once the chapters are filled in.}
+
+\section*{Who this book is for}
+
+This book is written for the curious reader with a basic feel for probability and algebra, who wants to understand why \emph{random matrices} are everywhere in modern data science --- from principal component analysis to deep learning, from finance to wireless communications --- and who has been told the words ``Tracy--Widom,'' ``spiked covariance,'' or ``spectral clustering'' without ever being shown how they fit together.
+
+If you have seen a normal distribution and you know what an eigenvalue is, you have enough background to start. Everything else is built up from scratch.
+
+\section*{How to read this book}
+
+The book supports two reading speeds.
+
+\begin{description}
+  \item[The \emph{cliff-notes track}.] Read the chapter opener (\textsc{Where we are} box), the \textsc{Intuition} boxes, the figures, and the \textsc{Chapter recap} at the end. Skip the proofs. You will come away with the conceptual picture in roughly 30\% of the time.
+  \item[The \emph{deep-diver track}.] Read everything: definitions, theorems, proofs, examples, simulations, exercises. The book is structured so that every claim is either proved in-line, sketched with a pointer to a full proof in the chapter appendix, or quoted as a standard result with a citation.
+\end{description}
+
+The right margin is reserved for asides, small figures, code snippets, and Colab badges. \emph{Asides never carry plot-load} --- if you ignore the entire margin, the proofs still work. Read the margins for context, history, motivation, or the occasional small joke.
+
+\PLACEHOLDER{Cliff-notes track listing: explicit list of which sections to read. To be written once chapters are filled in.}
+
+\section*{What you need to know first}
+
+\begin{itemize}
+  \item Some idea of what a random variable is, and what a probability density looks like (we'll re-build all of this from scratch in Part~I, but having seen it once before will speed things up).
+  \item Comfort with linear algebra at the level of vectors, matrices, eigenvalues, and a dot product. We re-derive the spectral theorem from scratch in Chapter~6.
+  \item Basic Python literacy --- enough to read a NumPy snippet and run a Colab notebook.
+\end{itemize}
+
+\section*{What you'll be able to do after}
+
+After reading this book, you will:
+
+\begin{itemize}
+  \item Read research papers on random matrix theory and follow the central results without getting stuck on definitions.
+  \item Run and interpret simulations of sample covariance matrices, eigenvalue distributions, and Marchenko--Pastur and Tracy--Widom limits.
+  \item Recognize the spiked covariance model and the BBP phase transition in real data.
+  \item Implement spectral clustering and explain \emph{three} different reasons it works.
+\end{itemize}
+
+\section*{A note on style}
+
+The book is written in third person, in the style of polished research notes that have been opened up to a wider audience. Technical content is rigorous; prose is friendly. Cartoon asides exist. The title is a small joke; the math is not.
+
+\bigskip
+\noindent\hfill\textit{Arzaan Singh}\par
+\noindent\hfill New Orleans, \DTMtoday

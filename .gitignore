@@ -1,0 +1,80 @@
+# ==========================================================
+# LaTeX build artefacts
+# ==========================================================
+
+# Core auxiliary files
+*.aux
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+
+# Bibliography (biblatex / biber)
+*.bbl
+*.blg
+*.bcf
+*.run.xml
+
+# Index
+*.idx
+*.ind
+*.ilg
+*.ist
+
+# Glossary
+*.acn
+*.acr
+*.alg
+*.glg
+*.glo
+*.gls
+
+# latexmk build cache
+*.fdb_latexmk
+*.fls
+*.synctex.gz
+*.synctex.gz(busy)
+*.synctex(busy)
+
+# Beamer (in case we add slides later)
+*.snm
+*.nav
+*.vrb
+
+# minted (Pygments) cache
+_minted-*/
+*.pyg
+
+# Final PDF — committed manually for releases, ignored in working dir
+main.pdf
+
+# ==========================================================
+# OS / editor cruft
+# ==========================================================
+
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+.idea/
+.vscode/.history/
+
+# Python (for /code/ scripts)
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ipynb_checkpoints/
+
+# ==========================================================
+# Local-only assets we don't push
+# ==========================================================
+
+# The cloned Tufte template — reference only, not part of the book
+_template/
+
+# Build outputs that latexmk -C might leave around
+*.dvi
+*.ps

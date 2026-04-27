@@ -1,0 +1,38 @@
+%% chapters/02-generating-functions.tex
+\chapter{Generating Functions}
+\label{ch:genfunc}
+
+\whereWeAre{%
+We've defined random variables and their distributions. Now we ask: what would it look like to package an entire distribution into a single, easy-to-manipulate object? Two such packages turn out to be central in everything that follows: the moment generating function (MGF) and the characteristic function (CF).%
+}
+
+\PLACEHOLDER{This chapter has the most mature source material in the existing notes. Pull from \texttt{Mathematics\_Research\_Notes/main.tex}, the MGF and CF sections (lines ~13--585). Use as the canonical reference for visual style of every other chapter.}
+
+\section{Why bundle a distribution into a function?}
+\PLACEHOLDER{Motivation: sums of independent RVs become products; moments become derivatives; Laplace/Fourier transform connections.}
+
+\section{The moment generating function}
+\PLACEHOLDER{Definition, domain, MGF as a two-sided Laplace transform, MGF generates moments, examples (Bernoulli, Binomial, Poisson, Exponential, Normal).}
+
+\section{Sums of independent random variables}
+\PLACEHOLDER{Multiplicativity; Poisson-plus-Poisson example; Normal-plus-Normal example.}
+
+\section{When the MGF fails: characteristic functions}
+\PLACEHOLDER{Cauchy distribution as motivation; CF always exists; relationship $\varphi_X(t) = M_X(it)$ when both exist.}
+
+\section{Characteristic function as Fourier transform}
+\PLACEHOLDER{Fourier and Fourier--Stieltjes viewpoint.}
+
+\section{Brief warm-ups}
+\PLACEHOLDER{3--5 short questions with immediate answers.}
+
+\chapterRecap{%
+\begin{itemize}
+  \item \PLACEHOLDER{MGFs encode distributions analytically and turn sums into products.}
+  \item \PLACEHOLDER{CFs always exist; MGFs sometimes don't.}
+  \item \PLACEHOLDER{Both will be the engine of the CLT in Chapter~4.}
+\end{itemize}%
+}
+
+\section*{Exercises}
+\PLACEHOLDER{8--15 longer exercises; solutions in Appendix A.}

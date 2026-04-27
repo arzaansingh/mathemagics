@@ -1,0 +1,35 @@
+%% chapters/16-marchenko-pastur.tex
+\chapter{The Marchenko--Pastur Law}
+\label{ch:mp}
+
+\whereWeAre{%
+The Marchenko--Pastur law is the high-dimensional analogue of ``$\Shat \to I_p$.'' Instead of every eigenvalue converging to 1, the empirical eigenvalue distribution converges to a continuous law on $[(1 - \sqrt c)^2, (1 + \sqrt c)^2]$. This is the universal eigenvalue picture for sample covariance matrices in high dimensions.%
+}
+
+\PLACEHOLDER{New chapter; pulls from Joseph thesis Section 3.2 (Prop 3.8); reference: Bai \& Silverstein, Vershynin Ch.~7.}
+
+\section{Statement of the Marchenko--Pastur law}
+\PLACEHOLDER{Density formula; support $[\lambda_-, \lambda_+] = [(1-\sqrt c)^2, (1+\sqrt c)^2]$; convergence in distribution of the empirical spectral distribution.}
+
+\section{Three perspectives on why it's true}
+\PLACEHOLDER{(1) Stieltjes-transform sketch (intuition only); (2) free-probability free convolution; (3) numerical experiment. Pointer to the rigorous proof in chapter appendix.}
+
+\section{What MP looks like as $c$ varies}
+\PLACEHOLDER{$c \to 0$: density concentrates near 1 (recovering fixed-$p$); $c = 1$: hits zero on the left edge; $c > 1$: atom at 0, support shifts.}
+
+\section{Simulation: MP as $N$ grows}
+\PLACEHOLDER{Colab box: histogram of $\Shat$ eigenvalues for $p=200, 500, 1000$ overlaid with theoretical density.}
+
+\section{Brief warm-ups}
+\PLACEHOLDER{3--5 short questions.}
+
+\chapterRecap{%
+\begin{itemize}
+  \item \PLACEHOLDER{ESD of $\Shat$ converges to Marchenko--Pastur in the high-dim regime.}
+  \item \PLACEHOLDER{Support is $[(1-\sqrt c)^2, (1+\sqrt c)^2]$.}
+  \item \PLACEHOLDER{Density vanishes like a square root at the edges --- the seed of Tracy--Widom.}
+\end{itemize}%
+}
+
+\section*{Exercises}
+\PLACEHOLDER{8--15 longer exercises.}

@@ -1,0 +1,178 @@
+{
+  // ============================================================
+  //  LaTeX Workshop configuration for Mathemagics
+  //  Open this folder in VS Code and the build "just works."
+  // ============================================================
+
+  // Use latexmk as the default build tool (it reads ./latexmkrc, which
+  // already sets --shell-escape for minted, biber for bibliography,
+  // and runs pdflatex up to 5 times to resolve cross-references).
+  "latex-workshop.latex.recipe.default": "latexmk",
+
+  "latex-workshop.latex.tools": [
+    {
+      "name": "latexmk",
+      "command": "latexmk",
+      "args": [
+        "-pdf",
+        "-synctex=1",
+        "-interaction=nonstopmode",
+        "-file-line-error",
+        "%DOC%"
+      ],
+      "env": {}
+    },
+    {
+      "name": "latexmk-clean",
+      "command": "latexmk",
+      "args": ["-c"],
+      "env": {}
+    }
+  ],
+
+  "latex-workshop.latex.recipes": [
+    {
+      "name": "latexmk",
+      "tools": ["latexmk"]
+    },
+    {
+      "name": "latexmk (clean first)",
+      "tools": ["latexmk-clean", "latexmk"]
+    }
+  ],
+
+  // Build on save is OFF by default — for a 100+ page book it's too slow.
+  // Use Cmd+Alt+B (or click the build button) when you want to recompile.
+  "latex-workshop.latex.autoBuild.run": "never",
+
+  // Show the PDF in a side-by-side tab when you click "View PDF"
+  "latex-workshop.view.pdf.viewer": "tab",
+  "latex-workshop.view.pdf.tab.editorGroup": "right",
+
+  // SyncTeX: Cmd+Alt+J jumps from .tex line to PDF location;
+  // Cmd+Click in the PDF jumps back to the source line.
+  "latex-workshop.synctex.afterBuild.enabled": true,
+
+  // Auto-clean intermediate files when you close the document
+  "latex-workshop.latex.autoClean.run": "onBuilt",
+  "latex-workshop.latex.clean.fileTypes": [
+    "*.aux", "*.bbl", "*.blg", "*.idx", "*.ind", "*.lof", "*.lot",
+    "*.out", "*.toc", "*.acn", "*.acr", "*.alg", "*.glg", "*.glo",
+    "*.gls", "*.ist", "*.fls", "*.log", "*.fdb_latexmk", "*.snm",
+    "*.synctex(busy)", "*.synctex.gz(busy)", "*.nav", "*.vrb",
+    "*.bcf", "*.run.xml", "_minted-*"
+  ],
+
+  // Don't keep the .pdf open as a phantom — clean reload on each build
+  "latex-workshop.view.pdf.invertMode.enabled": "auto",
+
+  // The "root" file is main.tex. LaTeX Workshop will detect this
+  // automatically because it has \begin{document}, but we make it explicit.
+  "latex-workshop.latex.rootFile.useSubFile": false,
+
+  // ============================================================
+  //  General editor experience
+  // ============================================================
+
+  // Word wrap for prose (LaTeX is a markup language, long lines hurt)
+  "[latex]": {
+    "editor.wordWrap": "on",
+    "editor.wordWrapColumn": 100,
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true,
+    "editor.formatOnSave": false,
+    "editor.suggestOnTriggerCharacters": true,
+    "editor.acceptSuggestionOnEnter": "off",
+    "editor.quickSuggestions": {
+      "comments": false,
+      "strings": false,
+      "other": true
+    }
+  },
+
+  "[bibtex]": {
+    "editor.tabSize": 2
+  },
+
+  // Spell checking for prose
+  "cSpell.language": "en,en-US",
+  "cSpell.words": [
+    "Arzaan",
+    "Bernoulli",
+    "Bbb",
+    "Casella",
+    "Chebyshev",
+    "Genzer",
+    "Gustavo",
+    "Isserlis",
+    "Kochenderfer",
+    "Levy",
+    "Marchenko",
+    "Mathemagics",
+    "Pastur",
+    "PSD",
+    "RVs",
+    "SCM",
+    "Strang",
+    "Tracy",
+    "Tufte",
+    "Vandermonde",
+    "Vershynin",
+    "Widom",
+    "Wishart",
+    "Wigner",
+    "amsmath",
+    "amssymb",
+    "amsthm",
+    "biblatex",
+    "biber",
+    "biblabel",
+    "biblio",
+    "bibresource",
+    "didier",
+    "eigenbasis",
+    "eigvecs",
+    "fluctuations",
+    "frontmatter",
+    "linalg",
+    "marginnote",
+    "mathcal",
+    "mathemagics",
+    "minted",
+    "natbib",
+    "pdflatex",
+    "shellesc",
+    "synctex",
+    "tcolorbox",
+    "tikzlibrary",
+    "tufte",
+    "tcbtheorem"
+  ],
+
+  // Treat .tex files as latex (not plaintex)
+  "files.associations": {
+    "*.tex": "latex",
+    "*.cls": "latex",
+    "*.sty": "latex",
+    "*.bib": "bibtex"
+  },
+
+  // Hide build artefacts from the file explorer
+  "files.exclude": {
+    "**/*.aux": true,
+    "**/*.log": true,
+    "**/*.out": true,
+    "**/*.toc": true,
+    "**/*.idx": true,
+    "**/*.ind": true,
+    "**/*.ilg": true,
+    "**/*.bbl": true,
+    "**/*.blg": true,
+    "**/*.bcf": true,
+    "**/*.run.xml": true,
+    "**/*.synctex.gz": true,
+    "**/*.fls": true,
+    "**/*.fdb_latexmk": true,
+    "**/_minted-*": true
+  }
+}

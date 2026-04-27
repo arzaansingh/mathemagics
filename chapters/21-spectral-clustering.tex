@@ -1,0 +1,41 @@
+%% chapters/21-spectral-clustering.tex
+\chapter{Spectral Clustering: Three Perspectives}
+\label{ch:specclust}
+
+\whereWeAre{%
+The destination. \emph{Spectral clustering} is what happens when you take the spiked-covariance picture seriously: the signal eigenvectors of a similarity matrix, graph Laplacian, or kernel reveal cluster structure in the data. We follow von Luxburg and present the algorithm three different ways --- so that if one explanation doesn't click, the other two will.%
+}
+
+\PLACEHOLDER{New chapter. Primary source: von Luxburg's \emph{A Tutorial on Spectral Clustering} (the canonical pedagogical reference).}
+
+\section{The algorithm in one paragraph}
+\PLACEHOLDER{Build similarity graph; compute graph Laplacian; take its smallest $k$ eigenvectors; cluster the $n$ embedded points with $k$-means.}
+
+\section{Perspective 1: graph cut}
+\PLACEHOLDER{Normalized cut interpretation; spectral relaxation of an NP-hard problem.}
+
+\section{Perspective 2: random walk}
+\PLACEHOLDER{Random walk on the similarity graph; the Laplacian eigenvectors are stationary modes.}
+
+\section{Perspective 3: perturbation theory}
+\PLACEHOLDER{The Laplacian of a block-structured graph has a specific spectrum; perturbations don't break the picture too much. This is where the BBP intuition feeds in directly.}
+
+\section{Why this is the destination of the entire book}
+\PLACEHOLDER{The full chain: Gaussian foundations $\to$ random matrices $\to$ spiked covariance $\to$ BBP detectability $\to$ clusters revealed by top eigenvectors. Spectral clustering is exactly the algorithmic payoff.}
+
+\section{Simulation: spectral clustering on a synthetic dataset}
+\PLACEHOLDER{Colab box: two-blob dataset, build kernel, compute Laplacian eigenvectors, $k$-means in spectral coordinates.}
+
+\section{Brief warm-ups}
+\PLACEHOLDER{3--5 short questions.}
+
+\chapterRecap{%
+\begin{itemize}
+  \item \PLACEHOLDER{Spectral clustering = top/bottom Laplacian eigenvectors + $k$-means.}
+  \item \PLACEHOLDER{Three independent reasons it works.}
+  \item \PLACEHOLDER{Random matrix theory is the explanation for \emph{when} it works.}
+\end{itemize}%
+}
+
+\section*{Exercises}
+\PLACEHOLDER{8--15 longer exercises.}

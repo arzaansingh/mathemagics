@@ -1,0 +1,2 @@
+# This directory holds standalone Python scripts that produce figures or run experiments.
+# Each script should be runnable from the repo root with `python code/<file>.py`.

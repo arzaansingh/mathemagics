@@ -1,0 +1,105 @@
+%% main.tex
+%% Master document for "Mathemagics: A Field Guide to Random Matrices and Spectral Clustering"
+%%
+%% Build:
+%%   latexmk -pdf  (uses ./latexmkrc which sets shell-escape for minted)
+%% Or:
+%%   pdflatex --shell-escape main && biber main && pdflatex --shell-escape main && pdflatex --shell-escape main
+
+\documentclass{mathemagics}
+
+% Bibliography (extends the existing refs.bib in Mathematics_Research_Notes)
+% \usepackage[style=alphabetic,backend=biber]{biblatex}  % loaded by mathemagics.cls if you uncomment
+\addbibresource{refs.bib}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Frontmatter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\input{frontmatter/titlepage}
+\input{frontmatter/colophon}
+
+\frontmatter
+
+\input{frontmatter/preface}
+\input{frontmatter/acknowledgments}
+\input{frontmatter/notation}
+\input{frontmatter/dependency-graph}
+
+\tableofcontents
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Mainmatter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\mainmatter
+
+% --- Part 0: Prelude -----------------------------------------------------
+\input{parts/part0-prelude}
+\input{chapters/00-prelude}
+
+% --- Part I: Foundations of Probability ----------------------------------
+\input{parts/part1-foundations}
+\input{chapters/01-random-variables}
+\input{chapters/02-generating-functions}
+\input{chapters/03-convergence}
+\input{chapters/04-clt}
+
+% --- Part II: From Numbers to Vectors and Matrices -----------------------
+\input{parts/part2-vectors-and-matrices}
+\input{chapters/05-random-vectors}
+\input{chapters/06-linalg-refresher}
+\input{chapters/07-covariance-psd}
+
+% --- Part III: Sample Covariance Matrices --------------------------------
+\input{parts/part3-sample-covariance}
+\input{chapters/08-sample-covariance}
+\input{chapters/09-eigenvalue-convergence}
+\input{chapters/10-wishart}
+
+% --- Part IV: Eigenvalue Fluctuations in Fixed Dimension -----------------
+\input{parts/part4-fluctuations}
+\input{chapters/11-joint-clt-entries}
+\input{chapters/12-two-regimes}
+\input{chapters/13-eigenvectors}
+\input{chapters/14-goe}
+
+% --- Part V: High-Dimensional Phenomena ----------------------------------
+\input{parts/part5-high-dim}
+\input{chapters/15-fixed-to-highdim}
+\input{chapters/16-marchenko-pastur}
+\input{chapters/17-tracy-widom}
+\input{chapters/18-qq-plots}
+
+% --- Part VI: Spikes and Spectral Clustering -----------------------------
+\input{parts/part6-spikes-clustering}
+\input{chapters/19-spiked-covariance}
+\input{chapters/20-bbp-transition}
+\input{chapters/21-spectral-clustering}
+
+% --- Coda ----------------------------------------------------------------
+\input{coda/where-to-next}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Backmatter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\backmatter
+
+\appendix
+
+\input{appendices/A-solutions}
+\input{appendices/B-notation}
+\input{appendices/C-code-listings}
+\input{appendices/D-prerequisites}
+\input{appendices/E-bibliography-notes}
+
+% Bibliography (auto-generated from refs.bib)
+\printbibliography[heading=bibintoc]
+
+% Subject index
+\input{appendices/F-index}
+
+\end{document}

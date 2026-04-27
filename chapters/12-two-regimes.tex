@@ -1,0 +1,35 @@
+%% chapters/12-two-regimes.tex
+\chapter{Distinct vs Repeated Eigenvalues: Two Fluctuation Regimes}
+\label{ch:tworegimes}
+
+\whereWeAre{%
+The first really surprising fact in the book. The same scaling --- $\sqrt n$ --- gives a Gaussian limit when the population eigenvalues are distinct, but a non-Gaussian (GOE-type) limit when they coincide. The reason is that the eigenvalue map is differentiable in one case and only Lipschitz in the other.%
+}
+
+\PLACEHOLDER{Sources: existing main.tex `Continuation: Wishart Matrices...' section + April 17 derivative-of-eigenvalue work.}
+
+\section{Case 1: $\Sigma = I_2$ (repeated eigenvalues)}
+\PLACEHOLDER{No Taylor expansion needed; eigenvalues of $\Shat$ are eigenvalues of $W_n / \sqrt n$ shifted by 1; limit law is non-Gaussian.}
+
+\section{Case 2: $\Sigma = \diag(1,2)$ (distinct eigenvalues)}
+\PLACEHOLDER{First-order perturbation theory; $d\lambda = u^T(dM)u$; delta method; Gaussian limit with variance 8 (top eigenvalue) and 2 (bottom eigenvalue).}
+
+\section{The derivative-of-eigenvalue calculation explicitly}
+\PLACEHOLDER{Three partial derivatives: $\partial \lambda_2 / \partial m_{11}, \partial m_{12}, \partial m_{22}$; gradient $(0,0,1)$ at $\Sigma = \diag(1,2)$.}
+
+\section{Why the same $\sqrt{n}$ gives two different laws}
+\PLACEHOLDER{The matrix scaling is universal; the eigenvalue map is what differs. Map smooth $\Rightarrow$ delta method; map only Lipschitz $\Rightarrow$ nonlinear limit.}
+
+\section{Brief warm-ups}
+\PLACEHOLDER{3--5 short questions.}
+
+\chapterRecap{%
+\begin{itemize}
+  \item \PLACEHOLDER{Distinct eigenvalues $\to$ Gaussian fluctuations via the delta method.}
+  \item \PLACEHOLDER{Repeated eigenvalues $\to$ GOE-like fluctuations.}
+  \item \PLACEHOLDER{Same scaling, two universality classes.}
+\end{itemize}%
+}
+
+\section*{Exercises}
+\PLACEHOLDER{8--15 longer exercises.}

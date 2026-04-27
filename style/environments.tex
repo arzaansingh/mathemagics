@@ -1,0 +1,269 @@
+%% style/environments.tex
+%% The five locked tcolorbox environments + Colab box + warm-up + exercise.
+%%
+%% Discipline: do NOT add new colored environments without explicit consent.
+%% Five is the design budget.
+%%
+%% Counter discipline: definitions, theorems, propositions, lemmas, corollaries,
+%% and examples all SHARE one counter (`mathemagicsCounter`) which resets per
+%% chapter. So you'll see "Definition 4.1, Theorem 4.2, Example 4.3" sequentially
+%% — easy to find by number, no risk of collisions.
+
+% Master shared counter
+\newcounter{mathemagicsCounter}[chapter]
+\renewcommand{\themathemagicsCounter}{\thechapter.\arabic{mathemagicsCounter}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (1) Definition — light blue tinted box, blue rule
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newtcbtheorem[use counter=mathemagicsCounter]
+  {definition}{Definition}{%
+    enhanced,breakable,
+    colback=mathemagicsDefBg,
+    colframe=mathemagicsDef,
+    boxrule=0.6pt,
+    arc=2pt,
+    fonttitle=\bfseries,
+    coltitle=mathemagicsDef,
+    colbacktitle=mathemagicsDefBg,
+    attach boxed title to top left={yshift=-2mm, xshift=4mm},
+    boxed title style={colback=mathemagicsDefBg, colframe=mathemagicsDef,
+                       boxrule=0.6pt, sharp corners=west, arc=2pt},
+    top=4mm,
+    before skip=1em, after skip=1em
+  }{def}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (2) Theorem / Proposition / Lemma — minimal, white box, slanted body, shared counter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newtcbtheorem[use counter=mathemagicsCounter]
+  {theorem}{Theorem}{%
+    enhanced,breakable,
+    colback=mathemagicsThmBg,
+    colframe=mathemagicsThm,
+    boxrule=0.8pt,
+    arc=0pt,
+    fonttitle=\bfseries\itshape,
+    coltitle=mathemagicsThm,
+    colbacktitle=mathemagicsThmBg,
+    attach boxed title to top left={yshift=-2mm, xshift=4mm},
+    boxed title style={colback=mathemagicsThmBg, colframe=mathemagicsThm,
+                       boxrule=0.8pt, sharp corners, arc=0pt},
+    fontupper=\itshape,
+    top=4mm,
+    before skip=1em, after skip=1em
+  }{thm}
+
+\newtcbtheorem[use counter=mathemagicsCounter]
+  {proposition}{Proposition}{%
+    enhanced,breakable,
+    colback=mathemagicsThmBg,
+    colframe=mathemagicsThm,
+    boxrule=0.8pt,
+    arc=0pt,
+    fonttitle=\bfseries\itshape,
+    coltitle=mathemagicsThm,
+    colbacktitle=mathemagicsThmBg,
+    attach boxed title to top left={yshift=-2mm, xshift=4mm},
+    boxed title style={colback=mathemagicsThmBg, colframe=mathemagicsThm,
+                       boxrule=0.8pt, sharp corners, arc=0pt},
+    fontupper=\itshape,
+    top=4mm,
+    before skip=1em, after skip=1em
+  }{prop}
+
+\newtcbtheorem[use counter=mathemagicsCounter]
+  {lemma}{Lemma}{%
+    enhanced,breakable,
+    colback=mathemagicsThmBg,
+    colframe=mathemagicsThm,
+    boxrule=0.8pt,
+    arc=0pt,
+    fonttitle=\bfseries\itshape,
+    coltitle=mathemagicsThm,
+    colbacktitle=mathemagicsThmBg,
+    attach boxed title to top left={yshift=-2mm, xshift=4mm},
+    boxed title style={colback=mathemagicsThmBg, colframe=mathemagicsThm,
+                       boxrule=0.8pt, sharp corners, arc=0pt},
+    fontupper=\itshape,
+    top=4mm,
+    before skip=1em, after skip=1em
+  }{lem}
+
+\newtcbtheorem[use counter=mathemagicsCounter]
+  {corollary}{Corollary}{%
+    enhanced,breakable,
+    colback=mathemagicsThmBg,
+    colframe=mathemagicsThm,
+    boxrule=0.8pt,
+    arc=0pt,
+    fonttitle=\bfseries\itshape,
+    coltitle=mathemagicsThm,
+    colbacktitle=mathemagicsThmBg,
+    attach boxed title to top left={yshift=-2mm, xshift=4mm},
+    boxed title style={colback=mathemagicsThmBg, colframe=mathemagicsThm,
+                       boxrule=0.8pt, sharp corners, arc=0pt},
+    fontupper=\itshape,
+    top=4mm,
+    before skip=1em, after skip=1em
+  }{cor}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (3) Intuition — cream box, no number, used liberally to translate theorems
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newtcolorbox{intuition}{%
+  enhanced,breakable,
+  colback=mathemagicsIntuBg,
+  colframe=mathemagicsIntu,
+  boxrule=0.4pt,
+  arc=2pt,
+  leftrule=2.5pt,
+  rightrule=0.4pt,
+  toprule=0.4pt,
+  bottomrule=0.4pt,
+  fonttitle=\bfseries\sffamily\small,
+  title={Intuition},
+  attach boxed title to top left={yshift=-2mm, xshift=4mm},
+  boxed title style={colback=mathemagicsIntu, colframe=mathemagicsIntu,
+                     sharp corners, boxrule=0pt},
+  coltitle=white,
+  top=4mm,
+  before skip=0.8em,
+  after skip=0.8em,
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (4) Example — pale gray, shared counter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newtcbtheorem[use counter=mathemagicsCounter]
+  {example}{Example}{%
+    enhanced,breakable,
+    colback=mathemagicsExBg,
+    colframe=mathemagicsEx,
+    boxrule=0.4pt,
+    arc=2pt,
+    fonttitle=\bfseries\sffamily,
+    coltitle=white,
+    colbacktitle=mathemagicsEx,
+    attach boxed title to top left={yshift=-2mm, xshift=4mm},
+    boxed title style={colback=mathemagicsEx, colframe=mathemagicsEx,
+                       sharp corners, boxrule=0pt},
+    top=4mm,
+    before skip=1em, after skip=1em
+  }{ex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (5) Aside — uses tufte-book's \marginnote.
+% Three flavors: \asideHistorical, \asideMatters, \asideCartoon.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\makeatletter
+\newcommand{\@asideTitleStyle}[1]{%
+  {\sffamily\bfseries\scshape\small #1}%
+}
+\makeatother
+
+\makeatletter
+\newcommand{\asideHistorical}[1]{%
+  \marginnote{\@asideTitleStyle{Historical aside.} \footnotesize #1}%
+}
+\newcommand{\asideMatters}[1]{%
+  \marginnote{\@asideTitleStyle{Why this matters.} \footnotesize #1}%
+}
+\newcommand{\asideCartoon}[1]{%
+  \marginnote{\@asideTitleStyle{Aside.} \footnotesize #1}%
+}
+\newcommand{\aside}[2][Aside]{%
+  \marginnote{\@asideTitleStyle{#1.} \footnotesize #2}%
+}
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Code: three placements
+%   1. \mintinline{python}|...|     (inline) — provided by minted package
+%   2. \margincode{...}              (margin)
+%   3. \begin{colabbox}...\end{colabbox}  (full-width experiment)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\margincode}[1]{%
+  \marginnote{%
+    \begin{tcolorbox}[%
+      colback=mathemagicsCodeBg,
+      boxrule=0pt,
+      arc=1pt,
+      left=2pt,right=2pt,top=2pt,bottom=2pt,
+      fontupper=\footnotesize\ttfamily,
+    ]
+      #1
+    \end{tcolorbox}%
+  }%
+}
+
+\newtcolorbox{colabbox}[1][]{%
+  enhanced,breakable,
+  colback=mathemagicsCodeBg,
+  colframe=mathemagicsColab,
+  boxrule=0.4pt,
+  arc=2pt,
+  fonttitle=\bfseries\sffamily\small,
+  title={Simulation},
+  attach boxed title to top left={yshift=-2mm, xshift=4mm},
+  boxed title style={colback=mathemagicsColab, colframe=mathemagicsColab,
+                     sharp corners, boxrule=0pt},
+  coltitle=black,
+  top=4mm,
+  before skip=1em, after skip=1em,
+  #1
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Warm-up exercises (end-of-section, immediate answer)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcounter{warmup}[chapter]
+\renewcommand{\thewarmup}{\thechapter.\arabic{warmup}}
+
+\newenvironment{warmup}[1][\coffee{1}]{%
+  \refstepcounter{warmup}%
+  \par\medskip\noindent%
+  {\sffamily\bfseries Warm-up \thewarmup\ \,#1.}\quad%
+  \itshape\ignorespaces%
+}{%
+  \par\medskip%
+}
+
+\newenvironment{warmupSolution}{%
+  \par\smallskip\noindent%
+  {\sffamily\bfseries\small\itshape Answer:}\quad%
+  \small\ignorespaces%
+}{%
+  \par\smallskip%
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% End-of-chapter exercises (hints in margin, full solution in Appendix A)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcounter{exercise}[chapter]
+\renewcommand{\theexercise}{\thechapter.\arabic{exercise}}
+
+\newenvironment{exercise}[1][\coffee{1}]{%
+  \refstepcounter{exercise}%
+  \par\medskip\noindent%
+  {\sffamily\bfseries Exercise \theexercise\ \,#1.}\quad%
+  \ignorespaces%
+}{%
+  \par\medskip%
+}
+
+\newcommand{\hint}[1]{\marginnote{\sffamily\footnotesize\textit{Hint.} #1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% QED symbol
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\renewcommand{\qedsymbol}{\ensuremath{\blacksquare}}

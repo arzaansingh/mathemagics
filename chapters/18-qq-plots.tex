@@ -1,0 +1,38 @@
+%% chapters/18-qq-plots.tex
+\chapter{Q--Q Plots as Diagnostics}
+\label{ch:qq}
+
+\whereWeAre{%
+A Q--Q plot is the workhorse visual tool for asking ``does this sample look Gaussian?'' --- and, more interestingly, ``does this sample look \emph{not} Gaussian?'' This chapter builds Q--Q plots from scratch, applies them to the limit laws of Parts~IV and~V, and uses them to see TW1 differ from the Gaussian.%
+}
+
+\PLACEHOLDER{Sources: existing main.tex Q--Q plot section; the existing Colab notebook on TW1 vs Gaussian QQ.}
+
+\section{What a Q--Q plot is and isn't}
+\PLACEHOLDER{Theoretical quantiles vs sample quantiles; \emph{not} a CDF plot; reading shape (heavy/light tails, scale, skew).}
+
+\section{Three baselines: Gaussian, Cauchy, exponential means}
+\PLACEHOLDER{Gaussian sample vs Gaussian quantile (line); Cauchy sample (heavy tails); standardized exponential means (CLT in pictures).}
+
+\section{Q--Q for sample covariance eigenvalues}
+\PLACEHOLDER{Distinct vs repeated case revisited; Q--Q plots distinguish the two regimes visually.}
+
+\section{Q--Q for Tracy--Widom vs Gaussian}
+\PLACEHOLDER{Standardized TW1 sample vs $\Normal(0,1)$ quantiles; left-tail dip, right-tail flatness; the asymmetry signature.}
+
+\section{Simulation: full Colab notebook}
+\PLACEHOLDER{End-to-end Colab box: GOE simulation, normalization, QQ plot, residual plot, scaling sweep with $N$.}
+
+\section{Brief warm-ups}
+\PLACEHOLDER{3--5 short questions.}
+
+\chapterRecap{%
+\begin{itemize}
+  \item \PLACEHOLDER{Q--Q plots are quantile-vs-quantile, not CDF-vs-CDF.}
+  \item \PLACEHOLDER{Departures from $y=x$ encode tail behaviour and skewness.}
+  \item \PLACEHOLDER{TW1 vs Gaussian QQ shows the universality class boundary.}
+\end{itemize}%
+}
+
+\section*{Exercises}
+\PLACEHOLDER{8--15 longer exercises.}

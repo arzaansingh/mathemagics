@@ -1,0 +1,32 @@
+%% chapters/19-spiked-covariance.tex
+\chapter{Spiked Covariance Models}
+\label{ch:spiked}
+
+\whereWeAre{%
+The Marchenko--Pastur picture describes the eigenvalues of a sample covariance matrix when the population is isotropic ($\Sigma = I_p$). But what if the population has \emph{structure} --- a low-rank ``signal'' on top of isotropic noise? That structure either does or does not produce visible eigenvalue spikes above the bulk; this chapter sets up the question and motivates the answer.%
+}
+
+\PLACEHOLDER{Mostly new chapter. Reference: Yale Stat 615 Lecture 9, Vershynin Ch.~7--8.}
+
+\section{The spiked model: noise plus low-rank signal}
+\PLACEHOLDER{$\Sigma = I_p + \sum_k \theta_k v_k v_k^T$. PCA motivation. Why this is the canonical model in modern data science.}
+
+\section{Examples in the wild}
+\PLACEHOLDER{Factor models in finance, latent semantic analysis, gene expression PCA, deep learning Hessian.}
+
+\section{What a spike "looks like" in simulations}
+\PLACEHOLDER{Histograms with spike clearly above the MP bulk; scatter of (sample top eigenvalue, true spike strength).}
+
+\section{Brief warm-ups}
+\PLACEHOLDER{3--5 short questions.}
+
+\chapterRecap{%
+\begin{itemize}
+  \item \PLACEHOLDER{Spiked model = isotropic noise + structured low-rank signal.}
+  \item \PLACEHOLDER{Spikes show up in the spectrum as outliers above the MP bulk.}
+  \item \PLACEHOLDER{Whether they show up depends on signal strength --- BBP transition in Chapter 20.}
+\end{itemize}%
+}
+
+\section*{Exercises}
+\PLACEHOLDER{8--15 longer exercises.}

@@ -1,0 +1,38 @@
+%% chapters/17-tracy-widom.tex
+\chapter{Tracy--Widom: Fluctuations at the Edge}
+\label{ch:tw}
+
+\whereWeAre{%
+The Marchenko--Pastur law tells us the largest sample eigenvalue stabilizes at $\lambda_+ = (1 + \sqrt c)^2$. But how does it \emph{fluctuate}? The answer is the most famous law in random matrix theory: the Tracy--Widom distribution, which sits at the edge between two regimes and inherits a $p^{-2/3}$ scaling from the square-root vanishing of the MP density.%
+}
+
+\PLACEHOLDER{Sources: April 17 Gustavo notes (TW heuristics + $p^{-2/3}$ derivation); Joseph thesis Section 3.2 (Prop 3.9); Quanta Magazine article for context.}
+
+\section{Two heuristics: edge of two regimes, square-root density}
+\PLACEHOLDER{(1) TW lives at the boundary between Vandermonde-repelled bulk and empty exterior. (2) MP density $\sim C(\lambda_+ - \lambda)^{1/2}$ near the edge.}
+
+\section{Heuristic derivation of the $p^{-2/3}$ scaling}
+\PLACEHOLDER{The "1/p mass in the interval $[\lambda_{\max}, \lambda_+]$" argument, integrated against $C(\lambda_+ - \lambda)^{1/2}$, gives $\lambda_+ - \lambda_{\max} \sim p^{-2/3}$.}
+
+\section{Statement of the Tracy--Widom limit}
+\PLACEHOLDER{$p^{2/3}(\lambda_{\max} - \lambda_+) \xrightarrow{d} \mathrm{TW}_1$, with model-dependent prefactor; properties of TW1 (mean, std, skewness).}
+
+\section{Analogy with the CLT}
+\PLACEHOLDER{$\sqrt n$-CLT vs $p^{2/3}$-Tracy-Widom: in both cases, the unique scaling that stabilizes the fluctuation.}
+
+\section{Simulation: TW1 from GOE top eigenvalues}
+\PLACEHOLDER{Colab box: simulate top eigenvalue of $N \times N$ GOE for growing $N$; histogram converges to TW1 shape (left-skewed).}
+
+\section{Brief warm-ups}
+\PLACEHOLDER{3--5 short questions.}
+
+\chapterRecap{%
+\begin{itemize}
+  \item \PLACEHOLDER{TW1 is the limiting law of $\lambda_{\max}$ at the spectral edge.}
+  \item \PLACEHOLDER{$p^{-2/3}$ scaling falls out of the square-root vanishing of MP.}
+  \item \PLACEHOLDER{TW1 is to the spectral edge what the Gaussian is to the sample mean.}
+\end{itemize}%
+}
+
+\section*{Exercises}
+\PLACEHOLDER{8--15 longer exercises.}

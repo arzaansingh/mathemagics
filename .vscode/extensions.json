@@ -1,0 +1,11 @@
+{
+  // VS Code will prompt you to install these the first time you open the folder.
+  // One click and the textbook setup is complete.
+  "recommendations": [
+    "james-yu.latex-workshop",
+    "tecosaur.latex-utilities",
+    "streetsidesoftware.code-spell-checker",
+    "ms-python.python",
+    "ms-toolsai.jupyter"
+  ]
+}

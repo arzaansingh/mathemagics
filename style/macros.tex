@@ -1,0 +1,142 @@
+%% style/macros.tex
+%% Math notation macros, structural macros (\whereWeAre, \chapterRecap), and Colab links.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Number sets and common math objects
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\providecommand{\R}{\mathbb{R}}
+\providecommand{\N}{\mathbb{N}}
+\providecommand{\Z}{\mathbb{Z}}
+\providecommand{\Q}{\mathbb{Q}}
+\providecommand{\C}{\mathbb{C}}
+
+\providecommand{\E}{\mathbb{E}}
+\providecommand{\Prob}{\mathbb{P}}
+\providecommand{\Var}{\mathrm{Var}}
+\providecommand{\Cov}{\mathrm{Cov}}
+\providecommand{\Cor}{\mathrm{Cor}}
+
+% Common distributions
+\providecommand{\Normal}{\mathcal{N}}
+\providecommand{\Uniform}{\mathcal{U}}
+\providecommand{\Wishart}{\mathcal{W}}
+
+% Convergence arrows
+\providecommand{\convas}{\xrightarrow{\mathrm{a.s.}}}
+\providecommand{\convp}{\xrightarrow{P}}
+\providecommand{\convd}{\xrightarrow{d}}
+
+% Linear algebra
+\providecommand{\transpose}{^{\mathsf{T}}}
+\providecommand{\inv}{^{-1}}
+\providecommand{\Tr}{\mathrm{Tr}}
+\providecommand{\rank}{\mathrm{rank}}
+\providecommand{\diag}{\mathrm{diag}}
+
+% Sample covariance
+\providecommand{\Shat}{\widehat{\Sigma}_n}
+\providecommand{\Spop}{\Sigma}
+
+% Vectors and matrices: light convention — bold for vectors, capital for matrices
+\providecommand{\vect}[1]{\boldsymbol{#1}}
+\providecommand{\mat}[1]{\boldsymbol{#1}}
+
+% Useful operators
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator{\sgn}{sgn}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Vocabulary indexing: \vocab{spectral theorem} bolds and indexes the term
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\providecommand{\vocab}[1]{\index{#1}\emph{#1}}
+\providecommand{\vocabalt}[2]{\index{#2}\emph{#1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Colab linking — every \colablink{NAME}{URL} produces a clickable badge
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\colablink}[2]{%
+  \href{#2}{%
+    \begin{tikzpicture}[baseline=(badge.base)]
+      \node[badge/.style={rectangle, rounded corners=2pt, draw=mathemagicsColab,
+            fill=mathemagicsColab!20, inner sep=2pt, font=\scriptsize\sffamily}]
+        (badge) {Colab: #1};
+    \end{tikzpicture}%
+  }%
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \whereWeAre{...} — half-page mini-map at the start of each chapter
+% Place at the top of the chapter, after \chapter{...}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newtcolorbox{whereWeAreBox}{%
+  enhanced,
+  colback=mathemagicsWhereWeAreBg,
+  colframe=mathemagicsWhereWeAre,
+  boxrule=0.4pt,
+  arc=2pt,
+  fonttitle=\bfseries\sffamily\small,
+  title={Where we are},
+  attach boxed title to top left={yshift=-2mm, xshift=4mm},
+  boxed title style={colback=mathemagicsWhereWeAre, colframe=mathemagicsWhereWeAre,
+                     sharp corners, boxrule=0pt},
+  coltitle=white,
+  top=4mm,
+  before skip=0.6em,
+  after skip=1.2em,
+}
+
+\newcommand{\whereWeAre}[1]{%
+  \begin{whereWeAreBox}%
+    #1%
+  \end{whereWeAreBox}%
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \chapterRecap{...} — last page of each chapter, 3-5 punchline bullets
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newtcolorbox{chapterRecapBox}{%
+  enhanced,
+  colback=mathemagicsRecapBg,
+  colframe=mathemagicsRecap,
+  boxrule=0.4pt,
+  arc=2pt,
+  fonttitle=\bfseries\sffamily\small,
+  title={Chapter recap},
+  attach boxed title to top left={yshift=-2mm, xshift=4mm},
+  boxed title style={colback=mathemagicsRecap, colframe=mathemagicsRecap,
+                     sharp corners, boxrule=0pt},
+  coltitle=white,
+  top=4mm,
+  before skip=1.2em,
+  after skip=0.6em,
+}
+
+\newcommand{\chapterRecap}[1]{%
+  \begin{chapterRecapBox}%
+    #1%
+  \end{chapterRecapBox}%
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Difficulty pictogram — \coffee{1}, \coffee{2}, \coffee{3} for exercise rating
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\coffee}[1]{%
+  {\color{mathemagicsExercise}%
+  \ifcase#1\or\textbf{$\bullet$}\or\textbf{$\bullet\bullet$}\or\textbf{$\bullet\bullet\bullet$}\fi}%
+}
+% Note: this is a placeholder. Step 4 of the plan replaces with actual coffee-cup glyph
+% (a small TikZ icon) once the visual identity is locked.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Cartoon-aside pictogram — used to flag non-load-bearing margin asides
+% Currently a simple star; will be replaced with custom TikZ glyph in Step 4.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\cartoonglyph}{{\color{mathemagicsCartoon}\ensuremath{\star}}}

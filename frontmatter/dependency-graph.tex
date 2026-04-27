@@ -1,0 +1,96 @@
+%% frontmatter/dependency-graph.tex
+%% Chapter dependency graph — a half-page TikZ figure
+%% Solid arrows = "you need this," dotted arrows = "this motivates that."
+
+\chapter*{How the chapters depend on each other}
+\addcontentsline{toc}{chapter}{Chapter dependency graph}
+
+\noindent
+The chart below tells you what to read first. A solid arrow ``\textbf{Ch.~A} $\to$ \textbf{Ch.~B}'' means \emph{you need Ch.~A before Ch.~B}. A dotted arrow means Ch.~A \emph{motivates} Ch.~B but isn't strictly required.
+
+If you are reading the cliff-notes track, the chain Ch.~1 $\to$ Ch.~7 $\to$ Ch.~10 $\to$ Ch.~12 $\to$ Ch.~17 $\to$ Ch.~21 is the minimum-viable spine.
+
+\bigskip
+
+\begin{fullwidth}
+\centering
+\begin{tikzpicture}[
+  every node/.style={font=\small},
+  chap/.style={rectangle, rounded corners=2pt, draw=black, fill=white,
+               inner sep=3pt, minimum width=1.2cm, minimum height=0.55cm,
+               align=center, font=\footnotesize\sffamily},
+  needs/.style={->, >={Stealth[length=4pt]}, thick, draw=black},
+  motiv/.style={->, >={Stealth[length=4pt]}, dotted, draw=gray, thick},
+  node distance=8mm and 6mm
+]
+
+% Part I row
+\node[chap] (c1) {Ch. 1\\ RVs};
+\node[chap, right=of c1] (c2) {Ch. 2\\ MGF/CF};
+\node[chap, right=of c2] (c3) {Ch. 3\\ Conv.};
+\node[chap, right=of c3] (c4) {Ch. 4\\ CLT};
+
+% Part II row
+\node[chap, below=of c1] (c5) {Ch. 5\\ Vectors};
+\node[chap, right=of c5] (c6) {Ch. 6\\ Linalg};
+\node[chap, right=of c6] (c7) {Ch. 7\\ PSD};
+
+% Part III row
+\node[chap, below=of c5] (c8) {Ch. 8\\ SCM};
+\node[chap, right=of c8] (c9) {Ch. 9\\ Eig conv};
+\node[chap, right=of c9] (c10) {Ch. 10\\ Wishart};
+
+% Part IV row
+\node[chap, below=of c8] (c11) {Ch. 11\\ Joint CLT};
+\node[chap, right=of c11] (c12) {Ch. 12\\ Two regimes};
+\node[chap, right=of c12] (c13) {Ch. 13\\ Eigvecs};
+\node[chap, right=of c13] (c14) {Ch. 14\\ GOE};
+
+% Part V row
+\node[chap, below=of c11] (c15) {Ch. 15\\ High-dim};
+\node[chap, right=of c15] (c16) {Ch. 16\\ MP};
+\node[chap, right=of c16] (c17) {Ch. 17\\ TW};
+\node[chap, right=of c17] (c18) {Ch. 18\\ Q-Q};
+
+% Part VI row
+\node[chap, below=of c15] (c19) {Ch. 19\\ Spikes};
+\node[chap, right=of c19] (c20) {Ch. 20\\ BBP};
+\node[chap, right=of c20] (c21) {Ch. 21\\ Spec. Clust.};
+
+% Edges - "needs"
+\draw[needs] (c1) -- (c2);
+\draw[needs] (c1) -- (c3);
+\draw[needs] (c2) -- (c4);
+\draw[needs] (c3) -- (c4);
+\draw[needs] (c1) -- (c5);
+\draw[needs] (c5) -- (c7);
+\draw[needs] (c6) -- (c7);
+\draw[needs] (c7) -- (c8);
+\draw[needs] (c6) -- (c9);
+\draw[needs] (c8) -- (c9);
+\draw[needs] (c8) -- (c10);
+\draw[needs] (c10) -- (c11);
+\draw[needs] (c4) -- (c11);
+\draw[needs] (c11) -- (c12);
+\draw[needs] (c12) -- (c13);
+\draw[needs] (c12) -- (c14);
+\draw[needs] (c10) -- (c15);
+\draw[needs] (c14) -- (c15);
+\draw[needs] (c15) -- (c16);
+\draw[needs] (c16) -- (c17);
+\draw[needs] (c14) -- (c17);
+\draw[needs] (c17) -- (c18);
+\draw[needs] (c17) -- (c19);
+\draw[needs] (c19) -- (c20);
+\draw[needs] (c20) -- (c21);
+
+% "Motivates" arrows
+\draw[motiv] (c10.south) to[bend right=20] (c14.north);
+
+\end{tikzpicture}
+\end{fullwidth}
+
+\bigskip
+
+\noindent
+\textit{The graph is intentionally lossy --- it captures the main load-bearing dependencies, not every cross-reference. When in doubt, the order in the table of contents always works.}
