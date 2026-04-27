@@ -18,11 +18,42 @@ By the end of this chapter the reader will be able to: define random variables a
 }
 
 % --- Page 11 chapter-opener cartoon -----------------------------------------
+% AI-IMAGE SLOT: figures/ch01/wizard-comic.png
+% Until that file exists, the TikZ fallback (\wizardHatCartoon) renders.
+%
+% PROMPT FOR THE IMAGE GENERATOR
+% ------------------------------
+% A 4-panel hand-drawn comic strip in the style of Calvin and Hobbes (Bill
+% Watterson) or Sandra Boynton, soft pastel colors, warm friendly characters.
+%
+%   Panel 1: A young wizard character with a tall pointed hat (lilac purple,
+%            roughly #8273A8) holds up a coin, looking curious. Speech
+%            bubble: "Heads or tails?"
+%
+%   Panel 2: The wizard tosses the coin high in the air. The coin spins
+%            mid-air with motion lines. The wizard looks up, expectant.
+%
+%   Panel 3: The coin lands on a table, balanced perfectly on its edge.
+%            The wizard's eyes go wide in surprise.
+%
+%   Panel 4: The wizard scribbles on a chalkboard the equation
+%            "P(edge) ~ 0", with a small sweat drop. Speech bubble:
+%            "Probability is rigorous magic."
+%
+% Style: hand-drawn lines, soft pastel fills, warm off-white background
+% (#F8F6F2), charcoal-gray ink lines (#2D2D2D), slight texture.  Use
+% lilac, mustard, coral, mint, and soft gold accents.  No text outside
+% speech bubbles.  Friendly, gently humorous, NOT slick or stylized like
+% anime; closer to a children's book illustration that adults would also
+% find charming.
+%
+% Aspect: ~3:4 portrait or 2x2 grid.  Rendered at margin width (~10pc).
+% ----------------------------------------------------------------------
 \marginnote{%
 \centering
 \anchorDot{1}\,\sffamily\footnotesize\scshape Mathemagics\par
 \smallskip
-\wizardHatCartoon\par
+\artOrTikz{figures/ch01/wizard-comic.png}{\wizardHatCartoon}\par
 \smallskip
 \itshape\footnotesize Probability is rigorous magic: we name the unknown, weigh it, and pull conclusions out of it.
 }
@@ -105,11 +136,37 @@ Think of $X$ as a \emph{measurement device}. The randomness lives in $\Omega$; i
 \subsection*{A worked example: number of heads in two coin flips}
 
 % --- Page 13 margin: cartoon coin at the start of this subsection -----------
+% AI-IMAGE SLOT: figures/ch01/coin-cartoon.png
+% Until that file exists, the TikZ fallback (\coinCartoon) renders.
+%
+% PROMPT FOR THE IMAGE GENERATOR
+% ------------------------------
+% A hand-drawn cartoon coin character with personality, in the style of a
+% Sandra Boynton illustration or a friendly children's book.
+%
+% The coin is a large round shape (cream / pale-yellow #FBF3D9 fill, with a
+% charcoal #2D2D2D outline), shown front-on.  The coin has a face: two big
+% round eyes (wide open with curiosity), small expressive eyebrows raised
+% in question, and a small smile.  The letter "H" is prominently embossed
+% on the coin's face below the eyes.
+%
+% The coin is mid-thought.  To the right, a small thought bubble (white,
+% charcoal outline) trails up from the coin's head with two small puffs
+% leading up to a larger speech-bubble shape.  Inside the bubble, in a
+% friendly serif font, is the equation: "P(H) = 1/2".
+%
+% Style: warm hand-drawn ink, soft pastel palette, off-white background
+% (#F8F6F2).  Charcoal lines, mustard / cream coin body, no harsh shading.
+% Inviting, gently humorous.  The coin is being asked a question and is
+% genuinely thinking about it.
+%
+% Aspect: square (1:1).  Rendered at margin width (~10pc).
+% ----------------------------------------------------------------------
 \marginnote{%
 \centering
 \anchorDot{5}\,\sffamily\footnotesize\scshape Heads or tails?\par
 \smallskip
-\coinCartoon\par
+\artOrTikz{figures/ch01/coin-cartoon.png}{\coinCartoon}\par
 \smallskip
 \itshape\footnotesize One coin flip is the simplest non-trivial experiment in all of probability.
 }

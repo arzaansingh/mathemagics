@@ -99,6 +99,11 @@
 % hidden by default on screen in OCG-aware viewers.
 \RequirePackage[printocg=always]{ocgx2}
 
+% marginfix: clamps margin notes to the body's vertical bounds, so a margin
+% entry never overflows below the bottom of the body text.  Replaces the
+% default tufte-book margin packing.
+\RequirePackage{marginfix}
+
 % Index
 \RequirePackage{imakeidx}
 \makeindex[intoc]
