@@ -124,7 +124,7 @@ Let $\Omega$ be a sample space. A \emph{random variable} on $\Omega$ is a functi
 Think of $X$ as a \emph{measurement device}. The randomness lives in $\Omega$; it is the underlying experiment whose outcome we cannot predict. The random variable $X$ does not introduce any new randomness; it just tells you what number you record once an outcome has been drawn.
 \end{intuition}
 
-\subsection*{A worked example: number of heads in two coin flips}
+To see what the definition means in practice, take the simplest non-trivial example.
 
 % --- Page 13 margin: cartoon coin at the start of this subsection -----------
 % AI-IMAGE SLOT: figures/ch01/coin-cartoon.png
@@ -162,15 +162,17 @@ Think of $X$ as a \emph{measurement device}. The randomness lives in $\Omega$; i
 \itshape\footnotesize One coin flip is the simplest non-trivial experiment in all of probability.
 }
 
-Let the experiment be flipping a fair coin twice in a row.\anchorDot{5} The sample space contains four outcomes:
+\begin{example}{Number of heads in two coin flips}{two-coin-flips}
+\anchorDot{5}\,Flip a fair coin twice in a row. The sample space contains four outcomes,
 \[
-\Omega \;=\; \{HH,\; HT,\; TH,\; TT\}.
+\Omega \;=\; \{HH,\; HT,\; TH,\; TT\},
 \]
-Each outcome has probability $\tfrac{1}{4}$. Define the random variable
+each with probability $\tfrac{1}{4}$. Define the random variable
 \[
 X(\omega) \;=\; \text{the number of heads in } \omega.
 \]
-Then $X(HH) = 2$, $X(HT) = 1$, $X(TH) = 1$, and $X(TT) = 0$. The random variable $X$ takes its values in $\{0, 1, 2\} \subset \R$. \cref{fig:rv-mapping} draws the function: outcomes on the left, sorted by their image; the real number line on the right with tick marks at $0$, $1$, and $2$; arrows from each outcome to its image, with $HT$ and $TH$ visibly converging on the same target ($1$).
+Then $X(HH) = 2$, $X(HT) = 1$, $X(TH) = 1$, and $X(TT) = 0$. So $X$ takes its values in $\{0, 1, 2\} \subset \R$. \cref{fig:rv-mapping} draws the function: outcomes on the left, sorted by their image; the real number line on the right; arrows from each outcome to its target, with $HT$ and $TH$ visibly converging at $1$.
+\end{example}
 
 \begin{figure}[h]
 \centering
@@ -223,19 +225,15 @@ Then $X(HH) = 2$, $X(HT) = 1$, $X(TH) = 1$, and $X(TT) = 0$. The random variable
 \label{fig:rv-mapping}
 \end{figure}
 
-\subsection*{Notation}
+Before moving to a richer example, two notational conventions are worth pinning down. They will be used everywhere in this book.
 
 \asideMatters{\anchorDot{1}\, Defining $X$ as a function on $\Omega$, rather than just as ``a random number,'' lets us recover \emph{any} numerical question about the experiment by the same mechanism. The number of heads, the number of tails, whether the first flip matched the second; each is a different function on the same $\Omega$.}
 
 \begin{definition}{Notation: $X$ versus $x$}{notation}
-\anchorDot{1}\, Two conventions matter and will be used everywhere:
-\begin{itemize}
-\item Capital letters ($X$, $Y$, $Z$, \ldots) denote random variables, the \emph{functions} on $\Omega$.
-\item Lowercase letters ($x$, $y$, $z$, \ldots) denote particular real numbers, specific values that those random variables \emph{could} take.
-\end{itemize}
+\anchorDot{1}\, Capital letters ($X$, $Y$, $Z$, \ldots) denote random variables, the \emph{functions} on $\Omega$. Lowercase letters ($x$, $y$, $z$, \ldots) denote particular real numbers, specific values that those random variables \emph{could} take.
 \end{definition}
 
-So when we write $\Prob(X = x)$, we are asking: what is the probability that the random variable $X$ takes the value $x$? In our two-coin example,
+So when we write $\Prob(X = x)$, we are asking: what is the probability that the random variable $X$ takes the value $x$? In the two-coin example above,
 \[
 \Prob(X = 0) = \tfrac{1}{4}, \qquad
 \Prob(X = 1) = \tfrac{1}{2}, \qquad
@@ -243,7 +241,7 @@ So when we write $\Prob(X = x)$, we are asking: what is the probability that the
 \]
 The probability $\Prob(X = 1) = \tfrac{1}{2}$ comes from the fact that two of the four equally-likely outcomes ($HT$ and $TH$) map to $1$.
 
-\subsection*{A second example: the sum of two dice}
+A second example, with a richer sample space, exercises the same pattern.
 
 \marginnote{%
 \centering
